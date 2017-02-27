@@ -1,0 +1,29 @@
+
+
+citHeader("To cite image.LineSegmentDetector in publications use:")
+
+citEntry(entry  = "article",
+         title         = "LSD: a Line Segment Detector",
+         author        = personList(as.person("Grompone von Gioi, Rafael"), as.person("Jakubowicz, Jeremie"), as.person("Morel, Jean-Michel"), as.person("Randall, Gregory")),
+         journal = "Image Processing On Line",
+         year          = "2012",
+         volume  = "2",
+         pages   = "35--55",
+         url     = "https://doi.org/10.5201/ipol.2012.gjmr-lsd",
+         textVersion = "Rafael Grompone von Gioi, Jeremie Jakubowicz, Jean-Michel Morel, and Gregory Randall, LSD: a Line Segment Detector, Image Processing On Line, 2 (2012), pp. 35-55. https://doi.org/10.5201/ipol.2012.gjmr-lsd"
+)
+
+
+
+citEntry(entry  = "Unpublished",
+  title         = "{image.LineSegmentDetector}: image.LineSegmentDetector: an R package to detect line segments in images",
+  author        = personList(as.person("Jan Wijffels"), as.person("Rafael Grompone von Gioi")),
+  year          = "2017",
+  url           = "https://github.com/bnosac/image.LineSegmentDetector",
+  organization  = "BNOSAC",
+  note          = "R package version 1.0",
+  textVersion   =  paste("Wijffels Jan and Rafael Grompone von Gioi",
+               "LSD: an R package to detect line segments in images",
+               "https://github.com/bnosac/image.LineSegmentDetector")
+)
+

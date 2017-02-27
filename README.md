@@ -29,6 +29,7 @@ devtools::install_github("bnosac/image", subdir = "image.dlib", build_vignettes 
 Have a look at some vignettes
 ```
 vignette("image_contour_detector", package = "image.ContourDetector")
+vignette("image_line_segment_detector", package = "image.LineSegmentDetector")
 ```
 
 
