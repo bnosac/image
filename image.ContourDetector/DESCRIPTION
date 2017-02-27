@@ -1,0 +1,18 @@
+Package: image.ContourDetector
+Type: Package
+Title: Implementation of the Unsupervised Smooth Contour Line Detection for Images
+Description: An implementation of the Unsupervised Smooth Contour Detection algorithm for digital images as described in the paper: "Unsupervised Smooth Contour Detection". The algorithm is explained at < https://doi.org/10.5201/ipol.2016.175/>.
+Maintainer: Jan Wijffels <jwijffels@bnosac.be>
+Authors@R: c(person("Jan", "Wijffels", role = c("aut", "cre", "cph"), email = "jwijffels@bnosac.be"), person("BNOSAC", role = "cph"), person("Rafael Grompone von Gioi", role = "cph", email = "grompone@gmail.com"), person("Gregory Randall", role = "cph", email = "randall@fing.edu.uy"))
+License: AGPL-3 + file LICENSE
+Version: 1.0
+URL: https://github.com/bnosac/image.ContourDetector
+Date: 2017-01-12
+VignetteBuilder: knitr
+Imports: Rcpp (>= 0.12.8), sp
+LinkingTo: Rcpp
+Suggests:
+    knitr,
+    pixmap,
+    magick
+RoxygenNote: 6.0.1

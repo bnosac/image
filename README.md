@@ -26,6 +26,12 @@ devtools::install_github("bnosac/image", subdir = "image.CannyEdges", build_vign
 devtools::install_github("bnosac/image", subdir = "image.dlib", build_vignettes = TRUE)
 ```
 
+Have a look at some vignettes
+```
+vignette("image_contour_detector", package = "image.ContourDetector")
+```
+
+
 ## Support in image recognition
 
 Need support in image recognition?

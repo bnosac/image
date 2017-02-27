@@ -1,0 +1,28 @@
+
+
+citHeader("To cite image.ContourDetector in publications use:")
+
+citEntry(entry  = "article",
+         title         = "Unsupervised Smooth Contour Detection",
+         author        = personList(as.person("Grompone von Gioi, Rafael"), as.person("Randall, Gregory")),
+         journal = "Image Processing On Line",
+         year          = "2016",
+         volume  = "6",
+         pages   = "233--267",
+         url     = "https://doi.org/10.5201/ipol.2016.175",
+         textVersion = "Rafael Grompone von Gioi, and Gregory Randall, Unsupervised Smooth Contour Detection, Image Processing On Line, 6 (2016), pp. 233-267. https://doi.org/10.5201/ipol.2016.175"
+)
+
+
+citEntry(entry  = "Unpublished",
+  title         = "{image.ContourDetector}: image.ContourDetector: an R package to detect contour lines in images",
+  author        = personList(as.person("Jan Wijffels"), as.person("Grompone von Gioi")),
+  year          = "2017",
+  url           = "https://github.com/bnosac/image.ContourDetector",
+  organization  = "BNOSAC",
+  note          = "R package version 1.0",
+  textVersion   =  paste("Wijffels Jan and Grompone von Gioi",
+               "image.ContourDetector: an R package to detect contour lines in images",
+               "https://github.com/bnosac/image.ContourDetector")
+)
+
