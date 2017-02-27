@@ -4,11 +4,11 @@ This repository contains a suite of R packages which perform image algorithms cu
 
 There are put into different packages because of license differences. Currently the following R packages are available:
 
-- image.CornerDetectionF9:  FAST-9 corner detection for images  (license: BSD-2). [More info](image.CornerDetectionF9/README.md)
-- image.LineSegmentDetector: Line Segment Detector (LSD) for images (license: AGPL-3)[More info](image.LineSegmentDetector/README.md)
-- image.ContourDetector:  Unsupervised Smooth Contour Line Detection for images (license: AGPL-3)[More info](image.ContourDetector/README.md)
-- image.CannyEdges: Canny Edge Detector for Images (license: GPL-3)[More info](image.CannyEdges/README.md)
-- image.dlib: Speeded up robust features (SURF) and histogram of oriented gradients (HOG) features (license: AGPL-3)[More info](image.dlib/README.md)
+- image.CornerDetectionF9:  FAST-9 corner detection for images  (license: BSD-2). [More info](image.CornerDetectionF9)
+- image.LineSegmentDetector: Line Segment Detector (LSD) for images (license: AGPL-3)[More info](image.LineSegmentDetector)
+- image.ContourDetector:  Unsupervised Smooth Contour Line Detection for images (license: AGPL-3)[More info](image.ContourDetector)
+- image.CannyEdges: Canny Edge Detector for Images (license: GPL-3)[More info](image.CannyEdges)
+- image.dlib: Speeded up robust features (SURF) and histogram of oriented gradients (HOG) features (license: AGPL-3)[More info](image.dlib)
 
 More packages and extensions are under development.
 
