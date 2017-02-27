@@ -1,0 +1,17 @@
+Package: image.CornerDetectionF9
+Type: Package
+Title: Find Corners in Digital Images with FAST-9
+Version: 1.0
+Author: c(person("Jan", "Wijffels", role = c("aut", "cre", "cph"), email = "jwijffels@bnosac.be"), person("BNOSAC", role = "cph"), person("Julien Cayzac", role = "cph"))
+Maintainer: Jan Wijffels <jwijffels@bnosac.be>
+Description: An implementation of the "FAST-9" corner detection algorithm explained at <http://www.edwardrosten.com/work/fast.html>. The package allows to detect corners in digital images.
+License: BSD_2_clause + file LICENSE
+URL: https://github.com/bnosac/image.CornerDetectionF9
+Imports:
+    Rcpp (>= 0.12.8)
+Suggests:
+    pixmap,
+    magick,
+    knitr
+LinkingTo: Rcpp
+RoxygenNote: 5.0.1
