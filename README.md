@@ -1,6 +1,6 @@
 # image -  Computer Vision and Image Recognition algorithms for R users 
 
-This repository contains a suite of R packages which perform image algorithms currently not available in other R packages like ![magick](https://CRAN.R-project.org/package=magick), ![imageR](https://CRAN.R-project.org/package=imageR) or ![EBImage](https://bioconductor.org/packages/release/bioc/html/EBImage.html). 
+This repository contains a suite of R packages which perform image algorithms currently not available in other R packages like [magick](https://CRAN.R-project.org/package=magick), [imageR](https://CRAN.R-project.org/package=imageR) or [EBImage](https://bioconductor.org/packages/release/bioc/html/EBImage.html). 
 
 There are put into different packages because of license differences. Currently the following R packages are available:
 
