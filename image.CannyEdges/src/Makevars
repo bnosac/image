@@ -1,0 +1,3 @@
+PKG_LIBS = `pkg-config --libs fftw3 libpng`
+PKG_CXXFLAGS = `pkg-config --cflags fftw3 libpng` `Rscript -e 'Rcpp:::CxxFlags()'`
+PKG_CFLAGS = `pkg-config --cflags fftw3 libpng`
