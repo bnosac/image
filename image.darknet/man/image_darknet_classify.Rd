@@ -54,8 +54,6 @@ model <- system.file(package="image.darknet", "include", "darknet", "cfg", "dark
 
 darknet19 <- image_darknet_model(type = 'classify', 
                                  model = model, weights = weights, labels = labels)
-
-
 image_darknet_classify(file = f, object = darknet19)
 }
 }
