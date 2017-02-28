@@ -9,6 +9,7 @@ There are put into different packages because of license differences. Currently 
 - image.ContourDetector:  Unsupervised Smooth Contour Line Detection for images (license: AGPL-3). [More info](image.ContourDetector)
 - image.CannyEdges: Canny Edge Detector for Images (license: GPL-3). [More info](image.CannyEdges)
 - image.dlib: Speeded up robust features (SURF) and histogram of oriented gradients (HOG) features (license: AGPL-3). [More info](image.dlib)
+- image.darknet: Image classification using darknet with deep learning models AlexNet, Darknet, VGG-16, Extraction (GoogleNet) and Darknet19. And object detection using the state-of-the art YOLO detection system (license: AGPL-3). [More info](image.darknet)
 
 More packages and extensions are under development.
 
