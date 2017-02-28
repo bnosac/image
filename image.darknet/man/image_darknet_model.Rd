@@ -49,60 +49,54 @@ darknet_tiny
 ##
 \dontrun{
 ## AlexNet
-download.file(url = "http://pjreddie.com/media/files/alexnet.weights",
-  destfile = system.file(package="image.darknet", "models", "alexnet.weights"))
+weights <- file.path(system.file(package="image.darknet", "models"), "alexnet.weights")
+download.file(url = "http://pjreddie.com/media/files/alexnet.weights", destfile = weights)
 model <- system.file(package="image.darknet", "include", "darknet", "cfg", "alexnet.cfg")
-weights <- system.file(package="image.darknet", "models", "alexnet.weights")
 
 alexnet <- image_darknet_model(type = 'classify', 
                                model = model, weights = weights, labels = labels, resize=FALSE)
 alexnet
 
 ## Darknet Reference
-download.file(url = "http://pjreddie.com/media/files/darknet.weights",
-  destfile = system.file(package="image.darknet", "models", "darknet.weights"))
+weights <- file.path(system.file(package="image.darknet", "models"), "darknet.weights")
+download.file(url = "http://pjreddie.com/media/files/darknet.weights", destfile = weights)
 model <- system.file(package="image.darknet", "include", "darknet", "cfg", "darknet.cfg")
-weights <- system.file(package="image.darknet", "models", "darknet.weights")
 
 darknetref <- image_darknet_model(type = 'classify', 
                                   model = model, weights = weights, labels = labels)
 darknetref
 
 ## vgg-16
-download.file(url = "http://pjreddie.com/media/files/16.weights",
-  destfile = system.file(package="image.darknet", "models", "vgg-16.weights"))
+weights <- file.path(system.file(package="image.darknet", "models"), "vgg-16.weights")
+download.file(url = "http://pjreddie.com/media/files/vgg-16.weights", destfile = weights)
 model <- system.file(package="image.darknet", "include", "darknet", "cfg", "vgg-16.cfg")
-weights <- system.file(package="image.darknet", "models", "vgg-16.weights")
 
 vgg16 <- image_darknet_model(type = 'classify', 
                              model = model, weights = weights, labels = labels, resize=FALSE)
 vgg16
 
 ## googlenet
-download.file(url = "http://pjreddie.com/media/files/extraction.weights",
-  destfile = system.file(package="image.darknet", "models", "extraction.weights"))
+weights <- file.path(system.file(package="image.darknet", "models"), "extraction.weights")
+download.file(url = "http://pjreddie.com/media/files/extraction.weights", destfile = weights)
 model <- system.file(package="image.darknet", "include", "darknet", "cfg", "extraction.cfg")
-weights <- system.file(package="image.darknet", "models", "extraction.weights")
 
 googlenet <- image_darknet_model(type = 'classify', 
                                  model = model, weights = weights, labels = labels)
 googlenet
 
 ## darknet19
-download.file(url = "http://pjreddie.com/media/files/darknet19.weights",
-  destfile = system.file(package="image.darknet", "models", "darknet19.weights"))
+weights <- file.path(system.file(package="image.darknet", "models"), "darknet19.weights")
+download.file(url = "http://pjreddie.com/media/files/darknet19.weights", destfile = weights)
 model <- system.file(package="image.darknet", "include", "darknet", "cfg", "darknet19.cfg")
-weights <- system.file(package="image.darknet", "models", "darknet19.weights")
 
 darknet19 <- image_darknet_model(type = 'classify', 
                                  model = model, weights = weights, labels = labels)
 darknet19
 
 ## Darknet19 448x448
-download.file(url = "http://pjreddie.com/media/files/darknet19_448.weights",
-  destfile = system.file(package="image.darknet", "models", "darknet19_448.weights"))
+weights <- file.path(system.file(package="image.darknet", "models"), "darknet19_448.weights")
+download.file(url = "http://pjreddie.com/media/files/darknet19_448.weights", destfile = weights)
 model <- system.file(package="image.darknet", "include", "darknet", "cfg", "darknet19_448.cfg")
-weights <- system.file(package="image.darknet", "models", "darknet19_448.weights")
 
 darknet_19 <- image_darknet_model(type = 'classify', 
                                   model = model, weights = weights, labels = labels)

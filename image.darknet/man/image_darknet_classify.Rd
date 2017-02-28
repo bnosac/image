@@ -48,10 +48,9 @@ image_darknet_classify(file = f, object = darknet_tiny)
 ## For other models, see ?image_darknet_model
 
 ## darknet19
-download.file(url = "http://pjreddie.com/media/files/darknet19.weights",
-  destfile = system.file(package="image.darknet", "models", "darknet19.weights"))
+weights <- file.path(system.file(package="image.darknet", "models"), "darknet19.weights")
+download.file(url = "http://pjreddie.com/media/files/darknet19.weights", destfile = weights)
 model <- system.file(package="image.darknet", "include", "darknet", "cfg", "darknet19.cfg")
-weights <- system.file(package="image.darknet", "models", "darknet19.weights")
 
 darknet19 <- image_darknet_model(type = 'classify', 
                                  model = model, weights = weights, labels = labels)
