@@ -7,3 +7,6 @@
 \description{
 Image classification and Object Detection based on darknet
 }
+\seealso{
+\code{\link{image_darknet_classify}}, \code{\link{image_darknet_detect}}, \code{\link{image_darknet_model}}
+}

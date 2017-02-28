@@ -2,6 +2,7 @@
 
 S3method(print,darknet_model)
 export(image_darknet_classify)
+export(image_darknet_detect)
 export(image_darknet_model)
 importFrom(utils,head)
 useDynLib(image.darknet)
