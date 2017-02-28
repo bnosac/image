@@ -4,4 +4,5 @@
 #' @aliases image.darknet-package
 #' @useDynLib image.darknet
 #' @docType package
+#' @importFrom utils head
 NULL
