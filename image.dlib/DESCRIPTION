@@ -4,7 +4,10 @@ Title: Image Processing functionality using the 'dlib' package
 Version: 0.1.0
 Author: Jan Wijffels, BNOSAC
 Maintainer: Jan Wijffels <jwijffels@bnosac.be>
-Description: Facility wrappers around the image processing functionality of 'dlib'. 'Dlib' <http://dlib.net> is a 'C++' toolkit containing machine learning algorithms and computer vision tools. Currently the package allows to find SURF descriptors.
+Description: Facility wrappers around the image processing functionality of
+    'dlib'. 'Dlib' <http://dlib.net> is a 'C++' toolkit containing machine learning
+    algorithms and computer vision tools. Currently the package allows to find SURF
+    descriptors.
 License: AGPL-3
 URL: https://github.com/bnosac/image.dlib
 Imports:
@@ -12,7 +15,7 @@ Imports:
     dlib
 LinkingTo: Rcpp, dlib
 Suggests:
-    imager,
+    imager (>= 0.40),
     magick
 SystemRequirements: C++11
 RoxygenNote: 6.0.1

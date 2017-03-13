@@ -32,35 +32,10 @@
 #' library(imager)
 #' library(magick)
 #' img <- image_read(path = f)
-#' plot(as.cimg(img), main = "SURF points")
+#' plot(magick2cimg(img), main = "SURF points")
 #' points(surf_blobs$x, surf_blobs$y, col = "red", pch = 20)
 image_surf <- function(file, max_points = 1000, detection_threshold = 30) {
   stopifnot(tools::file_ext(file) == "bmp")
   dlib_surf_points(file, max_points=max_points, detection_threshold=detection_threshold)
-}
-
-
-cvt.frame <- function(f){
-  f <- as.integer(f)
-  d <- dim(f)
-  dim(f) <- c(d[1:2],1,4)
-  out <- imager::cimg(f)
-  out <- imager::imrotate(out, 90)
-  out <- imager::mirror(out, "x")
-  out
-}
-
-#' @title Convert magick-image to cimg
-#' @description Convert magick-image to cimg. Put in this package as long as it is not in the imager package
-#' @param im an object of class magick-image from the magick package
-#' @export
-"as.cimg.magick-image" <- function(im){
-  cc <- NULL
-  out <- imager::map_il(seq_len(length(im)), ~ cvt.frame(im[[.]]))
-  out <- imager::imappend(out, "z")
-  alpha <- imager::imsub(out,cc==4)
-  out <- imager::imsub(out,cc<=3)
-  attr(out,"alpha") <- alpha
-  out
 }
 

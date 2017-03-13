@@ -45,7 +45,7 @@ str(surf_blobs)
 library(imager)
 library(magick)
 img <- image_read(path = f)
-plot(as.cimg(img), main = "SURF points")
+plot(magick2cimg(img), main = "SURF points")
 points(surf_blobs$x, surf_blobs$y, col = "red", pch = 20)
 }
 \references{
