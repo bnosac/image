@@ -24,6 +24,13 @@ plot(edges)
 
 See instructions at https://github.com/bnosac/image
 
+The package also requires libpng and fftw3 to be installed
+In Ubuntu this is done as follows
+
+```
+sudo apt-get install libpng-dev fftw3 fftw3-dev pkg-config
+```
+
 ## Support in image recognition
 
 Need support in image recognition?
