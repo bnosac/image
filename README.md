@@ -13,6 +13,8 @@ These algorithms are put into different packages because of license differences.
 
 More packages and extensions are under development.
 
+A presentation given at the useR-2017 conference is available in file [presentation-user2017.pdf](presentation-user2017.pdf) 
+
 ![](logo-image.png)
 
 ## Installation
