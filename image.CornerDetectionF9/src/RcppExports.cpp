@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // detect_corners
 List detect_corners(IntegerVector x, int width, int height, int bytes_per_row, bool suppress_non_max, unsigned char threshold);
-RcppExport SEXP image_CornerDetectionF9_detect_corners(SEXP xSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP bytes_per_rowSEXP, SEXP suppress_non_maxSEXP, SEXP thresholdSEXP) {
+RcppExport SEXP _image_CornerDetectionF9_detect_corners(SEXP xSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP bytes_per_rowSEXP, SEXP suppress_non_maxSEXP, SEXP thresholdSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -20,4 +20,14 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(detect_corners(x, width, height, bytes_per_row, suppress_non_max, threshold));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_image_CornerDetectionF9_detect_corners", (DL_FUNC) &_image_CornerDetectionF9_detect_corners, 6},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_image_CornerDetectionF9(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }
