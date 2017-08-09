@@ -11,4 +11,3 @@ The package allows to detect corners in digital images.
 \seealso{
 \link{image_detect_corners}
 }
-

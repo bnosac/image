@@ -43,4 +43,3 @@ corners <- image_detect_corners(image@grey * 255, 80)
 plot(image)
 points(corners$x, corners$y, col = "red", pch = 20, lwd = 0.5)
 }
-
