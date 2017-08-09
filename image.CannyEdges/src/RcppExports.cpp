@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // canny_edge_detector
 List canny_edge_detector(IntegerVector image, int X, int Y, double s, double low_thr, double high_thr, bool accGrad);
-RcppExport SEXP image_CannyEdges_canny_edge_detector(SEXP imageSEXP, SEXP XSEXP, SEXP YSEXP, SEXP sSEXP, SEXP low_thrSEXP, SEXP high_thrSEXP, SEXP accGradSEXP) {
+RcppExport SEXP _image_CannyEdges_canny_edge_detector(SEXP imageSEXP, SEXP XSEXP, SEXP YSEXP, SEXP sSEXP, SEXP low_thrSEXP, SEXP high_thrSEXP, SEXP accGradSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -21,4 +21,14 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(canny_edge_detector(image, X, Y, s, low_thr, high_thr, accGrad));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_image_CannyEdges_canny_edge_detector", (DL_FUNC) &_image_CannyEdges_canny_edge_detector, 7},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_image_CannyEdges(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }
