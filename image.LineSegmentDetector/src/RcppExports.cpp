@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // detect_line_segments
 List detect_line_segments(NumericVector image, int X, int Y, double scale, double sigma_scale, double quant, double ang_th, double log_eps, double density_th, int n_bins, int need_to_union, double union_ang_th, int union_use_NFA, double union_log_eps, double length_threshold, double dist_threshold);
-RcppExport SEXP image_LineSegmentDetector_detect_line_segments(SEXP imageSEXP, SEXP XSEXP, SEXP YSEXP, SEXP scaleSEXP, SEXP sigma_scaleSEXP, SEXP quantSEXP, SEXP ang_thSEXP, SEXP log_epsSEXP, SEXP density_thSEXP, SEXP n_binsSEXP, SEXP need_to_unionSEXP, SEXP union_ang_thSEXP, SEXP union_use_NFASEXP, SEXP union_log_epsSEXP, SEXP length_thresholdSEXP, SEXP dist_thresholdSEXP) {
+RcppExport SEXP _image_LineSegmentDetector_detect_line_segments(SEXP imageSEXP, SEXP XSEXP, SEXP YSEXP, SEXP scaleSEXP, SEXP sigma_scaleSEXP, SEXP quantSEXP, SEXP ang_thSEXP, SEXP log_epsSEXP, SEXP density_thSEXP, SEXP n_binsSEXP, SEXP need_to_unionSEXP, SEXP union_ang_thSEXP, SEXP union_use_NFASEXP, SEXP union_log_epsSEXP, SEXP length_thresholdSEXP, SEXP dist_thresholdSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -30,4 +30,14 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(detect_line_segments(image, X, Y, scale, sigma_scale, quant, ang_th, log_eps, density_th, n_bins, need_to_union, union_ang_th, union_use_NFA, union_log_eps, length_threshold, dist_threshold));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_image_LineSegmentDetector_detect_line_segments", (DL_FUNC) &_image_LineSegmentDetector_detect_line_segments, 16},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_image_LineSegmentDetector(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }
