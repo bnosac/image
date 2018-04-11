@@ -22,6 +22,8 @@
  * @author Vincent Maioli <vincent.maioli@crans.org>
  */
 
+#include <R.h> 
+
 #include <assert.h>
 #include <stdarg.h>
 #include <stdio.h>
@@ -36,6 +38,8 @@
 // this function prints an error message and aborts the program
 void error(const char *fmt, ...)
 {
+  Rf_error(fmt);
+  /*
 	va_list argp;
 	fprintf(stderr, "\nERROR: ");
 	va_start(argp, fmt);
@@ -48,6 +52,7 @@ void error(const char *fmt, ...)
 #else
 	exit(*(int *)0x43);
 #endif
+   */
 }
 
 

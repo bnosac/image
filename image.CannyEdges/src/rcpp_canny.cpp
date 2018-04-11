@@ -105,17 +105,17 @@ static void maxima(double* grad, double *theta, unsigned char *output, size_t nx
   }
 }
 
-static const char *help =
-  "canny usage:\n"
-  "\t-h | --help          Display this help message\n"
-  "\t-v | --version	Display the version of this program\n"
-  "\t-s | --sigma   DBLE  Gaussian filter's variance\n"
-  "\t-lt	          DBLE  Low threshold\n"
-  "\t-ht	          DBLE 	High threshold\n"
-  "\t-a |	          	triggers higher-order gradient\n"
-  "\t-i | --input   FILE  Input file\n"
-  "\t-o | --output  FILE  Output file\n"
-  ;
+// static const char *help =
+//   "canny usage:\n"
+//   "\t-h | --help          Display this help message\n"
+//   "\t-v | --version	Display the version of this program\n"
+//   "\t-s | --sigma   DBLE  Gaussian filter's variance\n"
+//   "\t-lt	          DBLE  Low threshold\n"
+//   "\t-ht	          DBLE 	High threshold\n"
+//   "\t-a |	          	triggers higher-order gradient\n"
+//   "\t-i | --input   FILE  Input file\n"
+//   "\t-o | --output  FILE  Output file\n"
+//   ;
 
 
 // [[Rcpp::export]]
@@ -125,7 +125,7 @@ List canny_edge_detector(IntegerVector image, int X, int Y,
                           double high_thr = 10,
                           bool accGrad = false)
 {
-  size_t nx, ny, nc;		// data size
+  size_t nx, ny;		// data size
   nx=X;
   ny=Y;
   //double s = 2; 		//s : sigma, filter variance
@@ -224,7 +224,7 @@ List canny_edge_detector(IntegerVector image, int X, int Y,
 
   NumericMatrix out_r(Dimension(nx, ny));
   int nonzero = 0;
-  for(int i = 0; i < (nx * ny); i++){
+  for(int i = 0; i < int(nx * ny); i++){
     out_r[i] = output[i];
     if(output[i] == 255){
       nonzero = nonzero + 1;

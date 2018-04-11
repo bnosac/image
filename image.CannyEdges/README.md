@@ -28,7 +28,7 @@ The package also requires libpng and fftw3 to be installed
 In Ubuntu this is done as follows
 
 ```
-sudo apt-get install libpng-dev fftw3 fftw3-dev pkg-config
+sudo apt-get install libpng-dev fftw3 fftw3-dev
 ```
 
 ## Support in image recognition

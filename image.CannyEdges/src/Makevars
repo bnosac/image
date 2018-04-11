@@ -1,3 +1,2 @@
-PKG_LIBS = `pkg-config --libs fftw3 libpng`
-PKG_CXXFLAGS = `pkg-config --cflags fftw3 libpng` `Rscript -e 'Rcpp:::CxxFlags()'`
-PKG_CFLAGS = `pkg-config --cflags fftw3 libpng`
+PKG_LIBS = -lpng -lfftw3 -lm 
+PKG_CXXFLAGS = -Wno-misleading-indentation -Wno-vla
