@@ -132,7 +132,8 @@ List canny_edge_detector(IntegerVector image, int X, int Y,
   //double low_thr=3, high_thr = 10;		// Thresholds
   //bool accGrad = false;
 
-  unsigned char input[image.size()];
+  //unsigned char input[image.size()];
+  unsigned char *input = new unsigned char[image.size()];
   for(int i = 0; i < image.size(); i++) input[i] = (unsigned char)image[i];
 
   double* in = (double *) xmalloc(sizeof(double) * nx * ny);
@@ -231,6 +232,7 @@ List canny_edge_detector(IntegerVector image, int X, int Y,
     }
   }
   free(output);
+  delete[] input;
   List z = List::create(_["edges"] = out_r,
                         _["pixels_nonzero"] = nonzero,
                         _["nx"] = nx,

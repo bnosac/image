@@ -1,2 +1,1 @@
 PKG_LIBS = -lpng -lfftw3 -lm 
-PKG_CXXFLAGS = -Wno-misleading-indentation -Wno-vla
