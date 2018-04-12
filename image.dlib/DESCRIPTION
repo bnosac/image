@@ -9,7 +9,7 @@ Description: Facility wrappers around the image processing functionality of
     algorithms and computer vision tools. Currently the package allows to find SURF
     descriptors.
 License: AGPL-3
-URL: https://github.com/bnosac/image.dlib
+URL: https://github.com/bnosac/image
 Imports:
     Rcpp (>= 0.12.9),
     dlib

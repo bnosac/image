@@ -2,6 +2,7 @@ Package: image.darknet
 Type: Package
 Title: Image classification and Object Detection based on 'darknet'
 License: MIT + file LICENSE
+URL: https://github.com/bnosac/image
 Version: 1.0
 Date: 2017-02-17
 Maintainer: Jan Wijffels <jwijffels@bnosac.be>

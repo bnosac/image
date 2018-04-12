@@ -6,6 +6,7 @@ Author: c(person("Jan", "Wijffels", role = c("aut", "cre", "cph"), email = "jwij
 Maintainer: Jan Wijffels <jwijffels@bnosac.be>
 Description: An implementation of the Canny Edge Detector for detecting edges in images. The package provides an interface to the algorithm available at <https://github.com/Neseb/canny>.
 License: GPL-3
+URL: https://github.com/bnosac/image
 Encoding: UTF-8
 Imports:
     Rcpp (>= 0.12.9)
