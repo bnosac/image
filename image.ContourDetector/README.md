@@ -6,7 +6,7 @@ The  **image.ContourDetector** R package implements Unsupervised Smooth Contour 
 
 - It contains 1 main function **image_contour_detector**. If you give it an image matrix with grey scale values in the 0-255 range, it will find contour lines in the image.
 - The algorithm is defined in Rafael Grompone von Gioi, and Gregory Randall, Unsupervised Smooth Contour Detection, Image Processing On Line, 6 (2016), pp. 233-267. https://doi.org/10.5201/ipol.2016.175
-- Mark that if you are looking in detecting lines, you might also be interested in https://github.com/bnosac/image.LineSegmentDetector
+- Mark that if you are looking in detecting lines, you might also be interested in https://github.com/bnosac/image/image.LineSegmentDetector
 
 
 ## Examples
