@@ -123,6 +123,7 @@ print.lsd <- function(x, ...){
 #' @param ... further arguments passed on to plot
 #' @return invisibly a SpatialLines object with the lines
 #' @export 
+#' @method plot lsd
 #' @examples 
 #' library(pixmap)
 #' imagelocation <- system.file("extdata", "le-piree.pgm", package="image.LineSegmentDetector")
