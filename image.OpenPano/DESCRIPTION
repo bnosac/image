@@ -8,8 +8,8 @@ Description: Stitch Images together using OpenPano <https://github.com/ppwwyyxx/
 License: file LICENSE
 URL: https://github.com/bnosac/image
 Imports:
-    Rcpp, tools
-LinkingTo: Rcpp
+    Rcpp, RcppEigen, tools
+LinkingTo: Rcpp, RcppEigen
 Suggests: magick
-SystemRequirements: C++11
+SystemRequirements: C++11, libjpeg, eigen
 RoxygenNote: 6.0.1
