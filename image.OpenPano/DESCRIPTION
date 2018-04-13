@@ -1,0 +1,15 @@
+Package: image.OpenPano
+Title: Stitch Images using OpenPano
+Version: 1.0
+Author: c(person("Jan", "Wijffels", role = c("aut", "cre", "cph"), email = "jwijffels@bnosac.be"), person("BNOSAC", role = "cph"), person("Yuxin Wu", role = "cph"))
+Maintainer: Jan Wijffels <jwijffels@bnosac.be>
+Description: Stitch Images together using OpenPano <https://github.com/ppwwyyxx/OpenPano>. 
+    It mainly follows the routine described in the paper Automatic Panoramic Image Stitching using Invariant Features <http://matthewalunbrown.com/papers/ijcv2007.pdf>.
+License: file LICENSE
+URL: https://github.com/bnosac/image
+Imports:
+    Rcpp, tools
+LinkingTo: Rcpp
+Suggests: magick
+SystemRequirements: C++11
+RoxygenNote: 6.0.1
