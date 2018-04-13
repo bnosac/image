@@ -18,7 +18,7 @@ using namespace std::tr2::sys;
 using namespace std;
 
 #include "utils.hh"
-
+/*
 void __m_assert_check__(bool val, const char *expr, const char *file, const char *func, int line) {
 	if (val)
 		return;
@@ -57,5 +57,29 @@ void error_exit(const char *msg) {
 	c_fprintf(COLOR_RED, stderr, "error: %s\n", msg);
 	exit(1);	Rcpp::stop("Not working");
 }
+*/
+
+#include <Rcpp.h>
+
+void __m_assert_check__(bool val, const char *expr, const char *file, const char *func, int line) {
+  if (val)
+    return;
+  
+  Rcpp::Rcout << "Failing expression " << expr << "\n";
+  Rcpp::Rcout << "Failing file " << file << "\n";
+  Rcpp::Rcout << "Failing func " << func << "\n";
+  Rcpp::Rcout << "Failing line " << line << "\n";
+  Rcpp::stop(expr);
+}
+
+void __print_debug__(const char *file, const char *func, int line, const char *fmt, ...) {
+  va_list arglist;
+  va_start(arglist, fmt);
+  Rcpp::Rcout << printf("[%s@%s:%d]", func, file, line) << vprintf(fmt, arglist);
+  va_end(arglist);
+}
 
 
+void error_exit(const char *msg) {
+  Rcpp::stop(msg);
+}
