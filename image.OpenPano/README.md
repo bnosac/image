@@ -20,5 +20,5 @@ image_read(images[3])
 image_read("result_stitched.jpg")
 ```
 
-
+![](inst/extdata/result_stitched.jpg)
 
