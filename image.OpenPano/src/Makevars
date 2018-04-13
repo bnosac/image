@@ -1,5 +1,7 @@
-PKG_LIBS = -ljpeg -fopenmp 
-PKG_CPPFLAGS  = -I. -isystem third-party -fopenmp -DDEBUG -std=c++11 -Wall -Wextra -Wnon-virtual-dtor -O3 -msse3 -march=native
+CXX_STD=CXX11
+PKG_LIBS = -ljpeg $(SHLIB_OPENMP_CFLAGS) $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
+PKG_CXXFLAGS = $(SHLIB_OPENMP_CXXFLAGS)
+PKG_CPPFLAGS  = -I. -isystem third-party -DDEBUG -Wnon-virtual-dtor
 
 SOURCES = lib/polygon.cc lib/debugutils.cc lib/color.cc lib/config.cc lib/timer.cc lib/imgproc.cc lib/kdtree.cc lib/imgio.cc lib/planedrawer.cc lib/matrix.cc lib/utils.cc feature/dist.cc feature/orientation.cc feature/sift.cc feature/gaussian.cc feature/feature.cc feature/dog.cc feature/matcher.cc feature/extrema.cc feature/brief.cc stitch/homography.cc stitch/warp.cc stitch/camera_estimator.cc stitch/debug.cc stitch/multiband.cc stitch/transform_estimate.cc stitch/cylstitcher.cc stitch/stitcherbase.cc stitch/camera.cc stitch/stitcher.cc stitch/blender.cc stitch/stitcher_image.cc stitch/incremental_bundle_adjuster.cc third-party/lodepng/lodepng.cc
 SOURCES += rcpp-openpano.cc
