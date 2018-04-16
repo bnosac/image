@@ -1,6 +1,7 @@
 // File: main.cc
 // Date: Wed Jun 17 20:29:58 2015 +0800
 // Author: Yuxin Wu <ppwwyyxxc@gmail.com>
+#include <Rcpp.h>
 
 #define _USE_MATH_DEFINES
 #include <cmath>
@@ -357,8 +358,6 @@ int main(int argc, char* argv[]) {
 		work(argc, argv);
 }
 
-
-#include <Rcpp.h>
 
 // [[Rcpp::plugins(cpp11)]]
 // [[Rcpp::export]]

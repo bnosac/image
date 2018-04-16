@@ -4,10 +4,11 @@ PKG_CXXFLAGS = $(SHLIB_OPENMP_CXXFLAGS)
 PKG_CPPFLAGS  = -I. -isystem third-party -DDEBUG -Wnon-virtual-dtor
 
 SOURCES = lib/polygon.cc lib/debugutils.cc lib/color.cc lib/config.cc lib/timer.cc lib/imgproc.cc lib/kdtree.cc lib/imgio.cc lib/planedrawer.cc lib/matrix.cc lib/utils.cc feature/dist.cc feature/orientation.cc feature/sift.cc feature/gaussian.cc feature/feature.cc feature/dog.cc feature/matcher.cc feature/extrema.cc feature/brief.cc stitch/homography.cc stitch/warp.cc stitch/camera_estimator.cc stitch/debug.cc stitch/multiband.cc stitch/transform_estimate.cc stitch/cylstitcher.cc stitch/stitcherbase.cc stitch/camera.cc stitch/stitcher.cc stitch/blender.cc stitch/stitcher_image.cc stitch/incremental_bundle_adjuster.cc third-party/lodepng/lodepng.cc
-SOURCES += rcpp-openpano.cc
+SOURCES += rcpp-openpano.cpp
 SOURCES += RcppExports.cpp
 
-#OBJECTS = $(SOURCES:.cc=.o)
-OBJECTS = lib/polygon.o lib/debugutils.o lib/color.o lib/config.o lib/timer.o lib/imgproc.o lib/kdtree.o lib/imgio.o lib/planedrawer.o lib/matrix.o lib/utils.o feature/dist.o feature/orientation.o feature/sift.o feature/gaussian.o feature/feature.o feature/dog.o feature/matcher.o feature/extrema.o feature/brief.o stitch/homography.o stitch/warp.o stitch/camera_estimator.o stitch/debug.o stitch/multiband.o stitch/transform_estimate.o stitch/cylstitcher.o stitch/stitcherbase.o stitch/camera.o stitch/stitcher.o stitch/blender.o stitch/stitcher_image.o stitch/incremental_bundle_adjuster.o third-party/lodepng/lodepng.o
-OBJECTS += rcpp-openpano.o
-OBJECTS += RcppExports.o
+OBJ = $(SOURCES:.cc=.o)
+OBJECTS = $(OBJ:.cpp=.o)
+#OBJECTS = lib/polygon.o lib/debugutils.o lib/color.o lib/config.o lib/timer.o lib/imgproc.o lib/kdtree.o lib/imgio.o lib/planedrawer.o lib/matrix.o lib/utils.o feature/dist.o feature/orientation.o feature/sift.o feature/gaussian.o feature/feature.o feature/dog.o feature/matcher.o feature/extrema.o feature/brief.o stitch/homography.o stitch/warp.o stitch/camera_estimator.o stitch/debug.o stitch/multiband.o stitch/transform_estimate.o stitch/cylstitcher.o stitch/stitcherbase.o stitch/camera.o stitch/stitcher.o stitch/blender.o stitch/stitcher_image.o stitch/incremental_bundle_adjuster.o third-party/lodepng/lodepng.o
+#OBJECTS += rcpp-openpano.o
+#OBJECTS += RcppExports.o
