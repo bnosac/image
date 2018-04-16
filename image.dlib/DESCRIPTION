@@ -15,7 +15,8 @@ Imports:
     dlib
 LinkingTo: Rcpp, dlib
 Suggests:
-    imager (>= 0.40),
+    imager,
+    abind,
     magick
 SystemRequirements: C++11
 RoxygenNote: 6.0.1

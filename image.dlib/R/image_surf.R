@@ -29,13 +29,27 @@
 #' str(surf_blobs)
 #'
 #' ## Plot the points
+#' "as.cimg.magick-image" <- function(x){
+#'   out <- lapply(x, FUN=function(frame){
+#'     frame <- as.integer(frame[[1]])[, , 1:3] # dropping the alpha channel
+#'     dim(frame) <- append(dim(frame), 1, after = 2)
+#'     frame
+#'   })
+#'   out$along <- 3
+#'   out <- do.call(abind::abind, out)
+#'   out <- imager::as.cimg(out)
+#'   out <- imager::permute_axes(out, "yxzc")
+#'   out
+#' }
 #' library(imager)
 #' library(magick)
 #' img <- image_read(path = f)
-#' plot(magick2cimg(img), main = "SURF points")
+#' plot(as.cimg(img), main = "SURF points")
 #' points(surf_blobs$x, surf_blobs$y, col = "red", pch = 20)
 image_surf <- function(file, max_points = 1000, detection_threshold = 30) {
   stopifnot(tools::file_ext(file) == "bmp")
-  dlib_surf_points(file, max_points=max_points, detection_threshold=detection_threshold)
+  out <- dlib_surf_points(file, max_points=max_points, detection_threshold=detection_threshold)
+  out$surf[is.nan(out$surf)] <- 0
+  out
 }
 

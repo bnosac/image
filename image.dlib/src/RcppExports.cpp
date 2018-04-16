@@ -9,7 +9,7 @@ using namespace Rcpp;
 
 // dlib_fhog
 List dlib_fhog(const std::string file, const int cell_size, const int filter_rows_padding, const int filter_cols_padding);
-RcppExport SEXP image_dlib_dlib_fhog(SEXP fileSEXP, SEXP cell_sizeSEXP, SEXP filter_rows_paddingSEXP, SEXP filter_cols_paddingSEXP) {
+RcppExport SEXP _image_dlib_dlib_fhog(SEXP fileSEXP, SEXP cell_sizeSEXP, SEXP filter_rows_paddingSEXP, SEXP filter_cols_paddingSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -23,7 +23,7 @@ END_RCPP
 }
 // dlib_surf_points
 List dlib_surf_points(const std::string file_name, long max_points, double detection_threshold);
-RcppExport SEXP image_dlib_dlib_surf_points(SEXP file_nameSEXP, SEXP max_pointsSEXP, SEXP detection_thresholdSEXP) {
+RcppExport SEXP _image_dlib_dlib_surf_points(SEXP file_nameSEXP, SEXP max_pointsSEXP, SEXP detection_thresholdSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -33,4 +33,15 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(dlib_surf_points(file_name, max_points, detection_threshold));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_image_dlib_dlib_fhog", (DL_FUNC) &_image_dlib_dlib_fhog, 4},
+    {"_image_dlib_dlib_surf_points", (DL_FUNC) &_image_dlib_dlib_surf_points, 3},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_image_dlib(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }

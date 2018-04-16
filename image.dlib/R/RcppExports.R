@@ -2,10 +2,10 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 dlib_fhog <- function(file, cell_size = 8L, filter_rows_padding = 1L, filter_cols_padding = 1L) {
-    .Call('image_dlib_dlib_fhog', PACKAGE = 'image.dlib', file, cell_size, filter_rows_padding, filter_cols_padding)
+    .Call('_image_dlib_dlib_fhog', PACKAGE = 'image.dlib', file, cell_size, filter_rows_padding, filter_cols_padding)
 }
 
 dlib_surf_points <- function(file_name, max_points = 10000L, detection_threshold = 30.0) {
-    .Call('image_dlib_dlib_surf_points', PACKAGE = 'image.dlib', file_name, max_points, detection_threshold)
+    .Call('_image_dlib_dlib_surf_points', PACKAGE = 'image.dlib', file_name, max_points, detection_threshold)
 }
 

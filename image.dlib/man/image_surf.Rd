@@ -42,10 +42,22 @@ surf_blobs <- image_surf(f, max_points = 10000, detection_threshold = 50)
 str(surf_blobs)
 
 ## Plot the points
+"as.cimg.magick-image" <- function(x){
+  out <- lapply(x, FUN=function(frame){
+    frame <- as.integer(frame[[1]])[, , 1:3] # dropping the alpha channel
+    dim(frame) <- append(dim(frame), 1, after = 2)
+    frame
+  })
+  out$along <- 3
+  out <- do.call(abind::abind, out)
+  out <- imager::as.cimg(out)
+  out <- imager::permute_axes(out, "yxzc")
+  out
+}
 library(imager)
 library(magick)
 img <- image_read(path = f)
-plot(magick2cimg(img), main = "SURF points")
+plot(as.cimg(img), main = "SURF points")
 points(surf_blobs$x, surf_blobs$y, col = "red", pch = 20)
 }
 \references{
