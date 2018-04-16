@@ -23,8 +23,10 @@ List dlib_surf_points(const std::string file_name,
   NumericVector ip_score(sp.size());
   NumericVector ip_laplacian(sp.size());
   NumericMatrix ip_surf(sp.size(), 64);
-
-  for(int i=0; i<sp.size(); i++){
+  
+  int points_nr;
+  points_nr = sp.size();
+  for(int i=0; i<points_nr; i++){
     ip_center_x[i] = sp[i].p.center(0);
     ip_center_y[i] = sp[i].p.center(1);
     ip_angle[i] = sp[i].angle;
@@ -32,7 +34,7 @@ List dlib_surf_points(const std::string file_name,
     ip_score[i] = sp[i].p.score;
     ip_laplacian[i] = sp[i].p.laplacian;
     for(int j=0; j<64; j++){
-      ip_surf[i, j] = sp[i].des(j, 1);
+      ip_surf(i, j) = sp[i].des(j, 1);
     }
 
   }
