@@ -11,6 +11,7 @@ These algorithms are put into different packages because of license differences.
 - **image.dlib**: Speeded up robust features (SURF) and histogram of oriented gradients (HOG) features (license: AGPL-3). [More info](image.dlib)
 - **image.darknet**: Image classification using darknet with deep learning models AlexNet, Darknet, VGG-16, Extraction (GoogleNet) and Darknet19. As well object detection using the state-of-the art YOLO detection system (license: MIT). [More info](image.darknet)
 - **image.OpenPano**: Image Stitching (license: see file LICENSE). [More info](image.OpenPano)
+- **image.DenoiseNLMeans**: Non-local means denoising (license: see file LICENSE). [More info](image.DenoiseNLMeans)
 
 More packages and extensions are under development.
 

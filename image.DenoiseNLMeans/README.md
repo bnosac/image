@@ -16,7 +16,7 @@ They are provided for scientific and education only.
 
 ```r
 library(magick)
-library(DenoiseNLMeans)
+library(image.DenoiseNLMeans)
 img <- system.file(package = "image.DenoiseNLMeans", "extdata", "img_garden.png")
 image_read(img)
 x <- image_denoise_nlmeans(img, sigma = 10)
