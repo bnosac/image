@@ -1,0 +1,66 @@
+# ABOUT
+
+* Author    : Antoni Buades <toni.buades@gmail.com>
+* Copyright : (C) 2009, 2010 IPOL Image Processing On Line http://www.ipol.im/
+* Licence
+
+- nlmeans_ipol.cpp, libdenoising.cpp and libdenoising.h
+may be linked to the EP patent 1,749,278 by A. Buades, T. Coll and J.M. Morel.
+They are provided for scientific and education only.
+
+- All the other files are distributed under the terms of the
+  LGPLv3 license.
+
+# OVERVIEW
+
+This source code provides an implementation of the NL-means denoising algorithm as described in IPOL
+    http://www.ipol.im/pub/algo/bcm_non_local_means_denoising/
+
+# ABOUT THIS FILE
+
+Copyright 2009, 2010 IPOL Image Processing On Line http://www.ipol.im/
+Author: Antoni Buades <toni.buades@gmail.com>
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.  This file is offered as-is,
+without any warranty.
+
+
+
+/*
+ * Copyright (c) 2009-2011, A. Buades <toni.buades@uib.es>
+ * All rights reserved.
+ *
+ *
+ * Patent warning:
+ *
+ * This file implements algorithms possibly linked to the patents
+ *
+ * # A. Buades, T. Coll and J.M. Morel, Image data processing method by
+ * reducing image noise, and camera integrating means for implementing
+ * said method, EP Patent 1,749,278 (Feb. 7, 2007).
+ *
+ * This file is made available for the exclusive aim of serving as
+ * scientific tool to verify the soundness and completeness of the
+ * algorithm description. Compilation, execution and redistribution
+ * of this file may violate patents rights in certain countries.
+ * The situation being different for every country and changing
+ * over time, it is your responsibility to determine which patent
+ * rights restrictions apply to you before you compile, use,
+ * modify, or redistribute this file. A patent lawyer is qualified
+ * to make this determination.
+ * If and only if they don't conflict with any patent terms, you
+ * can benefit from the following license terms attached to this
+ * file.
+ *
+ * License:
+ *
+ * This program is provided for scientific and educational only:
+ * you can use and/or modify it for these purposes, but you are
+ * not allowed to redistribute this work or derivative works in
+ * source or executable form. A license must be obtained from the
+ * patent right holders for any other use.
+ *
+ *
+ */

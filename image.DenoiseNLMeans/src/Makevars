@@ -1,0 +1,12 @@
+CXX_STD=CXX11
+PKG_LIBS = -lpng -lz $(SHLIB_OPENMP_CFLAGS) $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
+PKG_CXXFLAGS = -lpng -lz $(SHLIB_OPENMP_CXXFLAGS)
+PKG_CFLAGS  = -lpng -lz $(SHLIB_OPENMP_CFLAGS) $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
+
+SOURCES_C	= mt19937ar.c io_png.c
+SOURCES_CPP	= libauxiliar.cpp libdenoising.cpp rcpp_denoisenlmeans.cpp RcppExports.cpp
+SOURCES	= $(SOURCES_C) $(SOURCES_CPP)
+
+OBJ = $(SOURCES:.cpp=.o)
+OBJECTS = $(OBJ:.c=.o)
+
