@@ -2,7 +2,7 @@ Package: image.CannyEdges
 Type: Package
 Title: Implementation of the Canny Edge Detector for Images
 Version: 1.0
-Author: c(person("Jan", "Wijffels", role = c("aut", "cre", "cph"), email = "jwijffels@bnosac.be"), person("BNOSAC", role = "cph"), person("Rafael Grompone von Gioi", role = "cph", email = "grompone@gmail.com"), person("Vincent Maioli", role = "cph", email = "maioli@crans.org"))
+Author: c(person("Jan", "Wijffels", role = c("aut", "cre", "cph"), email = "jwijffels@bnosac.be"), person("BNOSAC", role = "cph"), person("Rafael Grompone von Gioi", role = "cph", email = "grompone@gmail.com"), person("Vincent Maioli", role = "cph", email = "maioli@crans.org"), person("IPOL Image Processing On Line", role = "cph"))
 Maintainer: Jan Wijffels <jwijffels@bnosac.be>
 Description: An implementation of the Canny Edge Detector for detecting edges in images. The package provides an interface to the algorithm available at <https://github.com/Neseb/canny>.
 License: GPL-3
