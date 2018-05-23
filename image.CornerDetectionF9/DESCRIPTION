@@ -1,7 +1,7 @@
 Package: image.CornerDetectionF9
 Type: Package
 Title: Find Corners in Digital Images with FAST-9
-Version: 1.0
+Version: 0.1.0
 Author: c(person("Jan", "Wijffels", role = c("aut", "cre", "cph"), email = "jwijffels@bnosac.be"), person("BNOSAC", role = "cph"), person("Julien Cayzac", role = "cph"))
 Maintainer: Jan Wijffels <jwijffels@bnosac.be>
 Description: An implementation of the "FAST-9" corner detection algorithm explained at <http://www.edwardrosten.com/work/fast.html>. The package allows to detect corners in digital images.

@@ -5,7 +5,7 @@ Description: An implementation of the Line Segment Detector on digital images de
 Maintainer: Jan Wijffels <jwijffels@bnosac.be>
 Authors@R: c(person("Jan", "Wijffels", role = c("aut", "cre", "cph"), email = "jwijffels@bnosac.be"), person("BNOSAC", role = "cph"), person("Rafael Grompone von Gioi", role = "cph", email = "grompone@gmail.com"))
 License: AGPL-3 + file LICENSE
-Version: 1.0
+Version: 0.1.0
 URL: https://github.com/bnosac/image
 VignetteBuilder: knitr
 Imports: Rcpp (>= 0.12.8), sp
