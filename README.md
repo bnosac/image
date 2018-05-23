@@ -36,8 +36,10 @@ devtools::install_github("bnosac/image", subdir = "image.darknet", build_vignett
 
 Have a look at some vignettes
 ```
-vignette("image_contour_detector", package = "image.ContourDetector")
+vignette("image_corner_detector_f9", package = "image.CornerDetectionF9")
 vignette("image_line_segment_detector", package = "image.LineSegmentDetector")
+vignette("image_contour_detector", package = "image.ContourDetector")
+vignette("image_canny_edges", package = "image.CannyEdges")
 ```
 
 
