@@ -2,16 +2,18 @@ Package: image.CannyEdges
 Type: Package
 Title: Implementation of the Canny Edge Detector for Images
 Version: 1.0
-Author: c(person("Jan", "Wijffels", role = c("aut", "cre", "cph"), email = "jwijffels@bnosac.be"), person("BNOSAC", role = "cph"), person("Rafael Grompone von Gioi", role = "cph", email = "grompone@gmail.com"), person("Vincent Maioli", role = "cph", email = "maioli@crans.org"), person("IPOL Image Processing On Line", role = "cph"))
+Author: c(person("Jan", "Wijffels", role = c("aut", "cre", "cph"), email = "jwijffels@bnosac.be"), person("BNOSAC", role = "cph"), person("Vincent Maioli", role = "cph", email = "maioli@crans.org"), person("IPOL Image Processing On Line", role = "cph"))
 Maintainer: Jan Wijffels <jwijffels@bnosac.be>
 Description: An implementation of the Canny Edge Detector for detecting edges in images. The package provides an interface to the algorithm available at <https://github.com/Neseb/canny>.
 License: GPL-3
 URL: https://github.com/bnosac/image
 Encoding: UTF-8
+VignetteBuilder: knitr
 Imports:
     Rcpp (>= 0.12.9)
 LinkingTo: Rcpp
 Suggests:
-    pixmap
+    pixmap,
+    knitr
 RoxygenNote: 6.0.1
 SystemRequirements: libpng, fftw3
