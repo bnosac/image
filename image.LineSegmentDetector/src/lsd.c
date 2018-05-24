@@ -2159,7 +2159,7 @@ static void rects2rect( int * reg, int reg_size,
 
   /* theta */
   theta = get_reg_union_theta(reg,reg_size,x,y,points,reg_angle,prec);
-  printf("theta: %lf (%lf)\n", theta, reg_angle);
+  //printf("theta: %lf (%lf)\n", theta, reg_angle);
   // FIXME!!!!
   //theta = reg_angle;
 
@@ -2358,7 +2358,7 @@ void line_segment_grower(double * img, int X, int Y,
         if (use_NFA) {
             ///* compute NFA value */
             log_nfa = rect_improve(&rec,angles,logNT,log_eps);
-            printf("nfa: %lf %lf\n", log_nfa, log_eps);
+            //printf("nfa: %lf %lf\n", log_nfa, log_eps);
             if( log_nfa <= log_eps ) continue;
         }
 
