@@ -1,6 +1,6 @@
 Package: image.dlib
 Type: Package
-Title: Image Processing Functionality using the 'dlib' package
+Title: Image Processing Functionality using the 'dlib' Package
 Version: 0.1.0
 Author: Jan Wijffels, BNOSAC
 Maintainer: Jan Wijffels <jwijffels@bnosac.be>
