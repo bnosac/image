@@ -1,0 +1,11 @@
+library(magick)
+x <- image_read(path = "image.CornerDetectionHarris/dev/building.png")
+x <- image_convert(x, colorspace = "Gray")
+x <- image_scale(x, "500!x500!")
+x
+img <- image_data(x)
+img <- as.integer(img, transpose = TRUE)
+img <- as.vector(img[, , 1])
+points <- image.CornerDetectionHarris:::detect_corners(img, 500, 500)
+plot(points$x, points$y)
+plot(points$y, points$x, cex = points$strength / max(points$strength))
