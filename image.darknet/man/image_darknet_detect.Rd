@@ -45,8 +45,8 @@ x <- image_darknet_detect(file = f, object = yolo_tiny_voc)
 weights <- file.path(system.file(package="image.darknet", "models"), "yolo.weights")
 download.file(url = "http://pjreddie.com/media/files/yolo.weights", destfile = weights)
 yolo_coco <- image_darknet_model(type = 'detect', 
- model = "yolo.cfg", 
- weights = system.file(package="image.darknet", "models", "yolo.weights"), 
+ model = "yolov3.cfg", 
+ weights = system.file(package="image.darknet", "models", "yolov3.weights"), 
  labels = system.file(package="image.darknet", "include", "darknet", "data", "coco.names"))
 yolo_coco
 
