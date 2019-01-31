@@ -1,7 +1,7 @@
 Package: image.CornerDetectionHarris
 Type: Package
 Title: Implementation of the Harris Corner Detection for Images
-Description: An implementation of the Harris Corner Detection for detecting relevant points in images as described in the paper: " An Analysis and Implementation of the Harris Corner Detector". The algorithm is explained at <doi:10.5201/ipol.2018.229>. 
+Description: An implementation of the Harris Corner Detection for detecting relevant points in images as described in the paper: "An Analysis and Implementation of the Harris Corner Detector". The algorithm is explained at <doi:10.5201/ipol.2018.229>. 
 Maintainer: Jan Wijffels <jwijffels@bnosac.be>
 Authors@R: c(
     person("Jan", "Wijffels", role = c("aut", "cre", "cph"), email = "jwijffels@bnosac.be"), 
