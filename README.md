@@ -5,6 +5,7 @@ This repository contains a suite of R packages which perform image algorithms cu
 These algorithms are put into different packages because of license differences. Currently the following R packages are available:
 
 - **image.CornerDetectionF9**:  FAST-9 corner detection for images  (license: BSD-2). [More info](image.CornerDetectionF9)
+- **image.CornerDetectionHarris**:  Harris corner detection for images  (license: BSD-2). [More info](image.CornerDetectionHarris)
 - **image.LineSegmentDetector**: Line Segment Detector (LSD) for images (license: AGPL-3). [More info](image.LineSegmentDetector)
 - **image.ContourDetector**:  Unsupervised Smooth Contour Line Detection for images (license: AGPL-3). [More info](image.ContourDetector)
 - **image.CannyEdges**: Canny Edge Detector for Images (license: GPL-3). [More info](image.CannyEdges)
@@ -27,6 +28,7 @@ Install all packages
 install.packages("devtools")
 install.packages("dlib")
 devtools::install_github("bnosac/image", subdir = "image.CornerDetectionF9", build_vignettes = TRUE)
+devtools::install_github("bnosac/image", subdir = "image.CornerDetectionHarris", build_vignettes = TRUE)
 devtools::install_github("bnosac/image", subdir = "image.LineSegmentDetector", build_vignettes = TRUE)
 devtools::install_github("bnosac/image", subdir = "image.ContourDetector", build_vignettes = TRUE)
 devtools::install_github("bnosac/image", subdir = "image.CannyEdges", build_vignettes = TRUE)
