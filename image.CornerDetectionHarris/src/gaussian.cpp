@@ -241,8 +241,8 @@ void sii_gaussian_conv_image(sii_coeffs &c, float *dest,
     /* Loop over the image channels. */
     for (channel = 0; channel < num_channels; ++channel)
     {
-        float *dest_y = dest;
-        const float *src_y = src;
+        //float *dest_y = dest;
+        //const float *src_y = src;
         
         /* Filter each row of the channel. */
 #pragma omp parallel for

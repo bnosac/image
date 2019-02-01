@@ -5,7 +5,7 @@
 //
 // Copyright (C) 2018, Javier Sánchez Pérez <jsanchez@ulpgc.es>
 // All rights reserved.
-
+#include <R.h>
 
 #include <stdio.h>
 #include <math.h>
@@ -378,7 +378,7 @@ void message(const char *msg, timeval &start, int verbose)
 { 
   if (verbose)
   {
-     printf("%s", msg);
+     Rprintf("%s", msg);
      gettimeofday(&start, NULL);
   }
 }  
@@ -388,10 +388,10 @@ void message(const char *msg, timeval &start, timeval &end, int verbose)
   if (verbose)
   {
      gettimeofday(&end, NULL);
-     printf("Time: %fs\n", ((end.tv_sec-start.tv_sec)* 1000000u + 
+     Rprintf("Time: %fs\n", ((end.tv_sec-start.tv_sec)* 1000000u + 
             end.tv_usec - start.tv_usec) / 1.e6);
 
-     printf("%s", msg);
+     Rprintf("%s", msg);
      gettimeofday(&start, NULL);
   }
 }  
@@ -399,7 +399,7 @@ void message(const char *msg, timeval &start, timeval &end, int verbose)
 void message(timeval &start, timeval &end)
 { 
    gettimeofday(&end, NULL);
-   printf("Time: %fs\n", ((end.tv_sec-start.tv_sec)* 1000000u + 
+   Rprintf("Time: %fs\n", ((end.tv_sec-start.tv_sec)* 1000000u + 
           end.tv_usec - start.tv_usec) / 1.e6);
 }  
 
@@ -491,8 +491,8 @@ void harris(
   
   if(verbose) 
   {
-    printf("\nHarris corner detection:\n");
-    printf("[nx=%d, ny=%d, sigma_i=%f]\n", nx, ny, sigma_i);
+    Rprintf("\nHarris corner detection:\n");
+    Rprintf("[nx=%d, ny=%d, sigma_i=%f]\n", nx, ny, sigma_i);
   }
 
   message(" 1.Smoothing the image: \t \t", start, verbose);
@@ -522,7 +522,7 @@ void harris(
   if(verbose)
   {
     message(start, end);
-    printf(" * Number of corners detected: %ld\n", corners.size());
+    Rprintf(" * Number of corners detected: %ld\n", corners.size());
   }
   
   delete []Ix;
@@ -591,7 +591,7 @@ void harris_scale(
     select_corners(corners, corners_z, sigma_i);
     
     if(verbose)
-      printf(" * Number of corners after scale check: %ld\n", corners.size());
+      Rprintf(" * Number of corners after scale check: %ld\n", corners.size());
   }
 }
 
