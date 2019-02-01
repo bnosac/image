@@ -39,7 +39,7 @@ NULL
 #' dev.off()
 #' 
 #' ## Or pass on a greyscale matrix starting at top left
-#' mat <- magick::image_data(x, channels = "gray")
+#' mat <- image_data(x, channels = "gray")
 #' mat <- as.integer(mat)
 #' mat <- mat[, , 1]
 #' mat <- t(mat)
