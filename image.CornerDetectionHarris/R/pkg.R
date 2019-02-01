@@ -50,7 +50,7 @@ image_harris <- function(x,
                          Nscales = 1L, 
                          precision = c('quadratic approximation', 'quartic interpolation', 'no subpixel'), 
                          cells = 10L, 
-                         verbose = TRUE) {
+                         verbose = FALSE) {
   gaussian <- which(gaussian %in% match.arg(gaussian)) -1L
   gradient <- which(gradient %in% match.arg(gradient)) -1L
   strategy <- which(strategy %in% match.arg(strategy)) -1L

@@ -11,7 +11,7 @@ image_harris(x, k = 0.06, sigma_d = 1, sigma_i = 2.5, threshold = 130,
   "distributed N corners"), Nselect = 1L, measure = c("Harris",
   "Shi-Tomasi", "Harmonic Mean"), Nscales = 1L,
   precision = c("quadratic approximation", "quartic interpolation",
-  "no subpixel"), cells = 10L, verbose = TRUE)
+  "no subpixel"), cells = 10L, verbose = FALSE)
 }
 \arguments{
 \item{x}{an object of class magick-image or a greyscale matrix of image pixel values in the 0-255 range where values start at the top left corner.}
