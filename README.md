@@ -11,6 +11,7 @@ These algorithms are put into different packages because of license differences.
 | **image.LineSegmentDetector**  | Line Segment Detector (LSD) for images | AGPL-3  | [Details](image.LineSegmentDetector)     |
 | **image.ContourDetector**      | Unsupervised Smooth Contour Line Detection for images | AGPL-3  | [Details](image.ContourDetector)     |
 | **image.CannyEdges**           | Canny Edge Detector for Images         | GPL-3   | [Details](image.CannyEdges)              |
+| **image.Otsu**                 | Otsu's Image Segmentation Method       | MIT     | [Details](image.Otsu)                    |
 | **image.dlib**                 | Speeded up robust features (SURF) and histogram of oriented gradients (HOG) features | AGPL-3 | [Details](image.dlib)     |
 | **image.darknet**              | Image classification using darknet with deep learning models AlexNet, Darknet, VGG-16, Extraction (GoogleNet) and Darknet19. As well object detection using the state-of-the art YOLO detection system | MIT   | [Details](image.darknet)        |
 | **image.OpenPano**             | Image Stitching                        | see file LICENSE | [Details](image.OpenPano)       |
@@ -34,6 +35,7 @@ devtools::install_github("bnosac/image", subdir = "image.CornerDetectionHarris",
 devtools::install_github("bnosac/image", subdir = "image.LineSegmentDetector", build_vignettes = TRUE)
 devtools::install_github("bnosac/image", subdir = "image.ContourDetector", build_vignettes = TRUE)
 devtools::install_github("bnosac/image", subdir = "image.CannyEdges", build_vignettes = TRUE)
+devtools::install_github("bnosac/image", subdir = "image.Otsu", build_vignettes = TRUE)
 devtools::install_github("bnosac/image", subdir = "image.dlib", build_vignettes = TRUE)
 devtools::install_github("bnosac/image", subdir = "image.darknet", build_vignettes = TRUE)
 ```
