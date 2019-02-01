@@ -1,7 +1,7 @@
 Package: image.Otsu
 Type: Package
 Title: Otsu's Image Segmentation Method
-Description: An implementation of the Otsu's Image Segmentation Method described in the paper: "A C++ Implementation of Otsu's Image Segmentation Method". The algorithm is explained at <https://doi.org/10.5201/ipol.2016.158>.
+Description: An implementation of the Otsu's Image Segmentation Method described in the paper: "A C++ Implementation of Otsu's Image Segmentation Method". The algorithm is explained at <doi:10.5201/ipol.2016.158>.
 Maintainer: Jan Wijffels <jwijffels@bnosac.be>
 Authors@R: c(
     person("Jan", "Wijffels", role = c("aut", "cre", "cph"), email = "jwijffels@bnosac.be", comment = "R wrapper"), 
