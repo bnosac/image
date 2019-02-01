@@ -37,6 +37,16 @@ NULL
 #' points(points$x, points$y, 
 #'        col = "red", pch = 20, cex = 5 * points$strength / max(points$strength))
 #' dev.off()
+#' 
+#' ## Or pass on a greyscale matrix starting at top left
+#' mat <- magick::image_data(x, channels = "gray")
+#' mat <- as.integer(mat)
+#' mat <- mat[, , 1]
+#' mat <- t(mat)
+#' points <- image_harris(mat)
+#' img <- image_draw(x)
+#' points(points$x, points$y, col = "red", pch = 20)
+#' dev.off()
 image_harris <- function(x, 
                          k = 0.060000, 
                          sigma_d = 1.000000, 
@@ -73,8 +83,10 @@ image_harris <- function(x,
     x <- x[, , 1]
     x <- t(x)
   }else if(inherits(x, "matrix")){
-    w <- ncol(x)
-    h <- nrow(x)
+    #w <- ncol(x)
+    #h <- nrow(x)
+    w <- nrow(x)
+    h <- ncol(x)
   }else{
     stop("x is not a matrix nor a magick-image")
   }

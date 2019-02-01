@@ -63,4 +63,14 @@ img <- image_draw(x)
 points(points$x, points$y, 
        col = "red", pch = 20, cex = 5 * points$strength / max(points$strength))
 dev.off()
+
+## Or pass on a greyscale matrix starting at top left
+mat <- magick::image_data(x, channels = "gray")
+mat <- as.integer(mat)
+mat <- mat[, , 1]
+mat <- t(mat)
+points <- image_harris(mat)
+img <- image_draw(x)
+points(points$x, points$y, col = "red", pch = 20)
+dev.off()
 }
