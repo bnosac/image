@@ -4,15 +4,17 @@ This repository contains a suite of R packages which perform image algorithms cu
 
 These algorithms are put into different packages because of license differences. Currently the following R packages are available:
 
-- **image.CornerDetectionF9**:  FAST-9 corner detection for images  (license: BSD-2). [More info](image.CornerDetectionF9)
-- **image.CornerDetectionHarris**:  Harris corner detection for images  (license: BSD-2). [More info](image.CornerDetectionHarris)
-- **image.LineSegmentDetector**: Line Segment Detector (LSD) for images (license: AGPL-3). [More info](image.LineSegmentDetector)
-- **image.ContourDetector**:  Unsupervised Smooth Contour Line Detection for images (license: AGPL-3). [More info](image.ContourDetector)
-- **image.CannyEdges**: Canny Edge Detector for Images (license: GPL-3). [More info](image.CannyEdges)
-- **image.dlib**: Speeded up robust features (SURF) and histogram of oriented gradients (HOG) features (license: AGPL-3). [More info](image.dlib)
-- **image.darknet**: Image classification using darknet with deep learning models AlexNet, Darknet, VGG-16, Extraction (GoogleNet) and Darknet19. As well object detection using the state-of-the art YOLO detection system (license: MIT). [More info](image.darknet)
-- **image.OpenPano**: Image Stitching (license: see file LICENSE). [More info](image.OpenPano)
-- **image.DenoiseNLMeans**: Non-local means denoising (license: see file LICENSE). [More info](image.DenoiseNLMeans)
+| Package           | Functionality                          | License     | Details|
+|-------------------|----------------------------------------|-------------|--------|
+| **image.CornerDetectionF9**    | FAST-9 corner detection for images     | BSD-2   | [Details](image.CornerDetectionF9)       |
+| **image.CornerDetectionHarris**| Harris corner detection for images     | BSD-2   | [Details](image.CornerDetectionHarris)   |
+| **image.LineSegmentDetector**  | Line Segment Detector (LSD) for images | AGPL-3  | [Details](image.LineSegmentDetector)     |
+| **image.ContourDetector**      | Unsupervised Smooth Contour Line Detection for images | AGPL-3  | [Details](image.ContourDetector)     |
+| **image.CannyEdges**           | Canny Edge Detector for Images         | GPL-3   | [Details](image.CannyEdges)              |
+| **image.dlib**                 | Speeded up robust features (SURF) and histogram of oriented gradients (HOG) features | AGPL-3 | [Details](image.dlib)     |
+| **image.darknet**              | Image classification using darknet with deep learning models AlexNet, Darknet, VGG-16, Extraction (GoogleNet) and Darknet19. As well object detection using the state-of-the art YOLO detection system | MIT   | [Details](image.darknet)        |
+| **image.OpenPano**             | Image Stitching                        | see file LICENSE | [Details](image.OpenPano)       |
+| **image.DenoiseNLMeans**       | Non-local means denoising              | see file LICENSE | [Details](image.DenoiseNLMeans) |
 
 More packages and extensions are under development.
 
