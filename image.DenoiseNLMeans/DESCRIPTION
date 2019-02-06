@@ -15,5 +15,5 @@ Imports:
 LinkingTo: Rcpp
 Suggests:
     magick
-SystemRequirements: C++11
+SystemRequirements: libpng, C++11
 RoxygenNote: 6.0.1
