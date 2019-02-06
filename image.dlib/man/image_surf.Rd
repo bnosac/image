@@ -41,6 +41,12 @@ f <- system.file("extdata", "cruise_boat.bmp", package="image.dlib")
 surf_blobs <- image_surf(f, max_points = 10000, detection_threshold = 50)
 str(surf_blobs)
 
+library(magick)
+x <- image_read(f)
+image_draw(x)
+points(surf_blobs$x, surf_blobs$y, col = "red", pch = 20)
+dev.off()
+\dontrun{
 ## Plot the points
 "as.cimg.magick-image" <- function(x){
   out <- lapply(x, FUN=function(frame){
@@ -56,9 +62,11 @@ str(surf_blobs)
 }
 library(imager)
 library(magick)
+library(abind)
 img <- image_read(path = f)
 plot(as.cimg(img), main = "SURF points")
 points(surf_blobs$x, surf_blobs$y, col = "red", pch = 20)
+}
 }
 \references{
 SURF: Speeded Up Robust Features By Herbert Bay, Tinne Tuytelaars, and Luc Van Gool
