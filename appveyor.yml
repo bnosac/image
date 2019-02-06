@@ -33,10 +33,16 @@ on_finish: Rscript -e "tic::after_script()"
 environment:
   USE_RTOOLS: true
   R_BUILD_ARGS: --no-manual
-  R_CHECK_ARGS: --no-manual --as-cran
+  R_CHECK_ARGS: --no-manual
   matrix:
     - R_VERSION: oldrel
+    - R_VERSION: stable
     - R_VERSION: release
+      R_ARCH: x64
+    - R_VERSION: release
+      R_ARCH: x64
+      GCC_PATH: mingw_64
+
 
 artifacts:
   - path: '*.Rcheck\**\*.log'

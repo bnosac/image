@@ -14,16 +14,16 @@ get_stage("after_install") %>% add_code_step(cat("Nothing to do"))
 get_stage("before_script") %>% add_code_step(cat("Nothing to do"))
 
 get_stage("script") %>%
-  add_code_step(rcmdcheck::rcmdcheck("image.Otsu")) %>%
-  add_code_step(rcmdcheck::rcmdcheck("image.CornerDetectionF9")) %>%
-  #add_code_step(rcmdcheck::rcmdcheck("image.CornerDetectionHarris")) %>%
-  #add_code_step(rcmdcheck::rcmdcheck("image.dlib")) %>%
-  #add_code_step(rcmdcheck::rcmdcheck("image.DenoiseNLMeans")) %>%
-  #add_code_step(rcmdcheck::rcmdcheck("image.darknet")) %>%
-  #add_code_step(rcmdcheck::rcmdcheck("image.CannyEdges")) %>%
-  #add_code_step(rcmdcheck::rcmdcheck("image.OpenPano")) %>%
-  add_code_step(rcmdcheck::rcmdcheck("image.ContourDetector")) %>%
-  add_code_step(rcmdcheck::rcmdcheck("image.LineSegmentDetector"))
+  add_code_step(rcmdcheck::rcmdcheck("image.Otsu", args = "--no-manual")) %>%
+  add_code_step(rcmdcheck::rcmdcheck("image.CornerDetectionF9", args = "--no-manual")) %>%
+  #add_code_step(rcmdcheck::rcmdcheck("image.CornerDetectionHarris", args = "--no-manual")) %>%
+  #add_code_step(rcmdcheck::rcmdcheck("image.dlib", args = "--no-manual")) %>%
+  #add_code_step(rcmdcheck::rcmdcheck("image.DenoiseNLMeans", args = "--no-manual")) %>%
+  #add_code_step(rcmdcheck::rcmdcheck("image.darknet", args = "--no-manual")) %>%
+  #add_code_step(rcmdcheck::rcmdcheck("image.CannyEdges", args = "--no-manual")) %>%
+  #add_code_step(rcmdcheck::rcmdcheck("image.OpenPano", args = "--no-manual")) %>%
+  add_code_step(rcmdcheck::rcmdcheck("image.ContourDetector", args = "--no-manual")) %>%
+  add_code_step(rcmdcheck::rcmdcheck("image.LineSegmentDetector", args = "--no-manual"))
   
 
 get_stage("before_deploy") %>%

@@ -1486,6 +1486,7 @@ void smooth_contours( double ** x, double ** y, int * N,
   double * yy;
   int * curve;
   struct arc_of_circle arc;
+  arc.dir  = 0;
   int i,k,n,reg_n,c,NN,MM,min_l;
   double w;
 
