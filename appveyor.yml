@@ -20,16 +20,17 @@ after_build: Rscript -e "tic::after_install()"
 before_test: Rscript -e "tic::before_script()"
 test_script: Rscript -e "tic::script()"
 on_success: Rscript -e "try(tic::after_success(), silent = TRUE)"
-on_failure: 
-  - 7z a failure.zip *.Rcheck\*
-  - appveyor PushArtifact failure.zip
-  - Rscript -e "tic::after_failure()"
+on_failure: Rscript -e "tic::after_failure()"
 before_deploy: Rscript -e "tic::before_deploy()"
 deploy_script: Rscript -e "tic::deploy()"
 after_deploy: Rscript -e "tic::after_deploy()"
 on_finish: Rscript -e "tic::after_script()"
 
 # Adapt as necessary starting from here
+#on_failure: 
+#  - 7z a failure.zip *.Rcheck\*
+#  - appveyor PushArtifact failure.zip
+  
 environment:
   USE_RTOOLS: true
   R_BUILD_ARGS: --no-manual
@@ -37,12 +38,6 @@ environment:
   matrix:
     - R_VERSION: oldrel
     - R_VERSION: stable
-    - R_VERSION: release
-      R_ARCH: x64
-    - R_VERSION: release
-      R_ARCH: x64
-      GCC_PATH: mingw_64
-
 
 artifacts:
   - path: '*.Rcheck\**\*.log'
