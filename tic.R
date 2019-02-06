@@ -22,8 +22,9 @@ get_stage("script") %>%
   #add_code_step(rcmdcheck::rcmdcheck("image.darknet")) %>%
   #add_code_step(rcmdcheck::rcmdcheck("image.CannyEdges")) %>%
   #add_code_step(rcmdcheck::rcmdcheck("image.OpenPano")) %>%
-  add_code_step(rcmdcheck::rcmdcheck("image.LineSegmentDetector")) %>%
-  add_code_step(rcmdcheck::rcmdcheck("image.ContourDetector"))
+  add_code_step(rcmdcheck::rcmdcheck("image.ContourDetector")) %>%
+  add_code_step(rcmdcheck::rcmdcheck("image.LineSegmentDetector"))
+  
 
 get_stage("before_deploy") %>%
   add_step(step_setup_ssh())
@@ -38,8 +39,8 @@ get_stage("deploy") %>%
   #add_code_step(drat::insertPackage(pkgbuild::build("image.darknet", binary = (getOption("pkgType") != "source")))) %>%
   #add_code_step(drat::insertPackage(pkgbuild::build("image.CannyEdges", binary = (getOption("pkgType") != "source")))) %>%
   #add_code_step(drat::insertPackage(pkgbuild::build("image.OpenPano", binary = (getOption("pkgType") != "source")))) %>%
-  add_code_step(drat::insertPackage(pkgbuild::build("image.LineSegmentDetector", binary = (getOption("pkgType") != "source")))) %>%
   add_code_step(drat::insertPackage(pkgbuild::build("image.ContourDetector", binary = (getOption("pkgType") != "source")))) %>%
+  add_code_step(drat::insertPackage(pkgbuild::build("image.LineSegmentDetector", binary = (getOption("pkgType") != "source")))) %>%
   add_step(step_do_push_deploy(path = "~/git/drat"))
 
 get_stage("after_deploy") %>%

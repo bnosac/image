@@ -1615,7 +1615,7 @@ static double get_reg_union_theta( int * reg, int reg_size, double x, double y,
   double Ixx = 0.0;
   double Iyy = 0.0;
   double Ixy = 0.0;
-  int i;
+  int i=0;
   if (reg_size == 1) {
 	  return points[reg[i]].theta;
   }
@@ -2133,7 +2133,7 @@ static void rects2rect( int * reg, int reg_size,
                          double prec, double p, struct rect * rec )
 {
   double x,y,dx,dy,l,w,theta,weight,sum,l_min,l_max,w_min,w_max;
-  int i;
+  int i=0;
 
   if (reg_size == 1) {
 	  *rec = points[reg[i]];
@@ -2230,8 +2230,8 @@ static void g_region_grow( int init_ind, int * reg,
                          double length_threshold )
 {
   double sumdx,sumdy, dx, dy;
-  int i, j, a, b;
-  struct rect *init_point = &points[init_ind];
+  int i, j, a=1, b=1;
+  //struct rect *init_point = &points[init_ind];
 
   /* first points of the region */
   *reg_size = 1;
@@ -2304,8 +2304,9 @@ void line_segment_grower(double * img, int X, int Y,
   int *used;
   struct rect rec;
   int * reg;
-  int reg_size, i, j;
-  double reg_angle,prec,p,log_nfa,logNT;
+  //int reg_size, i, j;
+  int reg_size, j;
+  double reg_angle,prec,p,log_nfa=log_eps,logNT;
   int ls_count = 0;                   /* line segments are numbered 1,2,3,... */
 
   free( (void *) out );
