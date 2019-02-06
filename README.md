@@ -48,6 +48,13 @@ vignette("image_contour_detector", package = "image.ContourDetector")
 vignette("image_canny_edges", package = "image.CannyEdges")
 ```
 
+###
+
+- Alternatively, you can see if the binary packages for your operating system are on the BNOSAC drat repo at https://github.com/bnosac/drat
+- CI builds: 
+    - [Travis](https://travis-ci.org/bnosac/image)
+    - [AppVeyor](https://ci.appveyor.com/project/jwijffels/image) 
+
 
 ## Support in image recognition
 
