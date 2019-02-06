@@ -44,7 +44,7 @@ Available models are
 ## Define the classification model 
 ## (structure of the deep learning model + the learned weights + the labels)
 ##
-model <- system.file(package="image.darknet", "include", "darknet", "cfg", )
+model <- system.file(package="image.darknet", "include", "darknet", "cfg", "tiny.cfg")
 weights <- system.file(package="image.darknet", "models", "tiny.weights")
 f <- system.file(package="image.darknet", "include", "darknet", "data", "imagenet.shortnames.list")
 labels <- readLines(f)
@@ -101,7 +101,6 @@ darknet_19
 }
 
 
-http://pjreddie.com/media/files/
 
 ##
 ## Define the detection model (YOLO) 
