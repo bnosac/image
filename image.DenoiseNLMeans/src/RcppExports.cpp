@@ -6,25 +6,27 @@
 using namespace Rcpp;
 
 // rcpp_nlmeans
-Rcpp::List rcpp_nlmeans(const char* file, const char* file_denoised, float sigma, bool args_auto, int win, int bloc, float fFiltPar);
-RcppExport SEXP _image_DenoiseNLMeans_rcpp_nlmeans(SEXP fileSEXP, SEXP file_denoisedSEXP, SEXP sigmaSEXP, SEXP args_autoSEXP, SEXP winSEXP, SEXP blocSEXP, SEXP fFiltParSEXP) {
+Rcpp::List rcpp_nlmeans(IntegerVector image, int width, int height, int channels, float sigma, bool args_auto, int win, int bloc, float fFiltPar);
+RcppExport SEXP _image_DenoiseNLMeans_rcpp_nlmeans(SEXP imageSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP channelsSEXP, SEXP sigmaSEXP, SEXP args_autoSEXP, SEXP winSEXP, SEXP blocSEXP, SEXP fFiltParSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const char* >::type file(fileSEXP);
-    Rcpp::traits::input_parameter< const char* >::type file_denoised(file_denoisedSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type image(imageSEXP);
+    Rcpp::traits::input_parameter< int >::type width(widthSEXP);
+    Rcpp::traits::input_parameter< int >::type height(heightSEXP);
+    Rcpp::traits::input_parameter< int >::type channels(channelsSEXP);
     Rcpp::traits::input_parameter< float >::type sigma(sigmaSEXP);
     Rcpp::traits::input_parameter< bool >::type args_auto(args_autoSEXP);
     Rcpp::traits::input_parameter< int >::type win(winSEXP);
     Rcpp::traits::input_parameter< int >::type bloc(blocSEXP);
     Rcpp::traits::input_parameter< float >::type fFiltPar(fFiltParSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpp_nlmeans(file, file_denoised, sigma, args_auto, win, bloc, fFiltPar));
+    rcpp_result_gen = Rcpp::wrap(rcpp_nlmeans(image, width, height, channels, sigma, args_auto, win, bloc, fFiltPar));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_image_DenoiseNLMeans_rcpp_nlmeans", (DL_FUNC) &_image_DenoiseNLMeans_rcpp_nlmeans, 7},
+    {"_image_DenoiseNLMeans_rcpp_nlmeans", (DL_FUNC) &_image_DenoiseNLMeans_rcpp_nlmeans, 9},
     {NULL, NULL, 0}
 };
 

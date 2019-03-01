@@ -17,8 +17,10 @@ They are provided for scientific and education only.
 ```r
 library(magick)
 library(image.DenoiseNLMeans)
-img <- system.file(package = "image.DenoiseNLMeans", "extdata", "img_garden.png")
-image_read(img)
-x <- image_denoise_nlmeans(img, sigma = 10)
-image_read(x$file_denoised)
+f <- system.file(package = "image.DenoiseNLMeans", "extdata", "img_garden.png")
+img <- image_read(f)
+img <- image_noise(img, noisetype = "Poisson")
+img
+denoised <- image_denoise_nlmeans(img, sigma = 40)
+denoised
 ```

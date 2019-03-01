@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "libdenoising.h"
-#include "io_png.h"
 
 #include <Rcpp.h>
 using namespace Rcpp;
@@ -16,14 +15,11 @@ void fiAddNothing(float *u, float *v, int size) {
 
 // [[Rcpp::plugins(cpp11)]]
 // [[Rcpp::export]]
-Rcpp::List rcpp_nlmeans(const char* file, const char* file_denoised, float sigma, bool args_auto = true, int win = 1, int bloc = 10, float fFiltPar = 0.4) {
+Rcpp::List rcpp_nlmeans(IntegerVector image, int width, int height, int channels, float sigma, bool args_auto = true, int win = 1, int bloc = 10, float fFiltPar = 0.4) {
   // read input
-  size_t nx,ny,nc;
-  float *d_v = NULL;
-  d_v = io_png_read_f32(file, &nx, &ny, &nc);
-  if (!d_v) {
-    Rcpp::stop("error :: not a correct png image");
-  }
+  size_t nx=width,ny=height,nc=channels;
+  std::vector<float> _d_v = Rcpp::as<std::vector<float> >(image);
+  float *d_v = &_d_v[0];
   
   // variables
   int d_w = (int) nx;
@@ -144,14 +140,14 @@ Rcpp::List rcpp_nlmeans(const char* file, const char* file_denoised, float sigma
 
   nlmeans_ipol(win, bloc, fSigma, fFiltPar, fpI,  fpO, d_c, d_w, d_h);
   
-  io_png_write_f32(file_denoised, denoised, (size_t) d_w, (size_t) d_h, (size_t) d_c);
-  
-  Rcpp::List output = Rcpp::List::create(Rcpp::Named("file") = file, 
-                                         Rcpp::Named("channels") = d_c,
-                                         Rcpp::Named("width") = d_w,
+  std::vector<double> result_denoised;
+  for(int i=0; i<(d_whc); i++){
+    result_denoised.push_back(denoised[i]);
+  }    
+  Rcpp::List output = Rcpp::List::create(Rcpp::Named("width") = d_w,
                                          Rcpp::Named("height") = d_h,
-                                         Rcpp::Named("file_denoised") = file_denoised,
-                                         //Rcpp::Named("output") = fpO,
+                                         Rcpp::Named("channels") = d_c,
+                                         Rcpp::Named("denoised") = result_denoised,
                                          Rcpp::Named("sigma") = fSigma,    // Noise parameter
                                          Rcpp::Named("filter") = fFiltPar, // Filtering parameter
                                          Rcpp::Named("window") = win,      // Half size of comparison window

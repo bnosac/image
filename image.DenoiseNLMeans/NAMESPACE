@@ -2,4 +2,9 @@
 
 export(image_denoise_nlmeans)
 importFrom(Rcpp,evalCpp)
+importFrom(grDevices,as.raster)
+importFrom(magick,image_comment)
+importFrom(magick,image_data)
+importFrom(magick,image_info)
+importFrom(magick,image_read)
 useDynLib(image.DenoiseNLMeans)
