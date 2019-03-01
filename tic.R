@@ -16,7 +16,7 @@ get_stage("before_script") %>% add_code_step(cat("Nothing to do"))
 get_stage("script") %>%
   add_code_step(rcmdcheck::rcmdcheck("image.Otsu", args = "--no-manual")) %>%
   add_code_step(rcmdcheck::rcmdcheck("image.CornerDetectionF9", args = "--no-manual")) %>%
-  #add_code_step(rcmdcheck::rcmdcheck("image.CornerDetectionHarris", args = "--no-manual")) %>%
+  add_code_step(rcmdcheck::rcmdcheck("image.CornerDetectionHarris", args = "--no-manual")) %>%
   #add_code_step(rcmdcheck::rcmdcheck("image.dlib", args = "--no-manual")) %>%
   add_code_step(rcmdcheck::rcmdcheck("image.DenoiseNLMeans", args = "--no-manual")) %>%
   #add_code_step(rcmdcheck::rcmdcheck("image.darknet", args = "--no-manual")) %>%
@@ -33,7 +33,7 @@ get_stage("deploy") %>%
   add_step(step_setup_push_deploy(path = "~/git/drat", branch = "gh-pages", remote = "git@github.com:bnosac/drat.git")) %>%
   add_code_step(drat::insertPackage(pkgbuild::build("image.Otsu", binary = (getOption("pkgType") != "source")))) %>%
   add_code_step(drat::insertPackage(pkgbuild::build("image.CornerDetectionF9", binary = (getOption("pkgType") != "source")))) %>%
-  #add_code_step(drat::insertPackage(pkgbuild::build("image.CornerDetectionHarris", binary = (getOption("pkgType") != "source")))) %>%
+  add_code_step(drat::insertPackage(pkgbuild::build("image.CornerDetectionHarris", binary = (getOption("pkgType") != "source")))) %>%
   add_code_step(drat::insertPackage(pkgbuild::build("image.dlib", binary = (getOption("pkgType") != "source")))) %>%
   add_code_step(drat::insertPackage(pkgbuild::build("image.DenoiseNLMeans", binary = (getOption("pkgType") != "source")))) %>%
   #add_code_step(drat::insertPackage(pkgbuild::build("image.darknet", binary = (getOption("pkgType") != "source")))) %>%
