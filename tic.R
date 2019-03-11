@@ -36,7 +36,7 @@ get_stage("deploy") %>%
   add_code_step(drat::insertPackage(pkgbuild::build("image.CornerDetectionHarris", binary = (getOption("pkgType") != "source")))) %>%
   add_code_step(drat::insertPackage(pkgbuild::build("image.dlib", binary = (getOption("pkgType") != "source")))) %>%
   add_code_step(drat::insertPackage(pkgbuild::build("image.DenoiseNLMeans", binary = (getOption("pkgType") != "source")))) %>%
-  #add_code_step(drat::insertPackage(pkgbuild::build("image.darknet", binary = (getOption("pkgType") != "source")))) %>%
+  add_code_step(drat::insertPackage(pkgbuild::build("image.darknet", binary = (getOption("pkgType") != "source")))) %>%
   #add_code_step(drat::insertPackage(pkgbuild::build("image.CannyEdges", binary = (getOption("pkgType") != "source")))) %>%
   #add_code_step(drat::insertPackage(pkgbuild::build("image.OpenPano", binary = (getOption("pkgType") != "source")))) %>%
   add_code_step(drat::insertPackage(pkgbuild::build("image.ContourDetector", binary = (getOption("pkgType") != "source")))) %>%
