@@ -35,7 +35,7 @@ and on any theory of liability, whether in contract, strict liability,
 or tort (including negligence or otherwise) arising in any way out of
 the use of this software, even if advised of the possibility of such damage.
 */
-
+#include <Rcpp.h>
 
 #include "facedetectcnn.h"
 #include <stdio.h>
@@ -533,7 +533,8 @@ int * facedetect_cnn(unsigned char * result_buffer, //buffer memory for storing 
 
     if (!result_buffer)
     {
-        fprintf(stderr, "%s: null buffer memory.\n", __FUNCTION__);
+        //fprintf(stderr, "%s: null buffer memory.\n", __FUNCTION__);
+        Rcpp::Rcerr << "null buffer memory.\n";
         return NULL;
     }
     //clear memory
