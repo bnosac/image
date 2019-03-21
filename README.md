@@ -28,16 +28,18 @@ A presentation given at the useR-2017 conference is available in file [presentat
 Install all packages
 
 ```
-install.packages("devtools")
+install.packages("remotes")
 install.packages("dlib")
-devtools::install_github("bnosac/image", subdir = "image.CornerDetectionF9", build_vignettes = TRUE)
-devtools::install_github("bnosac/image", subdir = "image.CornerDetectionHarris", build_vignettes = TRUE)
-devtools::install_github("bnosac/image", subdir = "image.LineSegmentDetector", build_vignettes = TRUE)
-devtools::install_github("bnosac/image", subdir = "image.ContourDetector", build_vignettes = TRUE)
-devtools::install_github("bnosac/image", subdir = "image.CannyEdges", build_vignettes = TRUE)
-devtools::install_github("bnosac/image", subdir = "image.Otsu", build_vignettes = TRUE)
-devtools::install_github("bnosac/image", subdir = "image.dlib", build_vignettes = TRUE)
-devtools::install_github("bnosac/image", subdir = "image.darknet", build_vignettes = TRUE)
+remotes::install_github("bnosac/image", subdir = "image.CornerDetectionF9", build_vignettes = TRUE)
+remotes::install_github("bnosac/image", subdir = "image.CornerDetectionHarris", build_vignettes = TRUE)
+remotes::install_github("bnosac/image", subdir = "image.LineSegmentDetector", build_vignettes = TRUE)
+remotes::install_github("bnosac/image", subdir = "image.ContourDetector", build_vignettes = TRUE)
+remotes::install_github("bnosac/image", subdir = "image.CannyEdges", build_vignettes = TRUE)
+remotes::install_github("bnosac/image", subdir = "image.Otsu", build_vignettes = TRUE)
+remotes::install_github("bnosac/image", subdir = "image.dlib", build_vignettes = TRUE)
+remotes::install_github("bnosac/image", subdir = "image.darknet", build_vignettes = TRUE)
+remotes::install_github("bnosac/image", subdir = "image.DenoiseNLMeans", build_vignettes = TRUE)
+remotes::install_github("bnosac/image", subdir = "image.OpenPano", build_vignettes = TRUE)
 ```
 
 Have a look at some vignettes
