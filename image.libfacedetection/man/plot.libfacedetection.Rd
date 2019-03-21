@@ -24,6 +24,9 @@
 
 \item{...}{other parameters passed on to \code{\link[graphics]{rect}}}
 }
+\value{
+an object of class \code{magick-image}
+}
 \description{
 Plot functionality for bounding boxes detected with \code{\link{image_detect_faces}}
 }

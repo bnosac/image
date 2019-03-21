@@ -18,7 +18,7 @@ get_stage("script") %>%
   add_code_step(rcmdcheck::rcmdcheck("image.CornerDetectionF9", args = "--no-manual")) %>%
   add_code_step(rcmdcheck::rcmdcheck("image.CornerDetectionHarris", args = "--no-manual")) %>%
   #add_code_step(rcmdcheck::rcmdcheck("image.dlib", args = "--no-manual")) %>%
-  add_code_step(rcmdcheck::rcmdcheck("image.DenoiseNLMeans", args = "--no-manual")) %>%
+  #add_code_step(rcmdcheck::rcmdcheck("image.DenoiseNLMeans", args = "--no-manual")) %>%
   #add_code_step(rcmdcheck::rcmdcheck("image.darknet", args = "--no-manual")) %>%
   #add_code_step(rcmdcheck::rcmdcheck("image.CannyEdges", args = "--no-manual")) %>%
   #add_code_step(rcmdcheck::rcmdcheck("image.OpenPano", args = "--no-manual")) %>%

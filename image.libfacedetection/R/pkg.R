@@ -74,6 +74,7 @@ image_detect_faces <- function(x) {
 #' @param cex character expension factor of the text on the box. Defaults to 2. Passed on to \code{\link[graphics]{text}}
 #' @param ... other parameters passed on to \code{\link[graphics]{rect}}
 #' @export
+#' @return an object of class \code{magick-image}
 #' @examples
 #' library(magick)
 #' path <- system.file(package="image.libfacedetection", "images", "handshake.jpg")
@@ -98,7 +99,7 @@ image_detect_faces <- function(x) {
 plot.libfacedetection <- function(x, image, border = "red", lwd = 5, only_box = FALSE, col = "red", cex = 2, ...){
   stopifnot(inherits(image, "magick-image") && nrow(magick::image_info(image)) == 1)
   faces <- x$detections
-  magick::image_draw(image)
+  img <- magick::image_draw(image)
   lapply(seq_along(faces$x), FUN = function(i){
     face <- lapply(faces, FUN=function(x) x[i])
     graphics::rect(xleft = face$x, xright = face$x + face$width,
@@ -107,5 +108,5 @@ plot.libfacedetection <- function(x, image, border = "red", lwd = 5, only_box = 
       graphics::text(x = face$x, y = face$y, adj = 0.5, labels = face$neighbours, col = col, cex = cex)  
     }
   })
-  invisible()
+  img
 }
