@@ -13,6 +13,7 @@ These algorithms are put into different packages because of license differences.
 | **image.CannyEdges**           | Canny Edge Detector for Images         | GPL-3   | [Details](image.CannyEdges)              |
 | **image.Otsu**                 | Otsu's Image Segmentation Method       | MIT     | [Details](image.Otsu)                    |
 | **image.dlib**                 | Speeded up robust features (SURF) and histogram of oriented gradients (HOG) features | AGPL-3 | [Details](image.dlib)     |
+| **image.libfacedetection**     | CNN for Face Detection                 | BSD-3   | [Details](image.libfacedetection)        |
 | **image.darknet**              | Image classification using darknet with deep learning models AlexNet, Darknet, VGG-16, Extraction (GoogleNet) and Darknet19. As well object detection using the state-of-the art YOLO detection system | MIT   | [Details](image.darknet)        |
 | **image.OpenPano**             | Image Stitching                        | see file LICENSE | [Details](image.OpenPano)       |
 | **image.DenoiseNLMeans**       | Non-local means denoising              | see file LICENSE | [Details](image.DenoiseNLMeans) |
@@ -25,7 +26,16 @@ A presentation given at the useR-2017 conference is available in file [presentat
 
 ## Installation
 
-Install all packages
+- You can see if the binary packages for your operating system are on the BNOSAC drat repo at https://github.com/bnosac/drat
+- If they are, you can just install them as follows, where you replace `thepackagename` with one of the packages you are interested in 
+
+```
+install.packages("thepackagename", repos = "https://bnosac.github.io/drat")
+```
+
+### Development packages
+
+Install the development version of packages as follows:
 
 ```
 install.packages("remotes")
@@ -39,6 +49,7 @@ remotes::install_github("bnosac/image", subdir = "image.Otsu", build_vignettes =
 remotes::install_github("bnosac/image", subdir = "image.dlib", build_vignettes = TRUE)
 remotes::install_github("bnosac/image", subdir = "image.darknet", build_vignettes = TRUE)
 remotes::install_github("bnosac/image", subdir = "image.DenoiseNLMeans", build_vignettes = TRUE)
+remotes::install_github("bnosac/image", subdir = "image.libfacedetection", build_vignettes = TRUE)
 remotes::install_github("bnosac/image", subdir = "image.OpenPano", build_vignettes = TRUE)
 ```
 
@@ -50,10 +61,9 @@ vignette("image_contour_detector", package = "image.ContourDetector")
 vignette("image_canny_edges", package = "image.CannyEdges")
 ```
 
-###
+### CI builds
 
-- Alternatively, you can see if the binary packages for your operating system are on the BNOSAC drat repo at https://github.com/bnosac/drat
-- CI builds: 
+- CI builds are here 
     - [Travis](https://travis-ci.org/bnosac/image)
     - [AppVeyor](https://ci.appveyor.com/project/jwijffels/image) 
 
