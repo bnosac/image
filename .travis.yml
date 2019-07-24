@@ -37,6 +37,12 @@ matrix:
     - os: linux
       dist: xenial
       r: release
+    - os: linux
+      dist: trusty 
+      r: release
+    - os: linux
+      dist: precise 
+      r: release
     - os: osx
       r: oldrel
     - os: osx
