@@ -8,22 +8,26 @@ NULL
 #' @description An implementation of the Otsu's image segmentation algorithm explained at \url{https://doi.org/10.5201/ipol.2016.158}. 
 #' @param x an object of class magick-image or a greyscale matrix of image pixel values in the 0-255 range
 #' @param threshold integer value in range of 0-255. To override the threshold. Defaults to 0 indicating not to override the threshold.
-#' @return A list with elements threshold and img containing the thresholded image (which is of class \code{magick-image} or of class matrix depending on the class of \code{x})
+#' @return 
+#' In case \code{x} is a matrix, a list with elements x (containing the thresholded image) and threshold is returned \cr
+#' In case \code{x} is a \code{magick-image}, the thresholded \code{magick-image} is returned alongside
+#' which also now has an attribute called threshold with the exact Otsu threshold value
 #' @export
 #' @examples
 #' library(magick)
 #' path <- system.file(package="image.Otsu", "extdata", "coins.jpeg")
-#' x <- image_read(path)
+#' x    <- image_read(path)
 #' x
-#' img <- image_otsu(x)
+#' img  <- image_otsu(x)
 #' img
-#' img <- image_otsu(x, threshold = 180)
+#' attr(img, "threshold")
+#' img  <- image_otsu(x, threshold = 180)
 #' img
 #'
-#' img <- image_data(x, channels = "gray")
-#' img <- as.integer(img)
-#' img <- img[, , 1]
-#' img <- image_otsu(img)
+#' img  <- image_data(x, channels = "gray")
+#' img  <- as.integer(img, transpose = TRUE)
+#' img  <- img[, , 1]
+#' img  <- image_otsu(img)
 #' str(img)
 image_otsu <- function(x, threshold = 0) {
   threshold <- as.integer(threshold)
@@ -45,6 +49,8 @@ image_otsu <- function(x, threshold = 0) {
     img <- otsu(img, w, h, threshold)
     img$x <- grDevices::as.raster(img$x, max = 255)
     img$x <- magick::image_read(img$x)
+    attr(img$x, which = "threshold") <- img$threshold
+    img <- img$x
   }else if(inherits(x, "matrix")){
     w <- ncol(x)
     h <- nrow(x)

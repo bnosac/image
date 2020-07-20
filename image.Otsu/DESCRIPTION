@@ -15,4 +15,4 @@ Imports: Rcpp (>= 0.12.8)
 LinkingTo: Rcpp
 Suggests:
     magick
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.0
