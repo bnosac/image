@@ -60,27 +60,24 @@
 #' plot(image)
 #' plot(linesegments, add = TRUE, col = "red")
 #'
-#' \dontrun{
+#' \donttest{
 #' imagelocation <- system.file("extdata", "le-piree.pgm", package="image.LineSegmentDetector")
 #' image <- read.pnm(file = imagelocation, cellres = 1)
 #' linesegments <- image_line_segment_detector(image@grey * 255)
 #' plot(image)
 #' plot(linesegments)
-#'
+#' }
+#' 
 #' ##
 #' ## image_line_segment_detector expects a matrix as input
 #' ##  if you have a jpg/png/... convert it to pgm first or take the r/g/b channel
-#' f <- tempfile(fileext = ".pgm")
 #' library(magick)
-#' x <- image_read(system.file("extdata", "atomium.jpg", package="image.LineSegmentDetector"))
-#' x <- image_convert(x, format = "pgm", depth = 8)
-#' image_write(x, path = f, format = "pgm")
-#'
-#' image <- read.pnm(f, cellres = 1)
-#' linesegments <- image_line_segment_detector(image@grey * 255)
-#' plot(image)
-#' plot(linesegments)
-#' }
+#' x   <- image_read(system.file("extdata", "atomium.jpg", package="image.LineSegmentDetector"))
+#' mat <- image_data(x, channels = "gray")
+#' mat <- as.integer(mat, transpose = TRUE)
+#' mat <- drop(mat)
+#' linesegments <- image_line_segment_detector(mat)
+#' plot(linesegments, lwd = 2)
 image_line_segment_detector <- function(x, scale = 0.8,
                                   sigma_scale = 0.6, quant = 2.0, ang_th = 22.5, log_eps = 0.0,
                                   density_th = 0.7, n_bins = 1024,

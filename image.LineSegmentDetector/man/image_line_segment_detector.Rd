@@ -4,10 +4,22 @@
 \alias{image_line_segment_detector}
 \title{Line Segments Detection (LSD) in an image}
 \usage{
-image_line_segment_detector(x, scale = 0.8, sigma_scale = 0.6, quant = 2,
-  ang_th = 22.5, log_eps = 0, density_th = 0.7, n_bins = 1024,
-  union = FALSE, union_min_length = 5, union_max_distance = 5,
-  union_ang_th = 7, union_use_NFA = FALSE, union_log_eps = 0)
+image_line_segment_detector(
+  x,
+  scale = 0.8,
+  sigma_scale = 0.6,
+  quant = 2,
+  ang_th = 22.5,
+  log_eps = 0,
+  density_th = 0.7,
+  n_bins = 1024,
+  union = FALSE,
+  union_min_length = 5,
+  union_max_distance = 5,
+  union_ang_th = 7,
+  union_use_NFA = FALSE,
+  union_log_eps = 0
+)
 }
 \arguments{
 \item{x}{a matrix of image pixel values in the 0-255 range.}
@@ -85,27 +97,24 @@ linesegments
 plot(image)
 plot(linesegments, add = TRUE, col = "red")
 
-\dontrun{
+\donttest{
 imagelocation <- system.file("extdata", "le-piree.pgm", package="image.LineSegmentDetector")
 image <- read.pnm(file = imagelocation, cellres = 1)
 linesegments <- image_line_segment_detector(image@grey * 255)
 plot(image)
 plot(linesegments)
+}
 
 ##
 ## image_line_segment_detector expects a matrix as input
 ##  if you have a jpg/png/... convert it to pgm first or take the r/g/b channel
-f <- tempfile(fileext = ".pgm")
 library(magick)
-x <- image_read(system.file("extdata", "atomium.jpg", package="image.LineSegmentDetector"))
-x <- image_convert(x, format = "pgm", depth = 8)
-image_write(x, path = f, format = "pgm")
-
-image <- read.pnm(f, cellres = 1)
-linesegments <- image_line_segment_detector(image@grey * 255)
-plot(image)
-plot(linesegments)
-}
+x   <- image_read(system.file("extdata", "atomium.jpg", package="image.LineSegmentDetector"))
+mat <- image_data(x, channels = "gray")
+mat <- as.integer(mat, transpose = TRUE)
+mat <- drop(mat)
+linesegments <- image_line_segment_detector(mat)
+plot(linesegments, lwd = 2)
 }
 \references{
 LSD: A Fast Line Segment Detector with a False Detection Control"

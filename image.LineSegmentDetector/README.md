@@ -23,26 +23,26 @@ plot(linesegments)
 ![](https://raw.githubusercontent.com/bnosac/image/master/image.LineSegmentDetector/inst/extdata/lsd-result.png?raw=true)
 
 
-If you have another type of image (jpg, png, ...). Convert the image to pgm format before getting the 0-255 range or convert it to grey format before passing it on to the function.
+If you have another type of image (jpg, png, ...). Convert the image to portable grey format before applying the function
 
 ```r
 library(magick)
-f <- tempfile(fileext = ".pgm")
-x <- image_read(system.file("extdata", "atomium.jpg", package="image.LineSegmentDetector"))
-x <- image_convert(x, format = "pgm", depth = 8)
-image_write(x, path = f, format = "pgm")
+x   <- image_read(system.file("extdata", "atomium.jpg", package="image.LineSegmentDetector"))
+mat <- image_data(x, channels = "gray")
+mat <- as.integer(mat, transpose = TRUE)
+mat <- drop(mat)
+linesegments <- image_line_segment_detector(mat)
+plot(linesegments, lwd = 2)
 
-image <- read.pnm(file = f, cellres = 1)
-linesegments <- image_line_segment_detector(image@grey * 255)
-plot(image)
-plot(linesegments, add = TRUE, col = "red")
+plt <- image_draw(x)
+linesegments$lines[, "y1"] <- image_info(x)$height - linesegments$lines[, "y1"]
+linesegments$lines[, "y2"] <- image_info(x)$height - linesegments$lines[, "y2"]
+plot(linesegments, add = TRUE, col = "red", lwd = 2)
+dev.off()
 ```
+
 ![](https://raw.githubusercontent.com/bnosac/image/master/image.LineSegmentDetector/inst/extdata/lsd-result-atomium.png?raw=true)
 
-
-## Installation
-
-See instructions at https://github.com/bnosac/image
 
 ## Support in image recognition
 

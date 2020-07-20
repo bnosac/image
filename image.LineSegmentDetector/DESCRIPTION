@@ -1,17 +1,19 @@
 Package: image.LineSegmentDetector
 Type: Package
 Title: Detect Line Segments in Images
-Description: An implementation of the Line Segment Detector on digital images described in the paper: "LSD: A Fast Line Segment Detector with a False Detection Control". The algorithm is explained at <doi:10.5201/ipol.2012.gjmr-lsd>.
+Description: An implementation of the Line Segment Detector on digital images described in the paper: "LSD: A Fast Line Segment Detector with a False Detection Control" by Rafael Grompone von Gioi et al (2012). 
+    The algorithm is explained at <doi:10.5201/ipol.2012.gjmr-lsd>.
 Maintainer: Jan Wijffels <jwijffels@bnosac.be>
-Authors@R: c(person("Jan", "Wijffels", role = c("aut", "cre", "cph"), email = "jwijffels@bnosac.be"), person("BNOSAC", role = "cph"), person("Rafael Grompone von Gioi", role = "cph", email = "grompone@gmail.com"))
-License: AGPL-3 + file LICENSE
+Authors@R: c(
+    person("Jan", "Wijffels", role = c("aut", "cre", "cph"), email = "jwijffels@bnosac.be", comment = "R wrapper"), 
+    person("BNOSAC", role = "cph", comment = "R wrapper"), 
+    person("Rafael Grompone von Gioi", role = c("ctb", "cph"), email = "grompone@gmail.com", comment = "src/lsd"))
+License: AGPL-3
 Version: 0.1.0
 URL: https://github.com/bnosac/image
-VignetteBuilder: knitr
 Imports: Rcpp (>= 0.12.8), sp
 LinkingTo: Rcpp
 Suggests:
-    knitr,
     pixmap,
     magick
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.0
