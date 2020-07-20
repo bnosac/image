@@ -22,10 +22,18 @@
 #' edges
 #' plot(edges)
 #'
-#' \dontrun{
 #' ##
 #' ## image_canny_edge_detector expects a matrix as input
 #' ##  if you have a jpg/png/... convert it to pgm first or take the r/g/b channel
+#' library(magick)
+#' x <- image_read(system.file("extdata", "atomium.jpg", package="image.CannyEdges"))
+#' x
+#' image <- image_data(x, channels = "Gray")
+#' image <- as.integer(image, transpose = TRUE)
+#' edges <- image_canny_edge_detector(image)
+#' plot(edges)
+#'
+#' \dontrun{ 
 #' f <- tempfile(fileext = ".pgm")
 #' library(magick)
 #' x <- image_read(system.file("extdata", "atomium.jpg", package="image.CannyEdges"))
