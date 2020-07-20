@@ -4,8 +4,16 @@
 \alias{plot.libfacedetection}
 \title{Plot detected faces}
 \usage{
-\method{plot}{libfacedetection}(x, image, border = "red", lwd = 5,
-  only_box = FALSE, col = "red", cex = 2, ...)
+\method{plot}{libfacedetection}(
+  x,
+  image,
+  border = "red",
+  lwd = 5,
+  only_box = FALSE,
+  col = "red",
+  cex = 2,
+  ...
+)
 }
 \arguments{
 \item{x}{object of class \code{libfacedetection} as returned by \code{\link{image_detect_faces}}}
