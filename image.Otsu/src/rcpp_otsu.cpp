@@ -54,7 +54,7 @@ public:
 };
 
 
-int MAX_INTENSITY = 255;
+const int MAX_INTENSITY = 255;
 
 /*! Computes image histogram
  \param input Input image
