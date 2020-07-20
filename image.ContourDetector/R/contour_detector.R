@@ -30,21 +30,17 @@
 #' plot(image)
 #' plot(contourlines, add = TRUE, col = "red")
 #' 
-#' \dontrun{
 #' ##
 #' ## line_segment_detector expects a matrix as input
 #' ##  if you have a jpg/png/... convert it to pgm first or take the r/g/b channel
-#' f <- tempfile(fileext = ".pgm")
 #' library(magick)
-#' x <- image_read(system.file("extdata", "atomium.jpg", package="LineSegmentDetector"))
-#' x <- image_convert(x, format = "pgm", depth = 8)
-#' image_write(x, path = f, format = "pgm")
-#'
-#' image <- read.pnm(f, cellres = 1)
-#' contourlines <- image_contour_detector(image@grey * 255)
-#' plot(image)
+#' x   <- image_read(system.file("extdata", "atomium.jpg", package="image.ContourDetector"))
+#' x
+#' mat <- image_data(x, channels = "gray")
+#' mat <- as.integer(mat, transpose = TRUE)
+#' mat <- drop(mat)
+#' contourlines <- image_contour_detector(mat)
 #' plot(contourlines)
-#' }
 image_contour_detector <- function(x, Q=2.0) {
   stopifnot(is.matrix(x))
   contourlines <- detect_contours(x, 

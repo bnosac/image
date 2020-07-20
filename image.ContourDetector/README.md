@@ -1,7 +1,5 @@
 # image.ContourDetector - Unsupervised Smooth Contour Line Detection for images
 
-![](https://github.com/bnosac/image.ContourDetector/blob/master/inst/extdata/logo-cld.png?raw=true)
-
 The  **image.ContourDetector** R package implements Unsupervised Smooth Contour Line Detection for images. 
 
 - It contains 1 main function **image_contour_detector**. If you give it an image matrix with grey scale values in the 0-255 range, it will find contour lines in the image.
@@ -18,37 +16,33 @@ library(image.ContourDetector)
 library(pixmap)
 imagelocation <- system.file("extdata", "image.pgm", package="image.ContourDetector")
 image <- read.pnm(file = imagelocation, cellres = 1)
-x <- image@grey * 255
+x     <- image@grey * 255
 contourlines <- image_contour_detector(x)
 contourlines
 plot(image)
 plot(contourlines)
 ```
-![](https://github.com/bnosac/image.ContourDetector/blob/master/inst/extdata/cld-result.png?raw=true)
+![](https://raw.githubusercontent.com/bnosac/image/master/image.ContourDetector/inst/extdata/cld-result.png?raw=true)
 
-If you have another type of image (jpg, png, ...). Convert the image to pgm format before getting the 0-255 range or convert it to grey format before passing it on to the function.
+If you have another type of image (jpg, png, ...). Convert the image to portable grey format before applying the function
 
 ```r
 library(magick)
-f <- tempfile(fileext = ".pgm")
-x <- image_read(system.file("extdata", "atomium.jpg", package="image.ContourDetector"))
-x <- image_convert(x, format = "pgm", depth = 8)
-image_write(x, path = f, format = "pgm")
+x   <- image_read(system.file("extdata", "atomium.jpg", package="image.ContourDetector"))
+mat <- image_data(x, channels = "gray")
+mat <- as.integer(mat, transpose = TRUE)
+mat <- drop(mat)
+contourlines <- image_contour_detector(mat)
+plot(contourlines)
 
-image <- read.pnm(file = f, cellres = 1)
-contourlines <- image_contour_detector(image@grey * 255)
-contourlines
-par(mai = c(0, 0, 0, 0), mar = c(0, 0, 0, 0))
-plot(image)
-plot(contourlines, add = TRUE, col = "red")
+plt <- image_draw(x)
+contourlines$data$y <- image_info(x)$height - contourlines$data$y
+plot(contourlines, add = TRUE, col = "red", lwd = 3)
+dev.off()
 ```
 
-![](https://github.com/bnosac/image.ContourDetector/blob/master/inst/extdata/cld-result2.png?raw=true)
+![](https://raw.githubusercontent.com/bnosac/image/master/image.ContourDetector/inst/extdata/cld-result2.png?raw=true)
 
-
-## Installation
-
-See instructions at https://github.com/bnosac/image
 
 ## Support in image recognition
 
