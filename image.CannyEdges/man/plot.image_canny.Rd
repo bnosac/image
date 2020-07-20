@@ -15,7 +15,7 @@
 invisible()
 }
 \description{
-Plot the result of \url{image_canny_edge_detector}
+Plot the result of \code{\link{image_canny_edge_detector}}
 }
 \examples{
 library(pixmap)

@@ -65,7 +65,7 @@ print.image_canny <- function(x, ...){
 
 
 #' @title Plot the result of the Canny Edge Detector
-#' @description Plot the result of \url{image_canny_edge_detector}
+#' @description Plot the result of \code{\link{image_canny_edge_detector}}
 #' @param x an object of class image_canny as returned by \code{\link{image_canny_edge_detector}}
 #' @param ... further arguments passed on to plot, except type, xlab and ylab which are set inside the function
 #' @method plot image_canny
@@ -77,7 +77,7 @@ print.image_canny <- function(x, ...){
 #' image <- read.pnm(file = imagelocation, cellres = 1)
 #' edges <- image_canny_edge_detector(image@grey * 255)
 #' plot(edges)
-plot.image_canny<- function(x, ...){
+plot.image_canny <- function(x, ...){
   ok <- grDevices::as.raster(x$edges, max = 255)
   plot(c(1, x$nx), c(1, x$ny), type = "n", xlab = "", ylab = "", ...)
   rasterImage(ok, 0, 0, x$nx, x$ny)
