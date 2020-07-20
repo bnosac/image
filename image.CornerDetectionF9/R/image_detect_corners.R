@@ -9,8 +9,8 @@
 #' @examples
 #' library(pixmap)
 #' imagelocation <- system.file("extdata", "chairs.pgm", package="image.CornerDetectionF9")
-#' image <- read.pnm(file = imagelocation, cellres = 1)
-#' x <- image@grey * 255
+#' image   <- read.pnm(file = imagelocation, cellres = 1)
+#' x       <- image@grey * 255
 #' corners <- image_detect_corners(x, 80)
 #' plot(image)
 #' points(corners$x, corners$y, col = "red", pch = 20, lwd = 0.5)
@@ -18,16 +18,33 @@
 #' ##
 #' ## image_detect_corners expects a matrix as input
 #' ##  if you have a jpg/png/... convert it to pgm first or take the r/g/b channel
+#' library(magick)
+#' x <- image_read(system.file("extdata", "hall.jpg", package="image.CornerDetectionF9"))
+#' x
+#' image   <- image_data(x, channels = "Gray")
+#' image   <- as.integer(image, transpose = TRUE)
+#' image   <- drop(image)
+#' corners <- image_detect_corners(image, threshold = 80)
+#' 
+#' plt <- image_draw(x)
+#' points(corners$x, image_info(x)$height - corners$y, col = "red", pch = 20, lwd = 0.5)
+#' dev.off()
+#' plt
+#' 
+#' 
+#' ## same but now converting to portable grey mab
 #' f <- tempfile(fileext = ".pgm")
 #' library(magick)
 #' x <- image_read(system.file("extdata", "hall.jpg", package="image.CornerDetectionF9"))
 #' x <- image_convert(x, format = "pgm", depth = 8)
 #' image_write(x, path = f, format = "pgm")
 #'
-#' image <- read.pnm(f, cellres = 1)
+#' image   <- read.pnm(f, cellres = 1)
 #' corners <- image_detect_corners(image@grey * 255, 80)
 #' plot(image)
 #' points(corners$x, corners$y, col = "red", pch = 20, lwd = 0.5)
+#' 
+#' file.remove(f)
 image_detect_corners <- function(x, threshold = 50L, suppress_non_max = FALSE) {
   stopifnot(is.matrix(x))
   # bytes_per_row is the size of an image row, in bytes. For an 8-bit grayscale image it's usually equal to the image width, or, if the format has some alignment constraints, might be the closest next value that is a multiple of 4, 8 or whatever the format says rows should align with.

@@ -23,8 +23,8 @@ An implementation of the "FAST-9" corner detection algorithm explained at <http:
 \examples{
 library(pixmap)
 imagelocation <- system.file("extdata", "chairs.pgm", package="image.CornerDetectionF9")
-image <- read.pnm(file = imagelocation, cellres = 1)
-x <- image@grey * 255
+image   <- read.pnm(file = imagelocation, cellres = 1)
+x       <- image@grey * 255
 corners <- image_detect_corners(x, 80)
 plot(image)
 points(corners$x, corners$y, col = "red", pch = 20, lwd = 0.5)
@@ -32,14 +32,31 @@ points(corners$x, corners$y, col = "red", pch = 20, lwd = 0.5)
 ##
 ## image_detect_corners expects a matrix as input
 ##  if you have a jpg/png/... convert it to pgm first or take the r/g/b channel
+library(magick)
+x <- image_read(system.file("extdata", "hall.jpg", package="image.CornerDetectionF9"))
+x
+image   <- image_data(x, channels = "Gray")
+image   <- as.integer(image, transpose = TRUE)
+image   <- drop(image)
+corners <- image_detect_corners(image, threshold = 80)
+
+plt <- image_draw(x)
+points(corners$x, image_info(x)$height - corners$y, col = "red", pch = 20, lwd = 0.5)
+dev.off()
+plt
+
+
+## same but now converting to portable grey mab
 f <- tempfile(fileext = ".pgm")
 library(magick)
 x <- image_read(system.file("extdata", "hall.jpg", package="image.CornerDetectionF9"))
 x <- image_convert(x, format = "pgm", depth = 8)
 image_write(x, path = f, format = "pgm")
 
-image <- read.pnm(f, cellres = 1)
+image   <- read.pnm(f, cellres = 1)
 corners <- image_detect_corners(image@grey * 255, 80)
 plot(image)
 points(corners$x, corners$y, col = "red", pch = 20, lwd = 0.5)
+
+file.remove(f)
 }
