@@ -1,7 +1,8 @@
 Package: image.CornerDetectionHarris
 Type: Package
 Title: Implementation of the Harris Corner Detection for Images
-Description: An implementation of the Harris Corner Detection for detecting relevant points in images as described in the paper: "An Analysis and Implementation of the Harris Corner Detector". The algorithm is explained at <doi:10.5201/ipol.2018.229>. 
+Description: An implementation of the Harris Corner Detection as described in the paper "An Analysis and Implementation of the Harris Corner Detector" by Sánchez J. et al (2018) available at <doi:10.5201/ipol.2018.229>. 
+    The package allows to detect relevant points in images which are characteristic to the digital image.
 Maintainer: Jan Wijffels <jwijffels@bnosac.be>
 Authors@R: c(
     person("Jan", "Wijffels", role = c("aut", "cre", "cph"), email = "jwijffels@bnosac.be", comment = "R wrapper"), 
@@ -15,5 +16,5 @@ Imports: Rcpp (>= 0.12.8)
 LinkingTo: Rcpp
 Suggests:
     magick
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.0
 Encoding: UTF-8

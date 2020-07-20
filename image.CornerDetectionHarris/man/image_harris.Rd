@@ -4,14 +4,22 @@
 \alias{image_harris}
 \title{Find Corners using Harris Corner Detection}
 \usage{
-image_harris(x, k = 0.06, sigma_d = 1, sigma_i = 2.5, threshold = 130,
+image_harris(
+  x,
+  k = 0.06,
+  sigma_d = 1,
+  sigma_i = 2.5,
+  threshold = 130,
   gaussian = c("fast Gaussian", "precise Gaussian", "no Gaussian"),
   gradient = c("central differences", "Sobel operator"),
-  strategy = c("all corners", "sort all corners", "N corners",
-  "distributed N corners"), Nselect = 1L, measure = c("Harris",
-  "Shi-Tomasi", "Harmonic Mean"), Nscales = 1L,
-  precision = c("quadratic approximation", "quartic interpolation",
-  "no subpixel"), cells = 10L, verbose = FALSE)
+  strategy = c("all corners", "sort all corners", "N corners", "distributed N corners"),
+  Nselect = 1L,
+  measure = c("Harris", "Shi-Tomasi", "Harmonic Mean"),
+  Nscales = 1L,
+  precision = c("quadratic approximation", "quartic interpolation", "no subpixel"),
+  cells = 10L,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{x}{an object of class magick-image or a greyscale matrix of image pixel values in the 0-255 range where values start at the top left corner.}
@@ -50,27 +58,26 @@ An implementation of the Harris Corner Detection algorithm explained at \url{htt
 }
 \examples{
 library(magick)
-path <- system.file(package="image.CornerDetectionHarris", 
+path <- system.file(package = "image.CornerDetectionHarris", 
                     "extdata", "building.png")
-x <- image_read(path)
-points <- image_harris(x)
-points
+x    <- image_read(path)
+pts  <- image_harris(x)
+pts
 
-img <- image_draw(x)
-points(points$x, points$y, col = "red", pch = 20)
+plt <- image_draw(x)
+points(pts$x, pts$y, col = "red", pch = 20)
 dev.off()
-img <- image_draw(x)
-points(points$x, points$y, 
-       col = "red", pch = 20, cex = 5 * points$strength / max(points$strength))
+plt <- image_draw(x)
+points(pts$x, pts$y, 
+       col = "red", pch = 20, cex = 5 * pts$strength / max(pts$strength))
 dev.off()
 
 ## Or pass on a greyscale matrix starting at top left
 mat <- image_data(x, channels = "gray")
-mat <- as.integer(mat)
-mat <- mat[, , 1]
-mat <- t(mat)
-points <- image_harris(mat)
-img <- image_draw(x)
-points(points$x, points$y, col = "red", pch = 20)
+mat <- as.integer(mat, transpose = FALSE)
+mat <- drop(mat)
+pts <- image_harris(mat)
+plt <- image_draw(x)
+points(pts$x, pts$y, col = "red", pch = 20)
 dev.off()
 }

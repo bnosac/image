@@ -24,28 +24,27 @@ NULL
 #' @export
 #' @examples
 #' library(magick)
-#' path <- system.file(package="image.CornerDetectionHarris", 
+#' path <- system.file(package = "image.CornerDetectionHarris", 
 #'                     "extdata", "building.png")
-#' x <- image_read(path)
-#' points <- image_harris(x)
-#' points
+#' x    <- image_read(path)
+#' pts  <- image_harris(x)
+#' pts
 #' 
-#' img <- image_draw(x)
-#' points(points$x, points$y, col = "red", pch = 20)
+#' plt <- image_draw(x)
+#' points(pts$x, pts$y, col = "red", pch = 20)
 #' dev.off()
-#' img <- image_draw(x)
-#' points(points$x, points$y, 
-#'        col = "red", pch = 20, cex = 5 * points$strength / max(points$strength))
+#' plt <- image_draw(x)
+#' points(pts$x, pts$y, 
+#'        col = "red", pch = 20, cex = 5 * pts$strength / max(pts$strength))
 #' dev.off()
 #' 
 #' ## Or pass on a greyscale matrix starting at top left
 #' mat <- image_data(x, channels = "gray")
-#' mat <- as.integer(mat)
-#' mat <- mat[, , 1]
-#' mat <- t(mat)
-#' points <- image_harris(mat)
-#' img <- image_draw(x)
-#' points(points$x, points$y, col = "red", pch = 20)
+#' mat <- as.integer(mat, transpose = FALSE)
+#' mat <- drop(mat)
+#' pts <- image_harris(mat)
+#' plt <- image_draw(x)
+#' points(pts$x, pts$y, col = "red", pch = 20)
 #' dev.off()
 image_harris <- function(x, 
                          k = 0.060000, 
