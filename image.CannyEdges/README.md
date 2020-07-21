@@ -20,7 +20,7 @@ edges
 plot(edges)
 ```
 
-![](https://raw.githubusercontent.com/bnosac/image/master/image.CannyEdges/inst/extdata/chairs-result.png?raw=true)
+![](https://raw.githubusercontent.com/bnosac/image/master/image.CannyEdges/inst/extdata/chairs-result.png)
 
 
 ## Installation
