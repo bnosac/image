@@ -20,11 +20,12 @@ edges
 plot(edges)
 ```
 
+![](https://raw.githubusercontent.com/bnosac/image/master/image.CannyEdges/inst/extdata/chairs-result.png?raw=true)
+
+
 ## Installation
 
-See instructions at https://github.com/bnosac/image
-
-The package also requires libpng and fftw3 to be installed
+The package requires libpng and fftw3 to be installed
 In Ubuntu this is done as follows
 
 ```
