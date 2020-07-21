@@ -1,5 +1,5 @@
 #' @importFrom Rcpp evalCpp
-#' @importFrom graphics text rect
+#' @importFrom graphics text rect points
 #' @useDynLib image.libfacedetection
 NULL
 
@@ -8,12 +8,12 @@ NULL
 
 #' @title Detect faces in images using the libfacedetection CNN
 #' @description Detect faces in images using using a convolutional neural network available from \url{https://github.com/ShiqiYu/libfacedetection}. 
-#' The function can be used to detect faces of minimal size 48x48 pixels.
+#' The function can be used to detect faces of minimal size 10x10 pixels.
 #' @param x an object of class magick-image with rgb colors. Or an rgb integer array with pixel values in the 0-255 range.
 #' @return A list with elements nr and detections.\cr
-#' Where nr indicates the number of faces found and the data frame detections 
-#' indicates the locations of these. This data.frame has columns x, y, width and height 
-#' as well as columns neighbours and angle. The values of x and y are the top left of the start of the box.
+#' Element nr indicates the number of faces found. \cr 
+#' The data frame detections indicates the locations of these. This data.frame has columns x, y, width and height 
+#' as well as a columns called confidence. The values of x and y are the top left of the start of the box. This data frame also has the x and y locations of 5 face landmarks (eyes, nose and mouth ends). 
 #' @export
 #' @examples
 #' library(magick)
@@ -22,7 +22,7 @@ NULL
 #' x
 #' faces <- image_detect_faces(x)
 #' faces
-#' plot(faces, x, border = "red", lwd = 7, col = "white")
+#' plot(faces, x, border = "red", lwd = 7, col = "white", landmarks = TRUE)
 #' 
 #' 
 #' ##
@@ -72,6 +72,10 @@ image_detect_faces <- function(x) {
 #' @param only_box logical indicating to draw only the box and not the text on top of it. Defaults to FALSE.
 #' @param col color of the text on the box. Defaults to red. Passed on to \code{\link[graphics]{text}}
 #' @param cex character expension factor of the text on the box. Defaults to 2. Passed on to \code{\link[graphics]{text}}
+#' @param landmarks logical indicating to plot the landmarks as points. Defaults to FALSE.
+#' @param col_landmarks color of the point of the landmarks. Defaults to black.
+#' @param cex_landmarks cex of the point of the landmarks. Defaults to 1.
+#' @param pch_landmarks pch of the point of the landmarks. Defaults to 20.
 #' @param ... other parameters passed on to \code{\link[graphics]{rect}}
 #' @export
 #' @return an object of class \code{magick-image}
@@ -83,6 +87,8 @@ image_detect_faces <- function(x) {
 #' faces <- image_detect_faces(x)
 #' faces
 #' plot(faces, x, border = "red", lwd = 7, col = "white")
+#' plot(faces, x, border = "red", lwd = 7, col = "white", landmarks = TRUE, 
+#'      col_landmarks = "purple", cex_landmarks = 2, pch_landmarks = 4)
 #' 
 #' ## show one detected face
 #' face <- head(faces$detections, 1)
@@ -96,7 +102,7 @@ image_detect_faces <- function(x) {
 #' })
 #' boxcontent <- do.call(c, boxcontent)
 #' boxcontent
-plot.libfacedetection <- function(x, image, border = "red", lwd = 5, only_box = FALSE, col = "red", cex = 2, ...){
+plot.libfacedetection <- function(x, image, border = "red", lwd = 5, only_box = FALSE, col = "red", cex = 2, landmarks = FALSE, col_landmarks = "black", cex_landmarks = 1, pch_landmarks = 20, ...){
   stopifnot(inherits(image, "magick-image") && nrow(magick::image_info(image)) == 1)
   faces <- x$detections
   img <- magick::image_draw(image)
@@ -105,7 +111,15 @@ plot.libfacedetection <- function(x, image, border = "red", lwd = 5, only_box = 
     graphics::rect(xleft = face$x, xright = face$x + face$width,
          ytop = face$y, ybottom = face$y + face$height, border = border, lwd = lwd, ...)
     if(!only_box){
-      graphics::text(x = face$x, y = face$y, adj = 0.5, labels = face$neighbours, col = col, cex = cex)  
+      #graphics::text(x = face$x, y = face$y, adj = 0.5, labels = face$neighbours, col = col, cex = cex) 
+      graphics::text(x = face$x, y = face$y, adj = 0.5, labels = face$confidence, col = col, cex = cex) 
+    }
+    if(landmarks){
+      graphics::points(x = face$landmark1_x, y = face$landmark1_y, col = col_landmarks, cex = cex_landmarks, pch = pch_landmarks)
+      graphics::points(x = face$landmark2_x, y = face$landmark2_y, col = col_landmarks, cex = cex_landmarks, pch = pch_landmarks)
+      graphics::points(x = face$landmark3_x, y = face$landmark3_y, col = col_landmarks, cex = cex_landmarks, pch = pch_landmarks)
+      graphics::points(x = face$landmark4_x, y = face$landmark4_y, col = col_landmarks, cex = cex_landmarks, pch = pch_landmarks)
+      graphics::points(x = face$landmark5_x, y = face$landmark5_y, col = col_landmarks, cex = cex_landmarks, pch = pch_landmarks)
     }
   })
   img

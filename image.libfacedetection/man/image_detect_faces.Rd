@@ -11,13 +11,13 @@ image_detect_faces(x)
 }
 \value{
 A list with elements nr and detections.\cr
-Where nr indicates the number of faces found and the data frame detections 
-indicates the locations of these. This data.frame has columns x, y, width and height 
-as well as columns neighbours and angle. The values of x and y are the top left of the start of the box.
+Element nr indicates the number of faces found. \cr 
+The data frame detections indicates the locations of these. This data.frame has columns x, y, width and height 
+as well as a columns called confidence. The values of x and y are the top left of the start of the box. This data frame also has the x and y locations of 5 face landmarks (eyes, nose and mouth ends).
 }
 \description{
 Detect faces in images using using a convolutional neural network available from \url{https://github.com/ShiqiYu/libfacedetection}. 
-The function can be used to detect faces of minimal size 48x48 pixels.
+The function can be used to detect faces of minimal size 10x10 pixels.
 }
 \examples{
 library(magick)
@@ -26,7 +26,7 @@ x <- image_read(path)
 x
 faces <- image_detect_faces(x)
 faces
-plot(faces, x, border = "red", lwd = 7, col = "white")
+plot(faces, x, border = "red", lwd = 7, col = "white", landmarks = TRUE)
 
 
 ##

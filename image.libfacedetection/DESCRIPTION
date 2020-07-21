@@ -2,7 +2,7 @@ Package: image.libfacedetection
 Type: Package
 Title: Convolutional Neural Network for Face Detection
 Description: An open source library for face detection in images. 
-    Provides a pretrained convolutional neural network based on <https://github.com/ShiqiYu/libfacedetection> which can be used to detect faces which have size greater than 48x48 pixels.
+    Provides a pretrained convolutional neural network based on <https://github.com/ShiqiYu/libfacedetection> which can be used to detect faces which have size greater than 10x10 pixels.
 Maintainer: Jan Wijffels <jwijffels@bnosac.be>
 Authors@R: c(
     person("Jan", "Wijffels", role = c("aut", "cre", "cph"), email = "jwijffels@bnosac.be", comment = "R wrapper"), 

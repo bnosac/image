@@ -12,6 +12,10 @@
   only_box = FALSE,
   col = "red",
   cex = 2,
+  landmarks = FALSE,
+  col_landmarks = "black",
+  cex_landmarks = 1,
+  pch_landmarks = 20,
   ...
 )
 }
@@ -30,6 +34,14 @@
 
 \item{cex}{character expension factor of the text on the box. Defaults to 2. Passed on to \code{\link[graphics]{text}}}
 
+\item{landmarks}{logical indicating to plot the landmarks as points. Defaults to FALSE.}
+
+\item{col_landmarks}{color of the point of the landmarks. Defaults to black.}
+
+\item{cex_landmarks}{cex of the point of the landmarks. Defaults to 1.}
+
+\item{pch_landmarks}{pch of the point of the landmarks. Defaults to 20.}
+
 \item{...}{other parameters passed on to \code{\link[graphics]{rect}}}
 }
 \value{
@@ -46,6 +58,8 @@ x
 faces <- image_detect_faces(x)
 faces
 plot(faces, x, border = "red", lwd = 7, col = "white")
+plot(faces, x, border = "red", lwd = 7, col = "white", landmarks = TRUE, 
+     col_landmarks = "purple", cex_landmarks = 2, pch_landmarks = 4)
 
 ## show one detected face
 face <- head(faces$detections, 1)

@@ -3,6 +3,7 @@
 S3method(plot,libfacedetection)
 export(image_detect_faces)
 importFrom(Rcpp,evalCpp)
+importFrom(graphics,points)
 importFrom(graphics,rect)
 importFrom(graphics,text)
 useDynLib(image.libfacedetection)
