@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 /*
 By downloading, copying, installing or using the software you agree to this license.
 If you do not agree to this license, do not download, install,
@@ -397,7 +398,8 @@ int * facedetect_cnn(unsigned char * result_buffer, //buffer memory for storing 
 
     if (!result_buffer)
     {
-        fprintf(stderr, "%s: null buffer memory.\n", __FUNCTION__);
+        //fprintf(stderr, "%s: null buffer memory.\n", __FUNCTION__);
+        REprintf("%s: null buffer memory.\n", __FUNCTION__);
         return NULL;
     }
     //clear memory
