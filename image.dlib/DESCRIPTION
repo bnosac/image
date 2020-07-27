@@ -2,19 +2,23 @@ Package: image.dlib
 Type: Package
 Title: Image Processing Functionality using the 'dlib' Package
 Version: 0.1.0
-Author: Jan Wijffels, BNOSAC
 Maintainer: Jan Wijffels <jwijffels@bnosac.be>
+Authors@R: c(
+    person("Jan", "Wijffels", role = c("aut", "cre", "cph"), email = "jwijffels@bnosac.be", comment = "R wrapper"), 
+    person("BNOSAC", role = "cph", comment = "R wrapper"), 
+    person("Davis E. King", role = c("ctb", "cph"), comment = "Main contributor of dlib - files in inst/dlib"),
+    person("dlib authors", role = c("ctb", "cph"), comment = "see file AUTHORS"))
 Description: Facility wrappers around the image processing functionality of
     'dlib'. 'Dlib' <http://dlib.net> is a 'C++' toolkit containing machine learning
-    algorithms and computer vision tools. Currently the package allows to find SURF
-    descriptors.
-License: AGPL-3
+    algorithms and computer vision tools. Currently the package allows to find feature
+    descriptors of digital images, in particular 'SURF' and 'HOG' descriptors.
+License: BSL-1.0
 URL: https://github.com/bnosac/image
 Imports:
-    Rcpp (>= 0.12.9),
-    dlib
-LinkingTo: Rcpp, dlib
+    Rcpp (>= 0.12.9)
+LinkingTo: Rcpp
 Suggests:
-    magick
+    magick,
+    FNN
 SystemRequirements: C++11
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.0

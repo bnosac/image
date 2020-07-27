@@ -4,11 +4,15 @@
 \alias{image_fhog}
 \title{HOG (Histogram Of Gradients) feature extraction}
 \usage{
-image_fhog(file, cell_size = 8L, filter_rows_padding = 1L,
-  filter_cols_padding = 1L)
+image_fhog(
+  x,
+  cell_size = 8L,
+  filter_rows_padding = 1L,
+  filter_cols_padding = 1L
+)
 }
 \arguments{
-\item{file}{a bmp file in bmp3 format with extension .bmp}
+\item{x}{a 3-dimensional array of integer pixel values where the first dimension is RGB, 2nd the width of the image and the 3rd the height of the image. See the example.}
 
 \item{cell_size}{integer. HOG groups pixels in cells, based on which a histogram of the gradiens is computed. Give the cell size. Defaults to 8.}
 
@@ -34,14 +38,19 @@ More information on the calculation, see the reference paper or
 the dlib reference \url{http://dlib.net/dlib/image_transforms/fhog_abstract.h.html}
 }
 \examples{
-f <- system.file("extdata", "cruise_boat.bmp", package="image.dlib")
-x <- image_fhog(f, cell_size = 8)
-str(x)
+library(magick)
+f <- system.file("extdata", "cruise_boat.png", package = "image.dlib")
+x <- image_read(f)
+x
+feats <- image_data(x, channels = "rgb")
+feats <- as.integer(feats, transpose = FALSE)
+feats <- image_fhog(feats, cell_size = 8)
+str(feats)
 
 ## FHOG feature vector of pixel at HOG space position 1, 1
-x$fhog[1, 1, ]
+feats$fhog[1, 1, ]
 ## FHOG feature vector of pixel at HOG space position 4 (height), 7 (width)
-x$fhog[4, 7, ]
+feats$fhog[4, 7, ]
 }
 \references{
 Object Detection with Discriminatively Trained Part Based Models by P. Felzenszwalb, R. Girshick, D. McAllester, D. Ramanan IEEE Transactions on Pattern Analysis and Machine Intelligence, Vol. 32, No. 9, Sep. 2010

@@ -2,6 +2,5 @@
 
 export(image_fhog)
 export(image_surf)
-import(dlib)
 importFrom(Rcpp,evalCpp)
 useDynLib(image.dlib)

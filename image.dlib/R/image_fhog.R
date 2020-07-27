@@ -3,7 +3,7 @@
 #' \url{https://en.wikipedia.org/wiki/Histogram_of_oriented_gradients} of an image.
 #' More information on the calculation, see the reference paper or
 #' the dlib reference \url{http://dlib.net/dlib/image_transforms/fhog_abstract.h.html}
-#' @param file a bmp file in bmp3 format with extension .bmp
+#' @param x a 3-dimensional array of integer pixel values where the first dimension is RGB, 2nd the width of the image and the 3rd the height of the image. See the example.
 #' @param cell_size integer. HOG groups pixels in cells, based on which a histogram of the gradiens is computed. Give the cell size. Defaults to 8.
 #' @param filter_rows_padding integer indicating how many extra rows and columns of zero padding along the borders to add, for more efficient convolution code
 #' @param filter_cols_padding integer indicating how many extra rows and columns of zero padding along the borders to add, for more efficient convolution code
@@ -19,23 +19,30 @@
 #' }
 #' @export
 #' @examples
-#' f <- system.file("extdata", "cruise_boat.bmp", package="image.dlib")
-#' x <- image_fhog(f, cell_size = 8)
-#' str(x)
+#' library(magick)
+#' f <- system.file("extdata", "cruise_boat.png", package = "image.dlib")
+#' x <- image_read(f)
+#' x
+#' feats <- image_data(x, channels = "rgb")
+#' feats <- as.integer(feats, transpose = FALSE)
+#' feats <- image_fhog(feats, cell_size = 8)
+#' str(feats)
 #'
 #' ## FHOG feature vector of pixel at HOG space position 1, 1
-#' x$fhog[1, 1, ]
+#' feats$fhog[1, 1, ]
 #' ## FHOG feature vector of pixel at HOG space position 4 (height), 7 (width)
-#' x$fhog[4, 7, ]
-image_fhog <- function(file,
+#' feats$fhog[4, 7, ]
+image_fhog <- function(x, 
                        cell_size = 8L,
                        filter_rows_padding = 1L,
                        filter_cols_padding = 1L) {
-  stopifnot(tools::file_ext(file) == "bmp")
-  out <- dlib_fhog(file,
-            cell_size=as.integer(cell_size),
-            filter_rows_padding=as.integer(filter_rows_padding),
-            filter_cols_padding=as.integer(filter_cols_padding))
+  width  <- dim(x)[2]
+  height <- dim(x)[3]
+  
+  out <- dlib_fhog(x, rows = height, cols = width,
+            cell_size = as.integer(cell_size),
+            filter_rows_padding = as.integer(filter_rows_padding),
+            filter_cols_padding = as.integer(filter_cols_padding))
   out$fhog <- array(out$fhog, dim = c(out$hog_height, out$hog_width, 31))
   out
 }

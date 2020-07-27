@@ -1,0 +1,7 @@
+CXX_STD       = CXX11
+PKG_CPPFLAGS  = $(SHLIB_PTHREAD_FLAGS) -DSTRICT_R_HEADERS -include r_cmd_check_happiness.h 
+PKG_CXXFLAGS  = -I../inst/dlib-19.20 -DDLIB_NO_GUI_SUPPORT 
+#PKG_CXXFLAGS = -I../inst/dlib-19.20 -DDLIB_ISO_CPP_ONLY
+#PKG_CXXFLAGS = -I../inst/dlib-19.20 -DDLIB_JPEG_SUPPORT -DDLIB_PNG_SUPPORT -DDLIB_NO_GUI_SUPPORT
+#PKG_LIBS     = -lpng -ljpeg -lz
+
