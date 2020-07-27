@@ -29,6 +29,8 @@ Canny Edge Detector for Images. See \url{https://en.wikipedia.org/wiki/Canny_edg
 Adapted from \url{https://github.com/Neseb/canny}.
 }
 \examples{
+if(requireNamespace("pixmap") && requireNamespace("magick")){
+
 library(pixmap)
 imagelocation <- system.file("extdata", "chairs.pgm", package="image.CannyEdges")
 image <- read.pnm(file = imagelocation, cellres = 1)
@@ -49,7 +51,6 @@ image <- as.integer(image, transpose = TRUE)
 edges <- image_canny_edge_detector(image)
 plot(edges)
 
-\dontrun{ 
 f <- tempfile(fileext = ".pgm")
 library(magick)
 x <- image_read(system.file("extdata", "atomium.jpg", package="image.CannyEdges"))
@@ -59,5 +60,7 @@ image_write(x, path = f, format = "pgm")
 image <- read.pnm(f, cellres = 1)
 edges <- image_canny_edge_detector(image@grey * 255)
 plot(edges)
+
+file.remove(f)
 }
 }

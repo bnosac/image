@@ -13,6 +13,8 @@
 #' have value 255 (pixels_nonzero).
 #' @export
 #' @examples
+#' if(requireNamespace("pixmap") && requireNamespace("magick")){
+#' 
 #' library(pixmap)
 #' imagelocation <- system.file("extdata", "chairs.pgm", package="image.CannyEdges")
 #' image <- read.pnm(file = imagelocation, cellres = 1)
@@ -33,7 +35,6 @@
 #' edges <- image_canny_edge_detector(image)
 #' plot(edges)
 #'
-#' \dontrun{ 
 #' f <- tempfile(fileext = ".pgm")
 #' library(magick)
 #' x <- image_read(system.file("extdata", "atomium.jpg", package="image.CannyEdges"))
@@ -43,6 +44,8 @@
 #' image <- read.pnm(f, cellres = 1)
 #' edges <- image_canny_edge_detector(image@grey * 255)
 #' plot(edges)
+#' 
+#' file.remove(f)
 #' }
 image_canny_edge_detector <- function(x, s = 2, low_thr = 3, high_thr = 10, accGrad = TRUE) {
   x <- canny_edge_detector(as.integer(x), nrow(x), ncol(x), s, low_thr, high_thr, accGrad)
