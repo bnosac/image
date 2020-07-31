@@ -236,7 +236,7 @@ void sii_gaussian_conv_image(sii_coeffs &c, float *dest,
     const float *src, int nx, int ny, int num_channels)
 {
     long num_pixels = ((long)nx) * ((long)ny);
-    int x, y, channel;
+    int channel;
     
     /* Loop over the image channels. */
     for (channel = 0; channel < num_channels; ++channel)
@@ -245,8 +245,10 @@ void sii_gaussian_conv_image(sii_coeffs &c, float *dest,
         //const float *src_y = src;
         
         /* Filter each row of the channel. */
-#pragma omp parallel for
-        for (y = 0; y < ny; ++y)
+        #ifdef _OPENMP
+        #pragma omp parallel for
+        #endif
+        for (int y = 0; y < ny; ++y)
         {
             float *buffer = NULL;
             if ((buffer = (float *)malloc(sizeof(float) * sii_buffer_size(c,
@@ -258,8 +260,10 @@ void sii_gaussian_conv_image(sii_coeffs &c, float *dest,
         }
         
         /* Filter each column of the channel. */
-#pragma omp parallel for
-        for (x = 0; x < nx; ++x)
+        #ifdef _OPENMP
+        #pragma omp parallel for
+        #endif
+        for (int x = 0; x < nx; ++x)
         {
             float *buffer = NULL;
             if ((buffer = (float *)malloc(sizeof(float) * sii_buffer_size(c,
@@ -291,10 +295,11 @@ void discrete_gaussian(
   int   precision //defines the size of the window
 )
 {
-  int i, j, k;
 
   if(sigma<=0 || precision<=0){
+    #ifdef _OPENMP
     #pragma omp parallel for
+    #endif
     for(int i=0; i<xdim*ydim; i++) Is[i] = I[i];
     return;
   }
@@ -324,10 +329,14 @@ void discrete_gaussian(
   for (int i=0; i<size; i++)
     B[i] /= norm;
 
-#pragma omp parallel for
+  #ifdef _OPENMP
+  #pragma omp parallel for
+  #endif
   //convolution of each line of the input image
-  for (k=0; k<ydim; k++)
+  for (int k=0; k<ydim; k++)
   {
+    int i;
+    int j;
     double *R = new double[size+xdim+size];
     for (i=size; i<bdx; i++)
       R[i] = I[k*xdim+i-size];
@@ -351,10 +360,14 @@ void discrete_gaussian(
     delete []R;
   }
 
-#pragma omp parallel for
+  #ifdef _OPENMP
+  #pragma omp parallel for
+  #endif
   // convolution of each column of the input image
-  for (k=0; k<xdim; k++)
+  for (int k=0; k<xdim; k++)
   {
+    int i;
+    int j;
     double *T = new double[size+ydim+size];
     for (i=size; i<bdy; i++)
       T[i] = Is[(i-size)*xdim+k];
@@ -409,7 +422,9 @@ void gaussian(
     sii_gaussian_conv_image(c, Is, I, nx, ny, 1);
   }
   else
+    #ifdef _OPENMP
     #pragma omp parallel for
+    #endif
     for(int i=0; i<nx*ny; i++)
       Is[i]=I[i];
 }

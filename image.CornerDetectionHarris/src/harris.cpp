@@ -92,7 +92,9 @@ void compute_corner_response(
   switch(measure) 
   {
     default: case HARRIS_MEASURE:
+      #ifdef _OPENMP
       #pragma omp parallel for
+      #endif
       for (int i=0; i<size; i++)
       {
         float detA  =A[i]*C[i]-B[i]*B[i];
@@ -103,7 +105,9 @@ void compute_corner_response(
       break;
 
     case SHI_TOMASI_MEASURE:
+      #ifdef _OPENMP
       #pragma omp parallel for
+      #endif      
       for (int i=0; i<size; i++)
       {
         float D=sqrt(A[i]*A[i]-2*A[i]*C[i]+4*B[i]*B[i]+C[i]*C[i]);
@@ -114,7 +118,9 @@ void compute_corner_response(
       break;
 
     case HARMONIC_MEAN_MEASURE: 
+      #ifdef _OPENMP
       #pragma omp parallel for
+      #endif      
       for (int i=0; i<size; i++)
       {
         float detA  =A[i]*C[i]-B[i]*B[i];
@@ -148,7 +154,9 @@ void non_maximum_suppression(
   int *skip = new int[nx*ny];
   
   //skip values under the threshold
+  #ifdef _OPENMP
   #pragma omp parallel for
+  #endif  
   for(int i=0; i<nx*ny; i++)
     if(R[i]<Th) skip[i]=1;
     else skip[i]=0;
@@ -156,7 +164,9 @@ void non_maximum_suppression(
   //use an array for each row to allow parallel processing
   vector<vector<harris_corner> > corners_row(ny-2*radius);
  
+  #ifdef _OPENMP
   #pragma omp parallel for
+  #endif
   for(int i=radius; i<ny-radius; i++)
   {
     int j=radius;
@@ -334,7 +344,9 @@ void compute_subpixel_precision(
   int type  //type of interpolation (quadratic or quartic)
 )
 {
+  #ifdef _OPENMP
   #pragma omp parallel for
+  #endif
   for(unsigned int i=0; i<corners.size(); i++)
   {
     int x=corners[i].x;

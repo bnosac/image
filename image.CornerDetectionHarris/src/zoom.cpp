@@ -128,7 +128,9 @@ float *zoom_out(
   float *Iz=new float[nxx*nyy];
   
   //zoom out the image using bicubic interpolation
+  #ifdef _OPENMP
   #pragma omp parallel for
+  #endif
   for (int i1=0; i1<nyy; i1++)
     for (int j1=0; j1<nxx; j1++)
       Iz[i1*nxx+j1]=bicubic_interpolation_at(I, j1*2, i1*2, nx, ny);

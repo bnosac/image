@@ -5,7 +5,9 @@
 #include <sys/time.h> 
 #include <math.h>
 #include <float.h>
+#ifdef _OPENMP
 #include <omp.h>
+#endif
 
 #include "harris.h"
 #include "gaussian.h"

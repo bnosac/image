@@ -23,7 +23,9 @@ void central_differences(
 )
 {
     //compute gradient in the center body
+    #ifdef _OPENMP
     #pragma omp parallel for
+    #endif
     for(int i=1; i<ny-1; i++)
     {
         for(int j=1; j<nx-1; j++)
@@ -67,7 +69,9 @@ void sobel_operator(
 )
 {
     //compute gradient in the center body
+    #ifdef _OPENMP
     #pragma omp parallel for
+    #endif
     for(int i=1; i<ny-1; i++)
     {
         for(int j=1; j<nx-1; j++)

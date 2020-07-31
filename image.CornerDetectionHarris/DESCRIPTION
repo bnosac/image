@@ -10,7 +10,7 @@ Authors@R: c(
     person("Javier Sánchez Pérez", role = c("ctb", "cph"), comment = "Harris Corner Detector C/C++ code"),
     person("Pascal Getreuer", role = c("ctb", "cph"), comment = "src/gaussian.cpp"))
 License: BSD_2_clause + file LICENSE
-Version: 0.1.0
+Version: 0.1.1
 URL: https://github.com/bnosac/image
 Imports: Rcpp (>= 0.12.8)
 LinkingTo: Rcpp
