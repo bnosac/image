@@ -4,6 +4,8 @@ The **image.dlib** package allows to quickly obtain image features (SURF and HOG
 
 ## Examples
 
+![](https://raw.githubusercontent.com/bnosac/image/master/image.dlib/inst/extdata/imagematching-example.png)
+
 ```r
 library(magick)
 library(image.dlib)
@@ -35,8 +37,6 @@ for(i_from in head(order(knn$nn.dist), 15)){
 dev.off()
 plt
 ```
-
-![](https://raw.githubusercontent.com/bnosac/image/master/image.dlib/inst/images/imagematching-example.png?raw=true)
 
 - Look to the documentation of the R package for examples: `help(package = image.dlib)`
 
