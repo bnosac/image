@@ -1,6 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 dev
+inst/extdata/imagematching-example.png
 ##
 ## All dlib folders and files except the dlib folder itself
 ##
