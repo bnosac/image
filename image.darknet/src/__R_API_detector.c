@@ -32,11 +32,9 @@ image **load_alphabet_pkg(char *path)
 int darknet_test_detector(char *cfgfile, char *weightfile, char *filename, float thresh, float hier_thresh, char **names, char *path)
 {
   image **alphabet = load_alphabet_pkg(path);
-  network net = parse_network_cfg(cfgfile);
-  if(weightfile){
-    load_weights(&net, weightfile);
-  }
-  set_batch_network(&net, 1);
+  network *net = load_network(cfgfile, weightfile, 0);
+  
+  set_batch_network(net, 1);
   srand(2222222);
   clock_t time;
   char buff[256];
@@ -47,8 +45,9 @@ int darknet_test_detector(char *cfgfile, char *weightfile, char *filename, float
   while(1){
     strncpy(input, filename, 256);
     image im = load_image_color(input,0,0);
-    image sized = resize_image(im, net.w, net.h);
-    layer l = net.layers[net.n-1];
+    
+    image sized = letterbox_image(im, net->w, net->h);
+    layer l = net->layers[net->n-1];
     
     box *boxes = calloc(l.w*l.h*l.n, sizeof(box));
     float **probs = calloc(l.w*l.h*l.n, sizeof(float *));
@@ -58,20 +57,15 @@ int darknet_test_detector(char *cfgfile, char *weightfile, char *filename, float
     time=clock();
     network_predict(net, X);
     printf("%s: Predicted in %f seconds.\n", input, sec(clock()-time));
-    get_region_boxes(l, 1, 1, thresh, probs, boxes, 0, 0, hier_thresh);
-    if (l.softmax_tree && nms) do_nms_obj(boxes, probs, l.w*l.h*l.n, l.classes, nms);
-    else if (nms) do_nms_sort(boxes, probs, l.w*l.h*l.n, l.classes, nms);
     
-    for(int i = 0; i < l.w*l.h*l.n; ++i){
-      int class = max_index(probs[i], l.classes);
-      float prob = probs[i][class];
-      if(prob > thresh){
-        boxes_abovethreshold  = boxes_abovethreshold + 1;
-      }
-    }
+    int nboxes = 0;
+    detection *dets = get_network_boxes(net, im.w, im.h, thresh, hier_thresh, 0, 1, &nboxes);
+    //printf("%d\n", nboxes);
+    //if (nms) do_nms_obj(boxes, probs, l.w*l.h*l.n, l.classes, nms);
+    if (nms) do_nms_sort(dets, nboxes, l.classes, nms);
+    draw_detections(im, dets, nboxes, thresh, names, alphabet, l.classes);
+    free_detections(dets, nboxes);
     
-    printf("Boxes: %d of which %d above the threshold.\n", l.w*l.h*l.n, boxes_abovethreshold);
-    draw_detections(im, l.w*l.h*l.n, thresh, boxes, probs, names, alphabet, l.classes);
     save_image(im, "predictions");
     
     free_image(im);

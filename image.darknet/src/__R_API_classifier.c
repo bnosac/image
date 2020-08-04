@@ -22,11 +22,8 @@ image get_image_from_stream(CvCapture *cap);
 void darknet_predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *filename, int top,
                                 char **pred_lab, double *pred_score, char **names, int resize){
   
-  network net = parse_network_cfg(cfgfile);
-  if(weightfile){
-    load_weights(&net, weightfile);
-  }
-  set_batch_network(&net, 1);
+  network *net = load_network(cfgfile, weightfile, 0);
+  set_batch_network(net, 1);
   srand(2222222);
   /*
   list *options = read_data_cfg(datacfg);
@@ -41,21 +38,21 @@ void darknet_predict_classifier(char *datacfg, char *cfgfile, char *weightfile, 
   int *indexes = calloc(top, sizeof(int));
   char buff[256];
   char *input = buff;
-  int size = net.w;
+  int size = net->w;
   while(1){
     strncpy(input, filename, 256);
     image im = load_image_color(input, 0, 0);
     image r = resize_min(im, size);
     if(resize > 0) {
-      resize_network(&net, r.w, r.h);
+      resize_network(net, r.w, r.h);
     }
     //printf("%d %d\n", r.w, r.h);
     
     float *X = r.data;
     time=clock();
     float *predictions = network_predict(net, X);
-    if(net.hierarchy) hierarchy_predictions(predictions, net.outputs, net.hierarchy, 0);
-    top_k(predictions, net.outputs, top, indexes);
+    if(net->hierarchy) hierarchy_predictions(predictions, net->outputs, net->hierarchy, 0, 1);
+    top_k(predictions, net->outputs, top, indexes);
     //printf("%s: Predicted in %f seconds.\n", input, sec(clock()-time));
     for(i = 0; i < top; ++i){
       int index = indexes[i];
