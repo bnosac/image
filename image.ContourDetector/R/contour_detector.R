@@ -41,8 +41,16 @@
 #' mat <- drop(mat)
 #' contourlines <- image_contour_detector(mat)
 #' plot(contourlines)
-image_contour_detector <- function(x, Q=2.0) {
+image_contour_detector <- function(x, Q=2.0, ...){
+  UseMethod("image_contour_detector")
+}
+
+#' @export
+image_contour_detector.matrix <- function(x, Q=2.0, ...){
   stopifnot(is.matrix(x))
+  
+  if( min(x, na.rm = TRUE)>=0 & max(x, na.rm = TRUE) <=255 ){ warning("Values range between 0 and 255: Q might be set to 0")}
+  
   contourlines <- detect_contours(x, 
                   X=nrow(x),
                   Y=ncol(x),
@@ -55,7 +63,26 @@ image_contour_detector <- function(x, Q=2.0) {
   contourlines$data <- data.frame(x = contourlines$y, y = nrow(x) - contourlines$x, curve = curve)
   contourlines <- contourlines[c("curves", "contourpoints", "data")]
   class(contourlines) <- "cld"
-  contourlines
+  return(contourlines)
+}
+
+#' @export
+image_contour_detector.RasterLayer <- function(x, Q=2.0, ...){
+  requireNamespace("raster")
+  minX = raster::extent(x)[1]
+  minY = raster::extent(x)[3]  
+  resol = raster::res(x)[1]  
+  x = raster::as.matrix(x)
+  
+  if( anyNA(x) ){
+    x[is.na(x)] = 0
+    warning("NA values found and set to 0") }
+
+  contourlines = image_contour_detector.matrix(x, Q=Q)
+  
+  contourlines$data$x = contourlines$data$x * resol + minX
+  contourlines$data$y = contourlines$data$y * resol + minY
+  return(contourlines)
 }
 
 
