@@ -41,6 +41,15 @@
 #' mat <- drop(mat)
 #' contourlines <- image_contour_detector(mat)
 #' plot(contourlines)
+#' 
+#' ##
+#' ##  working with a RasterLayer
+#' library(raster)
+#' x   <- raster(system.file("extdata", "landscape.tif", package="image.ContourDetector"))
+#' 
+#' contourlines <- image_contour_detector(x)
+#' plot(contourlines)
+
 image_contour_detector <- function(x, Q=2.0, ...){
   UseMethod("image_contour_detector")
 }
