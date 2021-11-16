@@ -21,6 +21,10 @@
 #' Image Processing On Line, 6 (2016), pp. 233-267. \url{https://doi.org/10.5201/ipol.2016.175}
 #' @export
 #' @examples
+#' \dontshow{
+#' if(require(pixmap))
+#' \{
+#' }
 #' library(pixmap)
 #' imagelocation <- system.file("extdata", "image.pgm", package="image.ContourDetector")
 #' image <- read.pnm(file = imagelocation, cellres = 1)
@@ -29,10 +33,18 @@
 #' contourlines
 #' plot(image)
 #' plot(contourlines, add = TRUE, col = "red")
+#' \dontshow{
+#' \}
+#' # End of main if statement running only if the required packages are installed
+#' }
 #' 
 #' ##
 #' ## line_segment_detector expects a matrix as input
 #' ##  if you have a jpg/png/... convert it to pgm first or take the r/g/b channel
+#' \dontshow{
+#' if(require(magick))
+#' \{
+#' }
 #' library(magick)
 #' x   <- image_read(system.file("extdata", "atomium.jpg", package="image.ContourDetector"))
 #' x
@@ -41,15 +53,28 @@
 #' mat <- drop(mat)
 #' contourlines <- image_contour_detector(mat)
 #' plot(contourlines)
+#' \dontshow{
+#' \}
+#' # End of main if statement running only if the required packages are installed
+#' }
 #' 
 #' ##
 #' ##  working with a RasterLayer
+#' ##
+#' \dontshow{
+#' if(require(raster))
+#' \{
+#' }
 #' library(raster)
 #' x   <- raster(system.file("extdata", "landscape.tif", package="image.ContourDetector"))
 #' 
 #' contourlines <- image_contour_detector(x)
-#' plot(contourlines)
-
+#' image(x)
+#' plot(contourlines, add = TRUE, col = "blue", lwd = 10)
+#' \dontshow{
+#' \}
+#' # End of main if statement running only if the required packages are installed
+#' }
 image_contour_detector <- function(x, Q=2.0, ...){
   UseMethod("image_contour_detector")
 }
@@ -57,9 +82,6 @@ image_contour_detector <- function(x, Q=2.0, ...){
 #' @export
 image_contour_detector.matrix <- function(x, Q=2.0, ...){
   stopifnot(is.matrix(x))
-  
-  if( min(x, na.rm = TRUE)>=0 & max(x, na.rm = TRUE) <=255 ){ warning("Values range between 0 and 255: Q might be set to 0")}
-  
   contourlines <- detect_contours(x, 
                   X=nrow(x),
                   Y=ncol(x),
