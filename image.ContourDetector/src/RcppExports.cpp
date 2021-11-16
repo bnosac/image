@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // detect_contours
 List detect_contours(NumericVector image, int X, int Y, double Q);
 RcppExport SEXP _image_ContourDetector_detect_contours(SEXP imageSEXP, SEXP XSEXP, SEXP YSEXP, SEXP QSEXP) {
