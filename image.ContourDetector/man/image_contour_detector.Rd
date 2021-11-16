@@ -10,6 +10,8 @@ image_contour_detector(x, Q = 2, ...)
 \item{x}{a matrix of image pixel values in the 0-255 range.}
 
 \item{Q}{numeric value with the pixel quantization step}
+
+\item{...}{further arguments, not used yet}
 }
 \value{
 an object of class cld which is a list with the following elements

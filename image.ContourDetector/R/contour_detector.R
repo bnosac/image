@@ -11,6 +11,7 @@
 #' an efficient algorithm is derived producing sub-pixel contours.
 #' @param x a matrix of image pixel values in the 0-255 range.
 #' @param Q numeric value with the pixel quantization step
+#' @param ... further arguments, not used yet
 #' @return an object of class cld which is a list with the following elements
 #' \itemize{
 #'  \item{curves: }{The number of contour lines found}
