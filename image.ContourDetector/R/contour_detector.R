@@ -19,7 +19,7 @@
 #'  \item{data: }{A data.frame with columns 'x', 'y' and 'curve' giving the x/y locations for each contour curve}
 #' }
 #' @references Rafael Grompone von Gioi, and Gregory Randall, Unsupervised Smooth Contour Detection, 
-#' Image Processing On Line, 6 (2016), pp. 233-267. \url{https://doi.org/10.5201/ipol.2016.175}
+#' Image Processing On Line, 6 (2016), pp. 233-267. \doi{10.5201/ipol.2016.175}
 #' @export
 #' @examples
 #' \dontshow{

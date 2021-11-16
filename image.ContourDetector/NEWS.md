@@ -1,4 +1,4 @@
-### CHANGES IN image.ContourDetector VERSION 0.1
+### CHANGES IN image.ContourDetector VERSION 0.1.1
 
 - Make from image_contour_detector a generic and implement image_contour_detector.matrix and image_contour_detector.RasterLayer
 

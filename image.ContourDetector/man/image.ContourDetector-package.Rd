@@ -18,7 +18,7 @@ an efficient algorithm is derived producing sub-pixel contours.
 }
 \references{
 Rafael Grompone von Gioi, and Gregory Randall, Unsupervised Smooth Contour Detection, 
-Image Processing On Line, 6 (2016), pp. 233-267. \url{https://doi.org/10.5201/ipol.2016.175}
+Image Processing On Line, 6 (2016), pp. 233-267. \doi{10.5201/ipol.2016.175}
 }
 \seealso{
 \link{image_contour_detector}
