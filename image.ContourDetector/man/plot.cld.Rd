@@ -18,10 +18,16 @@ invisibly a SpatialLines object with the contour lines
 Plot the detected contour lines from the image_contour_detector
 }
 \examples{
+\dontshow{
+if(require(pixmap))\{
+}
 library(pixmap)
 imagelocation <- system.file("extdata", "image.pgm", package="image.ContourDetector")
-image <- read.pnm(file = imagelocation, cellres = 1)
-contourlines <- image_contour_detector(image@grey * 255)
+image         <- read.pnm(file = imagelocation, cellres = 1)
+contourlines  <- image_contour_detector(image@grey * 255)
 plot(image)
 plot(contourlines, add = TRUE, col = "red")
+\dontshow{
+\} # End of main if statement running only if the required packages are installed
+}
 }

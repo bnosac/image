@@ -40,9 +40,12 @@ if(require(pixmap))
 }
 library(pixmap)
 imagelocation <- system.file("extdata", "image.pgm", package="image.ContourDetector")
-image <- read.pnm(file = imagelocation, cellres = 1)
-x <- image@grey * 255
-contourlines <- image_contour_detector(x)
+image         <- read.pnm(file = imagelocation, cellres = 1)
+\dontshow{
+image <- image[1:100, 1:100] ## speedup to have CRAN R CMD check within 5 secs
+}
+x             <- image@grey * 255
+contourlines  <- image_contour_detector(x, Q = 2)
 contourlines
 plot(image)
 plot(contourlines, add = TRUE, col = "red")
@@ -78,12 +81,14 @@ plot(contourlines)
 if(require(raster))
 \{
 }
+\donttest{
 library(raster)
 x   <- raster(system.file("extdata", "landscape.tif", package="image.ContourDetector"))
 
 contourlines <- image_contour_detector(x)
 image(x)
 plot(contourlines, add = TRUE, col = "blue", lwd = 10)
+}
 \dontshow{
 \}
 # End of main if statement running only if the required packages are installed

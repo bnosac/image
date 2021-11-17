@@ -28,9 +28,12 @@
 #' }
 #' library(pixmap)
 #' imagelocation <- system.file("extdata", "image.pgm", package="image.ContourDetector")
-#' image <- read.pnm(file = imagelocation, cellres = 1)
-#' x <- image@grey * 255
-#' contourlines <- image_contour_detector(x)
+#' image         <- read.pnm(file = imagelocation, cellres = 1)
+#' \dontshow{
+#' image <- image[1:100, 1:100] ## speedup to have CRAN R CMD check within 5 secs
+#' }
+#' x             <- image@grey * 255
+#' contourlines  <- image_contour_detector(x, Q = 2)
 #' contourlines
 #' plot(image)
 #' plot(contourlines, add = TRUE, col = "red")
@@ -66,12 +69,14 @@
 #' if(require(raster))
 #' \{
 #' }
+#' \donttest{
 #' library(raster)
 #' x   <- raster(system.file("extdata", "landscape.tif", package="image.ContourDetector"))
 #' 
 #' contourlines <- image_contour_detector(x)
 #' image(x)
 #' plot(contourlines, add = TRUE, col = "blue", lwd = 10)
+#' }
 #' \dontshow{
 #' \}
 #' # End of main if statement running only if the required packages are installed
@@ -133,12 +138,18 @@ print.cld <- function(x, ...){
 #' @return invisibly a SpatialLines object with the contour lines
 #' @export 
 #' @examples 
+#' \dontshow{
+#' if(require(pixmap))\{
+#' }
 #' library(pixmap)
 #' imagelocation <- system.file("extdata", "image.pgm", package="image.ContourDetector")
-#' image <- read.pnm(file = imagelocation, cellres = 1)
-#' contourlines <- image_contour_detector(image@grey * 255)
+#' image         <- read.pnm(file = imagelocation, cellres = 1)
+#' contourlines  <- image_contour_detector(image@grey * 255)
 #' plot(image)
 #' plot(contourlines, add = TRUE, col = "red")
+#' \dontshow{
+#' \} # End of main if statement running only if the required packages are installed
+#' }
 plot.cld <- function(x, ...){
   requireNamespace("sp")
   l <- split(x$data, x$data$curve)
