@@ -1,7 +1,7 @@
 Package: image.dlib
 Type: Package
 Title: Image Processing Functionality using the 'dlib' Package
-Version: 0.1.0
+Version: 0.1.1
 Maintainer: Jan Wijffels <jwijffels@bnosac.be>
 Authors@R: c(
     person("Jan", "Wijffels", role = c("aut", "cre", "cph"), email = "jwijffels@bnosac.be", comment = "R wrapper"), 
@@ -20,5 +20,5 @@ LinkingTo: Rcpp
 Suggests:
     magick,
     FNN
-SystemRequirements: C++11
-RoxygenNote: 7.1.0
+SystemRequirements: C++17
+RoxygenNote: 7.1.2
