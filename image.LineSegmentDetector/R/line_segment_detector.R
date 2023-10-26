@@ -30,6 +30,7 @@
 #' @param union_ang_th Numeric value with angle threshold in order to union
 #' @param union_use_NFA Logical indicating to use NFA to union
 #' @param union_log_eps Detection threshold to union
+#' @param export_sf Boolean. Set to TRUE to export lines as sf spatial objects (WARNING: process may take several time)
 #' @return an object of class lsd which is a list with the following elements
 #' \itemize{
 #'  \item{n: }{The number of found line segments}
@@ -78,13 +79,27 @@
 #' mat <- drop(mat)
 #' linesegments <- image_line_segment_detector(mat)
 #' plot(linesegments, lwd = 2)
+
+
 image_line_segment_detector <- function(x, scale = 0.8,
-                                  sigma_scale = 0.6, quant = 2.0, ang_th = 22.5, log_eps = 0.0,
-                                  density_th = 0.7, n_bins = 1024,
-                                  union = FALSE, union_min_length = 5, union_max_distance = 5,
-                                  union_ang_th=7, union_use_NFA=FALSE, union_log_eps = 0.0) {
+                                        sigma_scale = 0.6, quant = 2.0, ang_th = 22.5, log_eps = 0.0,
+                                        density_th = 0.7, n_bins = 1024,
+                                        union = FALSE, union_min_length = 5, union_max_distance = 5,
+                                        union_ang_th=7, union_use_NFA=FALSE, union_log_eps = 0.0,
+                                        export_sf=FALSE ){
+  UseMethod("image_line_segment_detector")
+  }
 
 
+#' @export
+image_line_segment_detector.matrix <- function(x, scale = 0.8,
+                                        sigma_scale = 0.6, quant = 2.0, ang_th = 22.5, log_eps = 0.0,
+                                        density_th = 0.7, n_bins = 1024,
+                                        union = FALSE, union_min_length = 5, union_max_distance = 5,
+                                        union_ang_th=7, union_use_NFA=FALSE, union_log_eps = 0.0,
+                                        export_sf=FALSE ) {
+  
+  
   stopifnot(is.matrix(x))
   linesegments <- detect_line_segments(as.numeric(x),
                                        X=nrow(x),
@@ -106,6 +121,64 @@ image_line_segment_detector <- function(x, scale = 0.8,
   class(linesegments) <- "lsd"
   linesegments
 }
+
+
+
+#' @export
+image_line_segment_detector.SpatRaster <- function(x, scale = 0.8,
+                                                   sigma_scale = 0.6, quant = 2.0, ang_th = 22.5, log_eps = 0.0,
+                                                   density_th = 0.7, n_bins = 1024,
+                                                   union = FALSE, union_min_length = 5, union_max_distance = 5,
+                                                   union_ang_th=7, union_use_NFA=FALSE, union_log_eps = 0.0,
+                                                   export_sf=FALSE ){
+  requireNamespace("terra")
+  uprightX = terra::ext(x)[2]
+  uprightY = terra::ext(x)[4]  
+  resol = terra::res(x)[1]
+  
+  x = t(terra::as.matrix(x,wide=TRUE))
+  
+  if( anyNA(x) ){
+    x[is.na(x)] = 0
+    warning("NA values found and set to 0") }
+  
+  linesegments = image_line_segment_detector.matrix(x, scale = scale,
+                                                    sigma_scale = sigma_scale, quant = quant, ang_th = ang_th, log_eps = log_eps,
+                                                    density_th = density_th, n_bins = n_bins,
+                                                    union = union, union_min_length = union_min_length, union_max_distance = union_max_distance,
+                                                    union_ang_th=union_ang_th, union_use_NFA=union_use_NFA, union_log_eps = union_log_eps,
+                                                    export_sf=export_sf )
+  
+  linesegments = as.data.frame(linesegments$lines)
+  
+  # assign spatial coordinates
+  linesegments$x1 = linesegments$x1 * -resol + uprightY
+  linesegments$y1 = linesegments$y1 * -resol + uprightX
+  linesegments$x2 = linesegments$x2 * -resol + uprightY
+  linesegments$y2 = linesegments$y2 * -resol + uprightX
+  
+  
+  # export object as sf
+  if(isTRUE(export_sf)){
+    requireNamespace("sf")
+    
+    linesegments = apply(linesegments, 1, function(x) 
+    {
+      v <- as.numeric(x[c(2,4,1,3)])
+      m <- matrix(v, nrow = 2)
+      return(sf::st_sfc(sf::st_linestring(m), crs = NA_crs_))
+    })
+    print("Sf export in progress...")
+    linesegments = do.call(c, linesegments)
+    
+    linesegments = sf::st_sf(linesegments)
+    linesegments$line_ID = 1:nrow(linesegments)
+    linesegments$length_m = sf::st_length(linesegments)
+  }
+  
+  return(linesegments)
+}
+
 
 #' @export
 print.lsd <- function(x, ...){
