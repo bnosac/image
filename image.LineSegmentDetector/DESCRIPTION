@@ -15,5 +15,7 @@ Imports: Rcpp (>= 0.12.8), sp
 LinkingTo: Rcpp
 Suggests:
     pixmap,
-    magick
+    magick,
+    sf,
+    terra
 RoxygenNote: 7.1.0
