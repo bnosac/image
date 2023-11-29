@@ -1,7 +1,7 @@
 Package: image.CannyEdges
 Type: Package
 Title: Implementation of the Canny Edge Detector for Images
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
     person("Jan", "Wijffels", role = c("aut", "cre", "cph"), email = "jwijffels@bnosac.be"), 
     person("BNOSAC", role = "cph"), 
@@ -17,5 +17,5 @@ Imports:
 LinkingTo: Rcpp
 Suggests:
     pixmap, magick
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.2
 SystemRequirements: libpng, fftw3
