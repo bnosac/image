@@ -26,6 +26,7 @@
 #'
 #' }
 #'
+#' \donttest{
 #' if(requireNamespace("magick")){
 #' ##
 #' ## image_canny_edge_detector expects a matrix as input
@@ -40,7 +41,6 @@
 #' plot(edges)
 #' }
 #'
-#' \donttest{
 #' if(requireNamespace("pixmap") && requireNamespace("magick")){
 #' ##
 #' ## image_canny_edge_detector expects a matrix as input
