@@ -5,7 +5,7 @@ NULL
 
 
 #' @title Find Corners using Harris Corner Detection
-#' @description An implementation of the Harris Corner Detection algorithm explained at \url{https://doi.org/10.5201/ipol.2018.229}. 
+#' @description An implementation of the Harris Corner Detection algorithm explained at \doi{10.5201/ipol.2018.229}. 
 #' @param x an object of class magick-image or a greyscale matrix of image pixel values in the 0-255 range where values start at the top left corner.
 #' @param k Harris' K parameter. Defaults to 0.06.
 #' @param sigma_d Gaussian standard deviation for derivation. Defaults to 1.

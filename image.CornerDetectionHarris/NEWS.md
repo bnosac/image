@@ -1,3 +1,8 @@
+## CHANGES IN VERSION 0.1.2
+
+- Drop C++11 specification in Makevars
+- In case verbose = TRUE, change use of Rprintf statement to a format specification for long long
+
 ## CHANGES IN VERSION 0.1.1
 
 - Fix unconditional use of omp.h

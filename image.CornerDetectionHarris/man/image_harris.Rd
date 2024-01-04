@@ -54,7 +54,7 @@ image_harris(
 as list of the relevant points with the x/y locations as well as the strenght. Note y values start at the top left corner of the image.
 }
 \description{
-An implementation of the Harris Corner Detection algorithm explained at \url{https://doi.org/10.5201/ipol.2018.229}.
+An implementation of the Harris Corner Detection algorithm explained at \doi{10.5201/ipol.2018.229}.
 }
 \examples{
 library(magick)
