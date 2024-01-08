@@ -534,7 +534,7 @@ void harris(
   if(verbose)
   {
     message(start, end);
-    Rprintf(" * Number of corners detected: %llu\n", corners.size());
+    Rprintf(" * Number of corners detected: %zu\n", corners.size());
   }
   
   delete []Ix;
@@ -603,7 +603,7 @@ void harris_scale(
     select_corners(corners, corners_z, sigma_i);
     
     if(verbose)
-      Rprintf(" * Number of corners after scale check: %llu\n", corners.size());
+      Rprintf(" * Number of corners after scale check: %zu\n", corners.size());
   }
 }
 

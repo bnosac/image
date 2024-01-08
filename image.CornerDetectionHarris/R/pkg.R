@@ -23,6 +23,12 @@ NULL
 #' @return as list of the relevant points with the x/y locations as well as the strenght. Note y values start at the top left corner of the image.
 #' @export
 #' @examples
+#' \dontshow{
+#' mat <- system.file(package = "image.CornerDetectionHarris", "extdata", "building.rds")
+#' mat <- readRDS(mat)
+#' pts <- image_harris(mat)
+#' }
+#' \donttest{
 #' library(magick)
 #' path <- system.file(package = "image.CornerDetectionHarris", 
 #'                     "extdata", "building.png")
@@ -46,6 +52,7 @@ NULL
 #' plt <- image_draw(x)
 #' points(pts$x, pts$y, col = "red", pch = 20)
 #' dev.off()
+#' }
 image_harris <- function(x, 
                          k = 0.060000, 
                          sigma_d = 1.000000, 
