@@ -29,7 +29,7 @@ Canny Edge Detector for Images. See \url{https://en.wikipedia.org/wiki/Canny_edg
 Adapted from \url{https://github.com/Neseb/canny}.
 }
 \examples{
-if(requireNamespace("pixmap") && requireNamespace("magick")){
+if(requireNamespace("pixmap")){
 
 library(pixmap)
 imagelocation <- system.file("extdata", "chairs.pgm", package="image.CannyEdges")
@@ -40,6 +40,10 @@ edges <- image_canny_edge_detector(x)
 edges
 plot(edges)
 
+}
+
+\donttest{
+if(requireNamespace("magick")){
 ##
 ## image_canny_edge_detector expects a matrix as input
 ##  if you have a jpg/png/... convert it to pgm first or take the r/g/b channel
@@ -49,18 +53,27 @@ x
 image <- image_data(x, channels = "Gray")
 image <- as.integer(image, transpose = TRUE)
 edges <- image_canny_edge_detector(image)
+edges
 plot(edges)
+}
 
-f <- tempfile(fileext = ".pgm")
+if(requireNamespace("pixmap") && requireNamespace("magick")){
+##
+## image_canny_edge_detector expects a matrix as input
+##  if you have a jpg/png/... convert it to pgm first or take the r/g/b channel
 library(magick)
+library(pixmap)
+f <- tempfile(fileext = ".pgm")
 x <- image_read(system.file("extdata", "atomium.jpg", package="image.CannyEdges"))
 x <- image_convert(x, format = "pgm", depth = 8)
 image_write(x, path = f, format = "pgm")
 
 image <- read.pnm(f, cellres = 1)
 edges <- image_canny_edge_detector(image@grey * 255)
+edges
 plot(edges)
 
 file.remove(f)
+}
 }
 }

@@ -54,9 +54,15 @@ image_harris(
 as list of the relevant points with the x/y locations as well as the strenght. Note y values start at the top left corner of the image.
 }
 \description{
-An implementation of the Harris Corner Detection algorithm explained at \url{https://doi.org/10.5201/ipol.2018.229}.
+An implementation of the Harris Corner Detection algorithm explained at \doi{10.5201/ipol.2018.229}.
 }
 \examples{
+\dontshow{
+mat <- system.file(package = "image.CornerDetectionHarris", "extdata", "building.rds")
+mat <- readRDS(mat)
+pts <- image_harris(mat)
+}
+\donttest{
 library(magick)
 path <- system.file(package = "image.CornerDetectionHarris", 
                     "extdata", "building.png")
@@ -80,4 +86,5 @@ pts <- image_harris(mat)
 plt <- image_draw(x)
 points(pts$x, pts$y, col = "red", pch = 20)
 dev.off()
+}
 }

@@ -22,7 +22,7 @@
  * @author Vincent Maioli <vincent.maioli@crans.org>
  */
 
-#include <R.h> 
+#include <R.h>
 
 #include <assert.h>
 #include <stdarg.h>
@@ -38,7 +38,7 @@
 // this function prints an error message and aborts the program
 void error(const char *fmt, ...)
 {
-  Rf_error(fmt);
+  Rf_error("%s", fmt);
   /*
 	va_list argp;
 	fprintf(stderr, "\nERROR: ");
@@ -126,7 +126,7 @@ static void ifft_2ddouble(double *ifx,  fftw_complex *fx, int w, int h)
 	double scale = 1.0/(w*h);
 	FORI(w*h) {
 		fftw_complex z = b[i] * scale;
-		ifx[i] = crealf(z);	
+		ifx[i] = crealf(z);
 		assert(cimagf(z) < 0.001);
 	}
 	fftw_destroy_plan(p);
