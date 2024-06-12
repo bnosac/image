@@ -122,6 +122,25 @@ image_contour_detector.RasterLayer <- function(x, Q=2.0, ...){
   return(contourlines)
 }
 
+#' @export
+image_contour_detector.SpatRaster <- function(x, Q=2.0, ...){
+  requireNamespace("terra")
+  minX = terra::ext(x)[1]
+  minY = terra::ext(x)[3]  
+  resol = terra::res(x)[1]  
+  x = terra::as.matrix(x, wide=TRUE)
+  
+  if( anyNA(x) ){
+    x[is.na(x)] = 0
+    warning("NA values found and set to 0") }
+
+  contourlines = image_contour_detector.matrix(x, Q=Q)
+  
+  contourlines$data$x = contourlines$data$x * resol + minX
+  contourlines$data$y = contourlines$data$y * resol + minY
+  return(contourlines)
+}
+                         
 
 #' @export
 print.cld <- function(x, ...){
