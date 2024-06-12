@@ -64,10 +64,10 @@
 #' }
 #' 
 #' ##
-#' ##  working with a RasterLayer
+#' ##  working with a SpatRaster
 #' ##
 #' \dontshow{
-#' if(require(raster))
+#' if(require(terra))
 #' \{
 #' }
 #' \donttest{
