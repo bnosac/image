@@ -79,7 +79,26 @@
 #' mat <- drop(mat)
 #' linesegments <- image_line_segment_detector(mat)
 #' plot(linesegments, lwd = 2)
-
+#'
+#' ##
+#' ##  working with a SpatRaster
+#' ##
+#' \dontshow{
+#' if(require(terra))
+#' \{
+#' }
+#' \donttest{
+#' library(terra)
+#' x   <- rast(system.file("extdata", "landscape.tif", package="image.ContourDetector"))
+#' 
+#' linesegments <- image_line_segment_detector(x)
+#' image(x)
+#' plot(linesegments, add = TRUE, col = "blue", lwd = 10)
+#' }
+#' \dontshow{
+#' \}
+#' # End of main if statement running only if the required packages are installed
+#' }
 
 image_line_segment_detector <- function(x, scale = 0.8,
                                         sigma_scale = 0.6, quant = 2.0, ang_th = 22.5, log_eps = 0.0,
