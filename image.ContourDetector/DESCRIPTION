@@ -19,5 +19,7 @@ LinkingTo: Rcpp
 Suggests:
     pixmap,
     magick,
-    raster
+    raster,
+    sf,
+    terra
 RoxygenNote: 7.1.1
