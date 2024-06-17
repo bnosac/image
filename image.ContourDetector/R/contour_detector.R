@@ -11,7 +11,7 @@
 #' an efficient algorithm is derived producing sub-pixel contours.
 #' @param x a matrix of image pixel values in the 0-255 range.
 #' @param Q numeric value with the pixel quantization step
-#' @param export_sf Boolean. Set to TRUE to export lines as sf spatial objects (WARNING: process may take several time)
+#' @param as_sf Boolean. Set to TRUE to export lines as sf spatial objects (WARNING: process may take several time)
 #' @param ... further arguments, not used yet
 #' @return an object of class cld which is a list with the following elements
 #' \itemize{
@@ -82,12 +82,12 @@
 #' \}
 #' # End of main if statement running only if the required packages are installed
 #' }
-image_contour_detector <- function(x, Q=2.0 export_sf=FALSE, ...){
+image_contour_detector <- function(x, Q=2.0 as_sf=FALSE, ...){
   UseMethod("image_contour_detector")
 }
 
 #' @export
-image_contour_detector.matrix <- function(x, Q=2.0, export_sf=FALSE, ...){
+image_contour_detector.matrix <- function(x, Q=2.0, as_sf=FALSE, ...){
   stopifnot(is.matrix(x))
   contourlines <- detect_contours(x, 
                   X=nrow(x),
@@ -105,7 +105,7 @@ image_contour_detector.matrix <- function(x, Q=2.0, export_sf=FALSE, ...){
 }
 
 #' @export
-image_contour_detector.RasterLayer <- function(x, Q=2.0, export_sf=FALSE, ...){
+image_contour_detector.RasterLayer <- function(x, Q=2.0, as_sf=FALSE, ...){
   requireNamespace("raster")
   minX = raster::extent(x)[1]
   minY = raster::extent(x)[3]  
@@ -116,7 +116,7 @@ image_contour_detector.RasterLayer <- function(x, Q=2.0, export_sf=FALSE, ...){
     x[is.na(x)] = 0
     warning("NA values found and set to 0") }
 
-  contourlines = image_contour_detector.matrix(x, Q=Q, export_sf=export_sf)
+  contourlines = image_contour_detector.matrix(x, Q=Q, as_sf=as_sf)
   
   contourlines$data$x = contourlines$data$x * resol + minX
   contourlines$data$y = contourlines$data$y * resol + minY
@@ -124,7 +124,7 @@ image_contour_detector.RasterLayer <- function(x, Q=2.0, export_sf=FALSE, ...){
 }
 
 #' @export
-image_contour_detector.SpatRaster <- function(x, Q=2.0, export_sf=FALSE, ...){
+image_contour_detector.SpatRaster <- function(x, Q=2.0, as_sf=FALSE, ...){
   requireNamespace("terra")
   minX = terra::ext(x)[1]
   minY = terra::ext(x)[3]  
@@ -135,13 +135,13 @@ image_contour_detector.SpatRaster <- function(x, Q=2.0, export_sf=FALSE, ...){
     x[is.na(xmat)] = 0
     warning("NA values found and set to 0") }
 
-  contourlines = image_contour_detector.matrix(xmat, Q=Q, export_sf=export_sf)
+  contourlines = image_contour_detector.matrix(xmat, Q=Q, as_sf=as_sf)
   
   contourlines$data$x = contourlines$data$x * resol + minX
   contourlines$data$y = contourlines$data$y * resol + minY
 
   # export object as sf
-  if(isTRUE(export_sf)){
+  if(isTRUE(as_sf)){
     requireNamespace("sf")
     
   contourlines <- contourlines$data %>%
