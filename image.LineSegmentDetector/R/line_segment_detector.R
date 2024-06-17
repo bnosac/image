@@ -30,7 +30,7 @@
 #' @param union_ang_th Numeric value with angle threshold in order to union
 #' @param union_use_NFA Logical indicating to use NFA to union
 #' @param union_log_eps Detection threshold to union
-#' @param export_sf Boolean. Set to TRUE to export lines as sf spatial objects (WARNING: process may take several time)
+#' @param as_sf Boolean. Set to TRUE to export lines as sf spatial objects (WARNING: process may take several time)
 #' @return an object of class lsd which is a list with the following elements
 #' \itemize{
 #'  \item{n: }{The number of found line segments}
@@ -105,7 +105,7 @@ image_line_segment_detector <- function(x, scale = 0.8,
                                         density_th = 0.7, n_bins = 1024,
                                         union = FALSE, union_min_length = 5, union_max_distance = 5,
                                         union_ang_th=7, union_use_NFA=FALSE, union_log_eps = 0.0,
-                                        export_sf=FALSE ){
+                                        as_sf=FALSE ){
   UseMethod("image_line_segment_detector")
   }
 
@@ -116,7 +116,7 @@ image_line_segment_detector.matrix <- function(x, scale = 0.8,
                                         density_th = 0.7, n_bins = 1024,
                                         union = FALSE, union_min_length = 5, union_max_distance = 5,
                                         union_ang_th=7, union_use_NFA=FALSE, union_log_eps = 0.0,
-                                        export_sf=FALSE ) {
+                                        as_sf=FALSE ) {
   
   
   stopifnot(is.matrix(x))
@@ -149,7 +149,7 @@ image_line_segment_detector.SpatRaster <- function(x, scale = 0.8,
                                                    density_th = 0.7, n_bins = 1024,
                                                    union = FALSE, union_min_length = 5, union_max_distance = 5,
                                                    union_ang_th=7, union_use_NFA=FALSE, union_log_eps = 0.0,
-                                                   export_sf=FALSE ){
+                                                   as_sf=FALSE ){
   requireNamespace("terra")
   uprightX = terra::ext(x)[2]
   uprightY = terra::ext(x)[4]  
@@ -166,7 +166,7 @@ image_line_segment_detector.SpatRaster <- function(x, scale = 0.8,
                                                     density_th = density_th, n_bins = n_bins,
                                                     union = union, union_min_length = union_min_length, union_max_distance = union_max_distance,
                                                     union_ang_th=union_ang_th, union_use_NFA=union_use_NFA, union_log_eps = union_log_eps,
-                                                    export_sf=export_sf )
+                                                    as_sf=as_sf )
   
   linesegments = as.data.frame(linesegments$lines)
   
@@ -178,7 +178,7 @@ image_line_segment_detector.SpatRaster <- function(x, scale = 0.8,
   
   
   # export object as sf
-  if(isTRUE(export_sf)){
+  if(isTRUE(as_sf)){
     requireNamespace("sf")
     
     linesegments = apply(linesegments, 1, function(x) 
