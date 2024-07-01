@@ -82,7 +82,7 @@
 #' \}
 #' # End of main if statement running only if the required packages are installed
 #' }
-image_contour_detector <- function(x, Q=2.0 as_sf=FALSE, ...){
+image_contour_detector <- function(x, Q=2.0, as_sf=FALSE, ...){
   UseMethod("image_contour_detector")
 }
 
