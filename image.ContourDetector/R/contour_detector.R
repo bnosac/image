@@ -144,12 +144,25 @@ image_contour_detector.SpatRaster <- function(x, Q=2.0, as_sf=FALSE, ...){
   if(isTRUE(as_sf)){
     requireNamespace("sf")
     
-  contourlines <- contourlines$data %>%
-  sf::st_as_sf(coords = c("x", "y"), crs = sf::st_crs(x) ) %>%
-  dplyr::group_by( curve ) %>%
-  dplyr::summarize(do_union=FALSE) %>%
-  sf::st_cast("LINESTRING")
-  contourlines$length_m = sf::st_length(contourlines)
+  # contourlines <- contourlines$data %>%
+  # sf::st_as_sf(coords = c("x", "y"), crs = sf::st_crs(x) ) %>%
+  # dplyr::group_by( curve ) %>%
+  # dplyr::summarize(do_union=FALSE) %>%
+  # sf::st_cast("LINESTRING")
+
+    contourlines <- contourlines$data
+    contourlines = sf::st_as_sf( contourlines, coords = c("x", "y"), crs = sf::st_crs(x) )
+    
+    out = list()
+    
+    for( i in unique(contourlines$curve) ){
+      ss = subset(contourlines, curve == i )
+      ss = sf::st_combine(ss)      
+      out[[length(out)+1]] = sf::st_cast( st_sf(ss), "LINESTRING")
+    }
+    
+    contourlines = do.call(rbind,out)    
+    contourlines$length_m = sf::st_length(contourlines)    
   }  
   return(contourlines)
 }
