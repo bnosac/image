@@ -16,14 +16,15 @@
 \item{...}{further arguments passed on to \code{image_contour_detector.matrix}}
 }
 \value{
-an object of class cld which as described in \code{\link{image_contour_detector}}
+In case \code{as_sf} is \code{FALSE}: an object of class cld which as described in \code{\link{image_contour_detector}}\cr
+In case \code{as_sf} is \code{TRUE}: an object of class sf with columns ss and length_m
 }
 \description{
 Unsupervised Smooth Contour Lines Detection for SpatRaster objects
 }
 \examples{
 \dontshow{
-if(require(terra))
+if(require(terra) && require(sf))
 \{
 }
 \donttest{
@@ -33,6 +34,8 @@ x   <- rast(system.file("extdata", "landscape.tif", package="image.ContourDetect
 contourlines <- image_contour_detector(x)
 image(x)
 plot(contourlines, add = TRUE, col = "blue", lwd = 10)
+
+contourlines <- image_contour_detector(x, as_sf = TRUE)
 }
 \dontshow{
 \}

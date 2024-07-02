@@ -115,12 +115,14 @@ image_contour_detector.RasterLayer <- function(x, Q=2.0, as_sf=FALSE, ...){
 #' @param Q numeric value with the pixel quantization step
 #' @param as_sf Boolean. Set to TRUE to export lines as sf spatial objects
 #' @param ... further arguments passed on to \code{image_contour_detector.matrix}
-#' @return an object of class cld which as described in \code{\link{image_contour_detector}}
+#' @return 
+#' In case \code{as_sf} is \code{FALSE}: an object of class cld which as described in \code{\link{image_contour_detector}}\cr
+#' In case \code{as_sf} is \code{TRUE}: an object of class sf with columns ss and length_m
 #' @seealso \code{\link{image_contour_detector}}
 #' @export
 #' @examples 
 #' \dontshow{
-#' if(require(terra))
+#' if(require(terra) && require(sf))
 #' \{
 #' }
 #' \donttest{
@@ -130,6 +132,8 @@ image_contour_detector.RasterLayer <- function(x, Q=2.0, as_sf=FALSE, ...){
 #' contourlines <- image_contour_detector(x)
 #' image(x)
 #' plot(contourlines, add = TRUE, col = "blue", lwd = 10)
+#' 
+#' contourlines <- image_contour_detector(x, as_sf = TRUE)
 #' }
 #' \dontshow{
 #' \}
