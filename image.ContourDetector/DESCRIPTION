@@ -17,7 +17,6 @@ URL: https://github.com/bnosac/image
 Imports: Rcpp (>= 0.12.8), sp
 LinkingTo: Rcpp
 Suggests:
-    dplyr,
     pixmap,
     magick,
     raster,
