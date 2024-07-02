@@ -11,8 +11,7 @@
 #' an efficient algorithm is derived producing sub-pixel contours.
 #' @param x a matrix of image pixel values in the 0-255 range.
 #' @param Q numeric value with the pixel quantization step
-#' @param as_sf Boolean. Set to TRUE to export lines as sf spatial objects (WARNING: process may take several time)
-#' @param ... further arguments, not used yet
+#' @param ... further arguments passed on to \code{image_contour_detector.matrix}, \code{\link{image_contour_detector.RasterLayer}} or \code{\link{image_contour_detector.SpatRaster}}.
 #' @return an object of class cld which is a list with the following elements
 #' \itemize{
 #'  \item{curves: }{The number of contour lines found}
@@ -82,12 +81,12 @@
 #' \}
 #' # End of main if statement running only if the required packages are installed
 #' }
-image_contour_detector <- function(x, Q=2.0, as_sf=FALSE, ...){
+image_contour_detector <- function(x, Q=2.0, ...){
   UseMethod("image_contour_detector")
 }
 
 #' @export
-image_contour_detector.matrix <- function(x, Q=2.0, as_sf=FALSE, ...){
+image_contour_detector.matrix <- function(x, Q=2.0, ...){
   stopifnot(is.matrix(x))
   contourlines <- detect_contours(x, 
                   X=nrow(x),
@@ -104,6 +103,14 @@ image_contour_detector.matrix <- function(x, Q=2.0, as_sf=FALSE, ...){
   return(contourlines)
 }
 
+#' @title Unsupervised Smooth Contour Lines Detection for RasterLayer objects
+#' @description Unsupervised Smooth Contour Detection
+#' @param x a RasterLayer object
+#' @param Q numeric value with the pixel quantization step
+#' @param as_sf Boolean. Set to TRUE to export lines as sf spatial objects
+#' @param ... further arguments passed on to \code{image_contour_detector.matrix}
+#' @return an object of class cld which as described in \code{\link{image_contour_detector}}
+#' @seealso \code{\link{image_contour_detector}}
 #' @export
 image_contour_detector.RasterLayer <- function(x, Q=2.0, as_sf=FALSE, ...){
   requireNamespace("raster")
@@ -116,13 +123,20 @@ image_contour_detector.RasterLayer <- function(x, Q=2.0, as_sf=FALSE, ...){
     x[is.na(x)] = 0
     warning("NA values found and set to 0") }
 
-  contourlines = image_contour_detector.matrix(x, Q=Q, as_sf=as_sf)
+  contourlines = image_contour_detector.matrix(x, Q=Q, ...)
   
   contourlines$data$x = contourlines$data$x * resol + minX
   contourlines$data$y = contourlines$data$y * resol + minY
   return(contourlines)
 }
 
+#' @title Unsupervised Smooth Contour Lines Detection for SpatRaster objects
+#' @param x a SpatRaster object
+#' @param Q numeric value with the pixel quantization step
+#' @param as_sf Boolean. Set to TRUE to export lines as sf spatial objects
+#' @param ... further arguments passed on to \code{image_contour_detector.matrix}
+#' @return an object of class cld which as described in \code{\link{image_contour_detector}}
+#' @seealso \code{\link{image_contour_detector}}
 #' @export
 image_contour_detector.SpatRaster <- function(x, Q=2.0, as_sf=FALSE, ...){
   requireNamespace("terra")
@@ -135,7 +149,7 @@ image_contour_detector.SpatRaster <- function(x, Q=2.0, as_sf=FALSE, ...){
     x[is.na(xmat)] = 0
     warning("NA values found and set to 0") }
 
-  contourlines = image_contour_detector.matrix(xmat, Q=Q, as_sf=as_sf)
+  contourlines = image_contour_detector.matrix(xmat, Q=Q, ...)
   
   contourlines$data$x = contourlines$data$x * resol + minX
   contourlines$data$y = contourlines$data$y * resol + minY
