@@ -170,9 +170,9 @@ image_contour_detector.SpatRaster <- function(x, Q=2.0, as_sf=FALSE, ...){
     out = list()
     
     for( i in unique(contourlines$curve) ){
-      ss = subset(contourlines, curve == i )
+      ss = subset(contourlines, contourlines$curve == i )
       ss = sf::st_combine(ss)      
-      out[[length(out)+1]] = sf::st_cast( st_sf(ss), "LINESTRING")
+      out[[length(out)+1]] = sf::st_cast( sf::st_sf(ss), "LINESTRING")
     }
     
     contourlines = do.call(rbind,out)    
