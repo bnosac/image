@@ -145,9 +145,10 @@ image_contour_detector.SpatRaster <- function(x, Q=2.0, as_sf=FALSE, ...){
   resol = terra::res(x)[1]  
   xmat = terra::as.matrix(x, wide=TRUE)
   
-  if( anyNA(xmat) ){
-    x[is.na(xmat)] = 0
-    warning("NA values found and set to 0") }
+  if(anyNA(xmat)){
+    xmat[is.na(xmat)] = 0
+    warning("NA values found and set to 0") 
+  }
 
   contourlines = image_contour_detector.matrix(xmat, Q=Q, ...)
   
