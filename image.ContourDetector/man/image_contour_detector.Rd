@@ -73,26 +73,6 @@ plot(contourlines)
 \}
 # End of main if statement running only if the required packages are installed
 }
-
-##
-##  working with a SpatRaster
-##
-\dontshow{
-if(require(terra))
-\{
-}
-\donttest{
-library(terra)
-x   <- rast(system.file("extdata", "landscape.tif", package="image.ContourDetector"))
-
-contourlines <- image_contour_detector(x)
-image(x)
-plot(contourlines, add = TRUE, col = "blue", lwd = 10)
-}
-\dontshow{
-\}
-# End of main if statement running only if the required packages are installed
-}
 }
 \references{
 Rafael Grompone von Gioi, and Gregory Randall, Unsupervised Smooth Contour Detection, 

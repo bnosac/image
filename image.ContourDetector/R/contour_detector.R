@@ -61,26 +61,6 @@
 #' \}
 #' # End of main if statement running only if the required packages are installed
 #' }
-#' 
-#' ##
-#' ##  working with a SpatRaster
-#' ##
-#' \dontshow{
-#' if(require(terra))
-#' \{
-#' }
-#' \donttest{
-#' library(terra)
-#' x   <- rast(system.file("extdata", "landscape.tif", package="image.ContourDetector"))
-#' 
-#' contourlines <- image_contour_detector(x)
-#' image(x)
-#' plot(contourlines, add = TRUE, col = "blue", lwd = 10)
-#' }
-#' \dontshow{
-#' \}
-#' # End of main if statement running only if the required packages are installed
-#' }
 image_contour_detector <- function(x, Q=2.0, ...){
   UseMethod("image_contour_detector")
 }
@@ -138,6 +118,23 @@ image_contour_detector.RasterLayer <- function(x, Q=2.0, as_sf=FALSE, ...){
 #' @return an object of class cld which as described in \code{\link{image_contour_detector}}
 #' @seealso \code{\link{image_contour_detector}}
 #' @export
+#' @examples 
+#' \dontshow{
+#' if(require(terra))
+#' \{
+#' }
+#' \donttest{
+#' library(terra)
+#' x   <- rast(system.file("extdata", "landscape.tif", package="image.ContourDetector"))
+#' 
+#' contourlines <- image_contour_detector(x)
+#' image(x)
+#' plot(contourlines, add = TRUE, col = "blue", lwd = 10)
+#' }
+#' \dontshow{
+#' \}
+#' # End of main if statement running only if the required packages are installed
+#' }
 image_contour_detector.SpatRaster <- function(x, Q=2.0, as_sf=FALSE, ...){
   requireNamespace("terra")
   minX = terra::ext(x)[1]

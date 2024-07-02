@@ -21,6 +21,24 @@ an object of class cld which as described in \code{\link{image_contour_detector}
 \description{
 Unsupervised Smooth Contour Lines Detection for SpatRaster objects
 }
+\examples{
+\dontshow{
+if(require(terra))
+\{
+}
+\donttest{
+library(terra)
+x   <- rast(system.file("extdata", "landscape.tif", package="image.ContourDetector"))
+
+contourlines <- image_contour_detector(x)
+image(x)
+plot(contourlines, add = TRUE, col = "blue", lwd = 10)
+}
+\dontshow{
+\}
+# End of main if statement running only if the required packages are installed
+}
+}
 \seealso{
 \code{\link{image_contour_detector}}
 }
