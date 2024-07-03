@@ -89,7 +89,9 @@ image_contour_detector.matrix <- function(x, Q=2.0, ...){
 #' @param Q numeric value with the pixel quantization step
 #' @param as_sf Boolean. Set to TRUE to export lines as sf spatial objects
 #' @param ... further arguments passed on to \code{image_contour_detector.matrix}
-#' @return an object of class cld which as described in \code{\link{image_contour_detector}}
+#' @return
+#' In case \code{as_sf} is \code{FALSE}: an object of class cld which as described in \code{\link{image_contour_detector}}\cr
+#' In case \code{as_sf} is \code{TRUE}: an object of class sf containing the detected lines, a curve ID and its length (in the same units as the SpatRaster's CRS)
 #' @seealso \code{\link{image_contour_detector}}
 #' @export
 image_contour_detector.RasterLayer <- function(x, Q=2.0, as_sf=FALSE, ...){
@@ -97,16 +99,37 @@ image_contour_detector.RasterLayer <- function(x, Q=2.0, as_sf=FALSE, ...){
   minX = raster::extent(x)[1]
   minY = raster::extent(x)[3]  
   resol = raster::res(x)[1]  
-  x = raster::as.matrix(x)
+  xmat = raster::as.matrix(x)
   
-  if( anyNA(x) ){
-    x[is.na(x)] = 0
+  if( anyNA(xmat) ){
+    x[is.na(xmat)] = 0
     warning("NA values found and set to 0") }
 
-  contourlines = image_contour_detector.matrix(x, Q=Q, ...)
+  contourlines = image_contour_detector.matrix( xmat, Q=Q )
   
   contourlines$data$x = contourlines$data$x * resol + minX
   contourlines$data$y = contourlines$data$y * resol + minY
+
+  # export object as sf
+  if(isTRUE(as_sf)){
+    requireNamespace("sf")
+    
+    contourlines <- contourlines$data
+    contourlines = sf::st_as_sf( contourlines, coords = c("x", "y"), crs = sf::st_crs(x) )
+    
+    out = list()
+    
+    for( i in unique(contourlines$curve) ){
+      ss = subset(contourlines, curve == i )
+      ss = sf::st_combine(ss)      
+      out[[length(out)+1]] = sf::st_cast( sf::st_sf(ss), "LINESTRING")
+    }
+    
+    contourlines = do.call(rbind,out)    
+    contourlines$curve_ID = 1:nrow(contourlines)
+    contourlines$length = round( sf::st_length(contourlines), 3)
+  }
+  
   return(contourlines)
 }
 
@@ -115,9 +138,9 @@ image_contour_detector.RasterLayer <- function(x, Q=2.0, as_sf=FALSE, ...){
 #' @param Q numeric value with the pixel quantization step
 #' @param as_sf Boolean. Set to TRUE to export lines as sf spatial objects
 #' @param ... further arguments passed on to \code{image_contour_detector.matrix}
-#' @return 
+#' @return
 #' In case \code{as_sf} is \code{FALSE}: an object of class cld which as described in \code{\link{image_contour_detector}}\cr
-#' In case \code{as_sf} is \code{TRUE}: an object of class sf with columns ss and length_m
+#' In case \code{as_sf} is \code{TRUE}: an object of class sf containing the detected lines, a curve ID and its length (in the same units as the SpatRaster's CRS)
 #' @seealso \code{\link{image_contour_detector}}
 #' @export
 #' @examples 
@@ -130,7 +153,7 @@ image_contour_detector.RasterLayer <- function(x, Q=2.0, as_sf=FALSE, ...){
 #' x   <- rast(system.file("extdata", "landscape.tif", package="image.ContourDetector"))
 #' 
 #' contourlines <- image_contour_detector(x)
-#' image(x)
+#' plot(x)
 #' plot(contourlines, add = TRUE, col = "blue", lwd = 10)
 #' 
 #' contourlines <- image_contour_detector(x, as_sf = TRUE)
@@ -151,7 +174,7 @@ image_contour_detector.SpatRaster <- function(x, Q=2.0, as_sf=FALSE, ...){
     warning("NA values found and set to 0") 
   }
 
-  contourlines = image_contour_detector.matrix(xmat, Q=Q, ...)
+  contourlines = image_contour_detector.matrix( xmat, Q=Q )
   
   contourlines$data$x = contourlines$data$x * resol + minX
   contourlines$data$y = contourlines$data$y * resol + minY
@@ -172,13 +195,14 @@ image_contour_detector.SpatRaster <- function(x, Q=2.0, as_sf=FALSE, ...){
     out = list()
     
     for( i in unique(contourlines$curve) ){
-      ss = subset(contourlines, contourlines$curve == i )
+      ss = subset(contourlines, curve == i )
       ss = sf::st_combine(ss)      
       out[[length(out)+1]] = sf::st_cast( sf::st_sf(ss), "LINESTRING")
     }
     
     contourlines = do.call(rbind,out)    
-    contourlines$length_m = sf::st_length(contourlines)    
+    contourlines$curve_ID = 1:nrow(contourlines)
+    contourlines$length = round( sf::st_length(contourlines), 3)
   }  
   return(contourlines)
 }
