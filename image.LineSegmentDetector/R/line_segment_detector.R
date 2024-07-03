@@ -91,8 +91,8 @@
 #' library(terra)
 #' x   <- rast(system.file("extdata", "landscape.tif", package="image.ContourDetector"))
 #' 
-#' linesegments <- image_line_segment_detector(x)
-#' image(x)
+#' linesegments <- image_line_segment_detector(x, as_sf=TRUE)
+#' plot(x)
 #' plot(linesegments, add = TRUE, col = "blue", lwd = 10)
 #' }
 #' \dontshow{
@@ -155,44 +155,47 @@ image_line_segment_detector.SpatRaster <- function(x, scale = 0.8,
   uprightY = terra::ext(x)[4]  
   resol = terra::res(x)[1]
   
-  x = t(terra::as.matrix(x,wide=TRUE))
+  xmat = t(terra::as.matrix(x,wide=TRUE))
   
-  if( anyNA(x) ){
-    x[is.na(x)] = 0
+  if( anyNA(xmat) ){
+    xmat[is.na(xmat)] = 0
     warning("NA values found and set to 0") }
   
-  linesegments = image_line_segment_detector.matrix(x, scale = scale,
+  linesegments = image_line_segment_detector.matrix(xmat, scale = scale,
                                                     sigma_scale = sigma_scale, quant = quant, ang_th = ang_th, log_eps = log_eps,
                                                     density_th = density_th, n_bins = n_bins,
                                                     union = union, union_min_length = union_min_length, union_max_distance = union_max_distance,
                                                     union_ang_th=union_ang_th, union_use_NFA=union_use_NFA, union_log_eps = union_log_eps,
                                                     as_sf=as_sf )
   
-  linesegments = as.data.frame(linesegments$lines)
-  
   # assign spatial coordinates
-  linesegments$x1 = linesegments$x1 * -resol + uprightY
-  linesegments$y1 = linesegments$y1 * -resol + uprightX
-  linesegments$x2 = linesegments$x2 * -resol + uprightY
-  linesegments$y2 = linesegments$y2 * -resol + uprightX
-  
+  linesegments$lines[,1] = linesegments$lines[,1] * -resol + uprightY
+  linesegments$lines[,2] = linesegments$lines[,2] * -resol + uprightX
+  linesegments$lines[,3] = linesegments$lines[,3] * -resol + uprightY
+  linesegments$lines[,4] = linesegments$lines[,4] * -resol + uprightX
+  linesegments$lines[,5] = linesegments$lines[,5] * resol # width parameter
   
   # export object as sf
   if(isTRUE(as_sf)){
     requireNamespace("sf")
+
+    linesegments = as.data.frame(linesegments$lines)
     
     linesegments = apply(linesegments, 1, function(x) 
     {
       v <- as.numeric(x[c(2,4,1,3)])
       m <- matrix(v, nrow = 2)
-      return(sf::st_sfc(sf::st_linestring(m), crs = NA_crs_))
+      return(sf::st_sfc(sf::st_linestring(m)))
     })
     print("Sf export in progress...")
     linesegments = do.call(c, linesegments)
     
     linesegments = sf::st_sf(linesegments)
+    if( !is.na(sf::st_crs(x)) ){ sf::st_crs(linesegments) = sf::st_crs(x)}
+    st_geometry(linesegments) = 'geometry'
+    
     linesegments$line_ID = 1:nrow(linesegments)
-    linesegments$length_m = sf::st_length(linesegments)
+    linesegments$length = round( sf::st_length(linesegments), 3)
   }
   
   return(linesegments)
@@ -210,7 +213,7 @@ print.lsd <- function(x, ...){
 #' @description Plot the detected lines from the image_line_segment_detector
 #' @param x an object of class lsd as returned by \code{\link{image_line_segment_detector}}
 #' @param ... further arguments passed on to plot
-#' @return invisibly a SpatialLines object with the lines
+#' @return invisibly an sf object with the lines
 #' @export 
 #' @method plot lsd
 #' @examples 
@@ -221,13 +224,23 @@ print.lsd <- function(x, ...){
 #' plot(image)
 #' plot(linesegments, add = TRUE, col = "red")
 plot.lsd <- function(x, ...){
-  requireNamespace("sp")
-  out <- sp::SpatialLines(lapply(seq_len(x$n), FUN=function(i){
-    l <- rbind(
-      x$lines[i, c("x1", "y1")],
-      x$lines[i, c("x2", "y2")])
-    sp::Lines(sp::Line(l), ID = i)
-  }))
-  sp::plot(out, ...)
-  invisible(out)
+  requireNamespace("sf")
+  
+  out = as.data.frame(x$lines)
+  
+  out = apply(out, 1, function(x) 
+  {
+    v <- as.numeric(x[c(2,4,1,3)])
+    m <- matrix(v, nrow = 2)
+    return( sf::st_sfc(sf::st_linestring(m) ) )
+  })
+  print("Loading in progress...")
+  out = do.call(c, out)
+  
+  out = sf::st_sf(out, crs = 'NA_crs_')
+  if( !is.na(sf::st_crs(x)) ){ sf::st_crs(out) = sf::st_crs(x)}
+  st_geometry(out) = 'geometry'
+  
+  plot(out$geometry, ...)
+  invisible(out$geometry)
 }
