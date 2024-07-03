@@ -11,7 +11,7 @@ image_contour_detector(x, Q = 2, ...)
 
 \item{Q}{numeric value with the pixel quantization step}
 
-\item{...}{further arguments, not used yet}
+\item{...}{further arguments passed on to \code{image_contour_detector.matrix}, \code{\link{image_contour_detector.RasterLayer}} or \code{\link{image_contour_detector.SpatRaster}}.}
 }
 \value{
 an object of class cld which is a list with the following elements
@@ -69,26 +69,6 @@ mat <- as.integer(mat, transpose = TRUE)
 mat <- drop(mat)
 contourlines <- image_contour_detector(mat)
 plot(contourlines)
-\dontshow{
-\}
-# End of main if statement running only if the required packages are installed
-}
-
-##
-##  working with a RasterLayer
-##
-\dontshow{
-if(require(raster))
-\{
-}
-\donttest{
-library(raster)
-x   <- raster(system.file("extdata", "landscape.tif", package="image.ContourDetector"))
-
-contourlines <- image_contour_detector(x)
-image(x)
-plot(contourlines, add = TRUE, col = "blue", lwd = 10)
-}
 \dontshow{
 \}
 # End of main if statement running only if the required packages are installed

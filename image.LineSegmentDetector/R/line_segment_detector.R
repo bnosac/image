@@ -30,6 +30,7 @@
 #' @param union_ang_th Numeric value with angle threshold in order to union
 #' @param union_use_NFA Logical indicating to use NFA to union
 #' @param union_log_eps Detection threshold to union
+#' @param as_sf Boolean. Set to TRUE to export lines as sf spatial objects (WARNING: process may take several time)
 #' @return an object of class lsd which is a list with the following elements
 #' \itemize{
 #'  \item{n: }{The number of found line segments}
@@ -78,13 +79,46 @@
 #' mat <- drop(mat)
 #' linesegments <- image_line_segment_detector(mat)
 #' plot(linesegments, lwd = 2)
+#'
+#' ##
+#' ##  working with a SpatRaster
+#' ##
+#' \dontshow{
+#' if(require(terra))
+#' \{
+#' }
+#' \donttest{
+#' library(terra)
+#' x   <- rast(system.file("extdata", "landscape.tif", package="image.ContourDetector"))
+#' 
+#' linesegments <- image_line_segment_detector(x, as_sf=TRUE)
+#' plot(x)
+#' plot(linesegments, add = TRUE, col = "blue", lwd = 10)
+#' }
+#' \dontshow{
+#' \}
+#' # End of main if statement running only if the required packages are installed
+#' }
+
 image_line_segment_detector <- function(x, scale = 0.8,
-                                  sigma_scale = 0.6, quant = 2.0, ang_th = 22.5, log_eps = 0.0,
-                                  density_th = 0.7, n_bins = 1024,
-                                  union = FALSE, union_min_length = 5, union_max_distance = 5,
-                                  union_ang_th=7, union_use_NFA=FALSE, union_log_eps = 0.0) {
+                                        sigma_scale = 0.6, quant = 2.0, ang_th = 22.5, log_eps = 0.0,
+                                        density_th = 0.7, n_bins = 1024,
+                                        union = FALSE, union_min_length = 5, union_max_distance = 5,
+                                        union_ang_th=7, union_use_NFA=FALSE, union_log_eps = 0.0,
+                                        as_sf=FALSE ){
+  UseMethod("image_line_segment_detector")
+  }
 
 
+#' @export
+image_line_segment_detector.matrix <- function(x, scale = 0.8,
+                                        sigma_scale = 0.6, quant = 2.0, ang_th = 22.5, log_eps = 0.0,
+                                        density_th = 0.7, n_bins = 1024,
+                                        union = FALSE, union_min_length = 5, union_max_distance = 5,
+                                        union_ang_th=7, union_use_NFA=FALSE, union_log_eps = 0.0,
+                                        as_sf=FALSE ) {
+  
+  
   stopifnot(is.matrix(x))
   linesegments <- detect_line_segments(as.numeric(x),
                                        X=nrow(x),
@@ -107,6 +141,67 @@ image_line_segment_detector <- function(x, scale = 0.8,
   linesegments
 }
 
+
+
+#' @export
+image_line_segment_detector.SpatRaster <- function(x, scale = 0.8,
+                                                   sigma_scale = 0.6, quant = 2.0, ang_th = 22.5, log_eps = 0.0,
+                                                   density_th = 0.7, n_bins = 1024,
+                                                   union = FALSE, union_min_length = 5, union_max_distance = 5,
+                                                   union_ang_th=7, union_use_NFA=FALSE, union_log_eps = 0.0,
+                                                   as_sf=FALSE ){
+  requireNamespace("terra")
+  uprightX = terra::ext(x)[2]
+  uprightY = terra::ext(x)[4]  
+  resol = terra::res(x)[1]
+  
+  xmat = t(terra::as.matrix(x,wide=TRUE))
+  
+  if( anyNA(xmat) ){
+    xmat[is.na(xmat)] = 0
+    warning("NA values found and set to 0") }
+  
+  linesegments = image_line_segment_detector.matrix(xmat, scale = scale,
+                                                    sigma_scale = sigma_scale, quant = quant, ang_th = ang_th, log_eps = log_eps,
+                                                    density_th = density_th, n_bins = n_bins,
+                                                    union = union, union_min_length = union_min_length, union_max_distance = union_max_distance,
+                                                    union_ang_th=union_ang_th, union_use_NFA=union_use_NFA, union_log_eps = union_log_eps,
+                                                    as_sf=as_sf )
+  
+  # assign spatial coordinates
+  linesegments$lines[,1] = linesegments$lines[,1] * -resol + uprightY
+  linesegments$lines[,2] = linesegments$lines[,2] * -resol + uprightX
+  linesegments$lines[,3] = linesegments$lines[,3] * -resol + uprightY
+  linesegments$lines[,4] = linesegments$lines[,4] * -resol + uprightX
+  linesegments$lines[,5] = linesegments$lines[,5] * resol # width parameter
+  
+  # export object as sf
+  if(isTRUE(as_sf)){
+    requireNamespace("sf")
+
+    linesegments = as.data.frame(linesegments$lines)
+    
+    linesegments = apply(linesegments, 1, function(x) 
+    {
+      v <- as.numeric(x[c(2,4,1,3)])
+      m <- matrix(v, nrow = 2)
+      return(sf::st_sfc(sf::st_linestring(m)))
+    })
+    print("Sf export in progress...")
+    linesegments = do.call(c, linesegments)
+    
+    linesegments = sf::st_sf(linesegments)
+    if( !is.na(sf::st_crs(x)) ){ sf::st_crs(linesegments) = sf::st_crs(x)}
+    st_geometry(linesegments) = 'geometry'
+    
+    linesegments$line_ID = 1:nrow(linesegments)
+    linesegments$length = round( sf::st_length(linesegments), 3)
+  }
+  
+  return(linesegments)
+}
+
+
 #' @export
 print.lsd <- function(x, ...){
   cat("Line Segment Detector", sep = "\n")
@@ -118,7 +213,7 @@ print.lsd <- function(x, ...){
 #' @description Plot the detected lines from the image_line_segment_detector
 #' @param x an object of class lsd as returned by \code{\link{image_line_segment_detector}}
 #' @param ... further arguments passed on to plot
-#' @return invisibly a SpatialLines object with the lines
+#' @return invisibly an sf object with the lines
 #' @export 
 #' @method plot lsd
 #' @examples 
@@ -129,13 +224,23 @@ print.lsd <- function(x, ...){
 #' plot(image)
 #' plot(linesegments, add = TRUE, col = "red")
 plot.lsd <- function(x, ...){
-  requireNamespace("sp")
-  out <- sp::SpatialLines(lapply(seq_len(x$n), FUN=function(i){
-    l <- rbind(
-      x$lines[i, c("x1", "y1")],
-      x$lines[i, c("x2", "y2")])
-    sp::Lines(sp::Line(l), ID = i)
-  }))
-  sp::plot(out, ...)
-  invisible(out)
+  requireNamespace("sf")
+  
+  out = as.data.frame(x$lines)
+  
+  out = apply(out, 1, function(x) 
+  {
+    v <- as.numeric(x[c(2,4,1,3)])
+    m <- matrix(v, nrow = 2)
+    return( sf::st_sfc(sf::st_linestring(m) ) )
+  })
+  print("Loading in progress...")
+  out = do.call(c, out)
+  
+  out = sf::st_sf(out, crs = 'NA_crs_')
+  if( !is.na(sf::st_crs(x)) ){ sf::st_crs(out) = sf::st_crs(x)}
+  st_geometry(out) = 'geometry'
+  
+  plot(out$geometry, ...)
+  invisible(out$geometry)
 }

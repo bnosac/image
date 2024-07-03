@@ -9,7 +9,7 @@ Authors@R: c(
     person("BNOSAC", role = "cph", comment = "R wrapper"), 
     person("Rafael Grompone von Gioi", role = c("ctb", "cph"), email = "grompone@gmail.com", comment = "src/smooth_contours"), 
     person("Gregory Randall", role = c("ctb", "cph"), email = "randall@fing.edu.uy", comment = "src/smooth_contours"),
-    person("Niccolò Marchi", role = "ctb", email = "niccolo.marchi@unipd.it"))
+    person("Niccolò Marchi", role = "ctb", email = "sciurusurbanus@hotmail.it"))
 Encoding: UTF-8
 License: AGPL-3
 Version: 0.1.1
@@ -19,5 +19,7 @@ LinkingTo: Rcpp
 Suggests:
     pixmap,
     magick,
-    raster
+    raster,
+    sf,
+    terra
 RoxygenNote: 7.1.1
