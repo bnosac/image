@@ -17,7 +17,7 @@ In case \code{x} is a \code{magick-image}, the thresholded \code{magick-image} i
 which also now has an attribute called threshold with the exact Otsu threshold value
 }
 \description{
-An implementation of the Otsu's image segmentation algorithm explained at \url{https://doi.org/10.5201/ipol.2016.158}.
+An implementation of the Otsu's image segmentation algorithm explained at \doi{10.5201/ipol.2016.158}.
 }
 \examples{
 library(magick)

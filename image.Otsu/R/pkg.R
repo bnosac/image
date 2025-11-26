@@ -5,7 +5,7 @@ NULL
 
 
 #' @title Image segmentation using Otsu
-#' @description An implementation of the Otsu's image segmentation algorithm explained at \url{https://doi.org/10.5201/ipol.2016.158}. 
+#' @description An implementation of the Otsu's image segmentation algorithm explained at \doi{10.5201/ipol.2016.158}. 
 #' @param x an object of class magick-image or a greyscale matrix of image pixel values in the 0-255 range
 #' @param threshold integer value in range of 0-255. To override the threshold. Defaults to 0 indicating not to override the threshold.
 #' @return 
