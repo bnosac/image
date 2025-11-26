@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // detect_faces
 Rcpp::List detect_faces(IntegerVector x, int width, int height, int step);
 RcppExport SEXP _image_libfacedetection_detect_faces(SEXP xSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP stepSEXP) {

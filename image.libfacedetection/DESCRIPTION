@@ -9,10 +9,10 @@ Authors@R: c(
     person("BNOSAC", role = "cph", comment = "R wrapper"), 
     person("Shiqi Yu", role = c("ctb", "cph"), comment = "libfacedetection C++ code"))
 License: BSD_3_clause + file LICENSE
-Version: 0.1
+Version: 0.1.1
 URL: https://github.com/bnosac/image
 Imports: Rcpp (>= 0.12.8), graphics
 LinkingTo: Rcpp
 Suggests:
     magick
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.2
