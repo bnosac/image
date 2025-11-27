@@ -14,9 +14,9 @@
 #' @param ... further arguments, not used yet
 #' @return an object of class cld which is a list with the following elements
 #' \itemize{
-#'  \item{curves: }{The number of contour lines found}
-#'  \item{contourpoints: }{The number of points defining the contour lines found}
-#'  \item{data: }{A data.frame with columns 'x', 'y' and 'curve' giving the x/y locations for each contour curve}
+#'  \item curves: The number of contour lines found
+#'  \item contourpoints: The number of points defining the contour lines found
+#'  \item data: A data.frame with columns 'x', 'y' and 'curve' giving the x/y locations for each contour curve
 #' }
 #' @references Rafael Grompone von Gioi, and Gregory Randall, Unsupervised Smooth Contour Detection, 
 #' Image Processing On Line, 6 (2016), pp. 233-267. \doi{10.5201/ipol.2016.175}

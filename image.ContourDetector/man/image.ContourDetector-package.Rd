@@ -2,6 +2,7 @@
 % Please edit documentation in R/pkg.R
 \docType{package}
 \name{image.ContourDetector-package}
+\alias{image.ContourDetector}
 \alias{image.ContourDetector-package}
 \title{The image.ContourDetector package detects contour lines in images}
 \description{
@@ -22,4 +23,16 @@ Image Processing On Line, 6 (2016), pp. 233-267. \doi{10.5201/ipol.2016.175}
 }
 \seealso{
 \link{image_contour_detector}
+}
+\author{
+\strong{Maintainer}: Jan Wijffels \email{jwijffels@bnosac.be} (R wrapper) [copyright holder]
+
+Other contributors:
+\itemize{
+  \item BNOSAC (R wrapper) [copyright holder]
+  \item Rafael Grompone von Gioi \email{grompone@gmail.com} (src/smooth_contours) [contributor, copyright holder]
+  \item Gregory Randall \email{randall@fing.edu.uy} (src/smooth_contours) [contributor, copyright holder]
+  \item Niccolò Marchi \email{niccolo.marchi@unipd.it} [contributor]
+}
+
 }

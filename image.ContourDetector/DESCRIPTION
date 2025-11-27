@@ -12,7 +12,7 @@ Authors@R: c(
     person("Niccolò Marchi", role = "ctb", email = "niccolo.marchi@unipd.it"))
 Encoding: UTF-8
 License: AGPL-3
-Version: 0.1.1
+Version: 0.1.2
 URL: https://github.com/bnosac/image
 Imports: Rcpp (>= 0.12.8), sp
 LinkingTo: Rcpp
@@ -20,4 +20,4 @@ Suggests:
     pixmap,
     magick,
     raster
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.2
