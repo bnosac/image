@@ -6,7 +6,7 @@
 #' to Desolneux, Moisan, and Morel's theory.
 #' @references LSD: A Fast Line Segment Detector with a False Detection Control"
 #' by Rafael Grompone von Gioi, Jeremie Jakubowicz, Jean-Michel Morel, and Gregory Randall, IEEE Transactions on Pattern Analysis and
-#' Machine Intelligence, vol. 32, no. 4, pp. 722-732, April, 2010. \url{https://doi.org/10.5201/ipol.2012.gjmr-lsd}
+#' Machine Intelligence, vol. 32, no. 4, pp. 722-732, April, 2010. \doi{10.5201/ipol.2012.gjmr-lsd}
 #' @name image.LineSegmentDetector-package
 #' @aliases image.LineSegmentDetector-package
 #' @docType package

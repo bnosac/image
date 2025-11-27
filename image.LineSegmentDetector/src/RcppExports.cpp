@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // detect_line_segments
 List detect_line_segments(NumericVector image, int X, int Y, double scale, double sigma_scale, double quant, double ang_th, double log_eps, double density_th, int n_bins, int need_to_union, double union_ang_th, int union_use_NFA, double union_log_eps, double length_threshold, double dist_threshold);
 RcppExport SEXP _image_LineSegmentDetector_detect_line_segments(SEXP imageSEXP, SEXP XSEXP, SEXP YSEXP, SEXP scaleSEXP, SEXP sigma_scaleSEXP, SEXP quantSEXP, SEXP ang_thSEXP, SEXP log_epsSEXP, SEXP density_thSEXP, SEXP n_binsSEXP, SEXP need_to_unionSEXP, SEXP union_ang_thSEXP, SEXP union_use_NFASEXP, SEXP union_log_epsSEXP, SEXP length_thresholdSEXP, SEXP dist_thresholdSEXP) {

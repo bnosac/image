@@ -62,18 +62,18 @@ Suggested value: 0.0.}
 \value{
 an object of class lsd which is a list with the following elements
 \itemize{
- \item{n: }{The number of found line segments}
- \item{lines: }{A matrix with detected line segments with columns x1, y1, x2, y2, width, p, -log_nfa".
+ \item n: The number of found line segments
+ \item lines: A matrix with detected line segments with columns x1, y1, x2, y2, width, p, -log_nfa".
  Each row corresponds to a line where a line segment is given by the coordinates (x1, y1) to (x2, y2).
  Column width indicates the width of the line, p is the angle precision in (0, 1) given
  by angle_tolerance/180 degree, and NFA stands for the Number of False Alarms.
  The value -log10(NFA) is equivalent but more intuitive than NFA (Number of False Alarms):
  -1 corresponds to 10 mean false alarms, 0 corresponds to 1 mean false alarm,
- 1 corresponds to 0.1 mean false alarms, 2 corresponds to 0.01 mean false alarms}
- \item{pixels: }{A matrix where each element correponds to a pixel where each pixel
+ 1 corresponds to 0.1 mean false alarms, 2 corresponds to 0.01 mean false alarms
+ \item pixels: A matrix where each element correponds to a pixel where each pixel
  indicates the line segment to which it belongs. Unused pixels have the value '0',
  while the used ones have the number of the line segment, numbered 1,2,3,...,
- in the same order as in the lines matrix}
+ in the same order as in the lines matrix
 }
 }
 \description{
@@ -119,5 +119,5 @@ plot(linesegments, lwd = 2)
 \references{
 LSD: A Fast Line Segment Detector with a False Detection Control"
 by Rafael Grompone von Gioi, Jeremie Jakubowicz, Jean-Michel Morel, and Gregory Randall, IEEE Transactions on Pattern Analysis and
-Machine Intelligence, vol. 32, no. 4, pp. 722-732, April, 2010. \url{https://doi.org/10.5201/ipol.2012.gjmr-lsd}
+Machine Intelligence, vol. 32, no. 4, pp. 722-732, April, 2010. \doi{10.5201/ipol.2012.gjmr-lsd}
 }

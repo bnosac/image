@@ -1,0 +1,8 @@
+### CHANGES IN image.LineSegmentDetector VERSION 0.1.1
+
+- Documentation fixes regarding unclosed brackets
+- Remove inst/CITATION file as the paper is described in the description file
+
+### CHANGES IN image.LineSegmentDetector VERSION 0.1.0
+
+- Initial package

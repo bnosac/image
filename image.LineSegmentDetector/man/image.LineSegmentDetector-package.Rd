@@ -2,6 +2,7 @@
 % Please edit documentation in R/pkg.R
 \docType{package}
 \name{image.LineSegmentDetector-package}
+\alias{image.LineSegmentDetector}
 \alias{image.LineSegmentDetector-package}
 \title{The image.LineSegmentDetector (LSD) package detects line segments in images}
 \description{
@@ -14,8 +15,18 @@ to Desolneux, Moisan, and Morel's theory.
 \references{
 LSD: A Fast Line Segment Detector with a False Detection Control"
 by Rafael Grompone von Gioi, Jeremie Jakubowicz, Jean-Michel Morel, and Gregory Randall, IEEE Transactions on Pattern Analysis and
-Machine Intelligence, vol. 32, no. 4, pp. 722-732, April, 2010. \url{https://doi.org/10.5201/ipol.2012.gjmr-lsd}
+Machine Intelligence, vol. 32, no. 4, pp. 722-732, April, 2010. \doi{10.5201/ipol.2012.gjmr-lsd}
 }
 \seealso{
 \link{image_line_segment_detector}
+}
+\author{
+\strong{Maintainer}: Jan Wijffels \email{jwijffels@bnosac.be} (R wrapper) [copyright holder]
+
+Other contributors:
+\itemize{
+  \item BNOSAC (R wrapper) [copyright holder]
+  \item Rafael Grompone von Gioi \email{grompone@gmail.com} (src/lsd) [contributor, copyright holder]
+}
+
 }

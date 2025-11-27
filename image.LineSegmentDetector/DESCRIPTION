@@ -9,11 +9,11 @@ Authors@R: c(
     person("BNOSAC", role = "cph", comment = "R wrapper"), 
     person("Rafael Grompone von Gioi", role = c("ctb", "cph"), email = "grompone@gmail.com", comment = "src/lsd"))
 License: AGPL-3
-Version: 0.1.0
+Version: 0.1.1
 URL: https://github.com/bnosac/image
 Imports: Rcpp (>= 0.12.8), sp
 LinkingTo: Rcpp
 Suggests:
     pixmap,
     magick
-RoxygenNote: 7.1.0
+RoxygenNote: 7.3.2
