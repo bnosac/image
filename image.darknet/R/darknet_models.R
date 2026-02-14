@@ -135,7 +135,8 @@
 image_darknet_model <- function(type = c("classify", "detect"), model, weights, labels, resize=TRUE){
   if(model %in% c("tiny.cfg", "alexnet.cfg", "darknet.cfg", "vgg-16.cfg", 
                   "extraction.cfg", "darknet19.cfg", "darknet19_448.cfg",
-                  "yolo.cfg", "tiny-yolo.cfg", "yolo-voc", "tiny-yolo-voc.cfg")){
+                  "yolo.cfg", "tiny-yolo.cfg", "yolo-voc", "tiny-yolo-voc.cfg",
+                  "yolov2.cfg", "yolov2-voc.cfg", "yolov3.cfg", "yolov3-voc.cfg")){
     model <- system.file(package="image.darknet", "include", "darknet", "cfg", model)
   }
   stopifnot(file.exists(model))
